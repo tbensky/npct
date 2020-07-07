@@ -12,11 +12,11 @@ By summer 2020, the virus was really getting to me. The news was bad and getting
 
 So I made a totally anonymous contract tracing system that doesn't use a mobile phone at all. Say hello to "NPCT," the "no phone contact tracer."
 
-# NPCT: The "no phone" Contact Tracer
+# The No Phone Contact Tracer (NPCT)
 
 I think Bluetooth (BT) is ideal for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But you can't use a phone. So what's the plan?
 
-$8....$8. A fully BT-enabled ESP32 is $8 on eBay. This about what materials cost for masks people are making.  There had to be someway of using this for a contact tracer.  So here's my plan:
+$8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. This about what materials cost for masks people are making.  There had to be some way of using this for a contact tracer.  So here's my plan:
 
 * Come up with some encoding for a unique ID for yourself + your health information (easy: an MD5 + some additional hex codes to describe your health).
 
@@ -27,6 +27,11 @@ $8....$8. A fully BT-enabled ESP32 is $8 on eBay. This about what materials cost
 * Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
 
 That's it. It works, and here's how I did it all.
+
+# So participants will need an ESP32, and to carry one around?
+
+Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe they'll make this too? Plus, there's a global pandemic out there. Wanna help stop it?
+
 
 # How to build an ESP32 contact tracer
 
