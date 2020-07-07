@@ -16,13 +16,15 @@ So I made a totally anonymous contract tracing system that doesn't use a mobile 
 
 I think Bluetooth (BT) is ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't wanto to use a phone for this, so what's the plan?
 
-$8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. This about what materials cost for masks people are making.  There had to be some way of using this for a contact tracer.  So here's my plan:
+I continue to be super impressed with the makers' effort in making masks. So maybe some 'maker' theme contract tracer is out there, and yes, I think there is.  
 
-* Come up with some encoding for a unique ID for yourself + your health information (easy: an MD5 + some additional hex codes to describe your health).
+$8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers use these for all kinds of things, and $8 is about what materials cost for masks people are making.  There had to be some way of using this for a contact tracer.  So here's my plan:
 
-* Put this encoding into the BT name of the ESP32. Tell it to constantly advertise itself. This takes care of broadcasting your information to those who come near you. By putting it into the BT name, devices don't have to pair to exchange info.
+* Come up with some encoding for a unique ID for yourself + your health information (Easy: an MD5 + some additional hex codes to describe your health).
 
-* Also tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info. 
+* Come up with a way of broadcasting your information to those who come near you.  (Easy again: put this encoding into the BT name of the ESP32. Tell it to constantly advertise itself.)  By putting it into the BT name, devices don't have to pair to exchange info.
+
+* Come up with a way of monitoring the health of those nearby.  (Easy: Tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info.) 
 
 * Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
 
