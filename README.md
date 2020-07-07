@@ -19,13 +19,18 @@ I think Bluetooth (BT) is ideal for contact tracing. It's a short-range protocol
 $8....$8. A fully BT-enabled ESP32 is $8 on eBay. This about what materials cost for masks people are making.  There had to be someway of using this for a contact tracer.  So here's my plan:
 
 * Come up with some encoding for a unique ID for yourself + your health information (easy: an MD5 + some additional hex codes to describe your health).
-* Put this encoding into the BT name of the ESP32. Tell it to constantly advertise itself. This takes care of broadcasting your information to those who come near you.
+
+* Put this encoding into the BT name of the ESP32. Tell it to constantly advertise itself. This takes care of broadcasting your information to those who come near you. By putting it into the BT name, devices don't have to pair to exchange info.
+
 * Also tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info. 
+
 * Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
 
 That's it. It works, and here's how I did it all.
 
-# 
+# How to build an ESP32 contact tracer
+
+# Flash on the software
 
 
 
