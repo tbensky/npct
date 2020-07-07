@@ -10,10 +10,22 @@ Also, although a phone itself may be secure as a device, Apps, privacy, and what
 
 By summer 2020, the virus was really getting to me. The news was bad and getting worse.  Would we ever emerge from this?  I wanted do do something--anything---to help us through the Covid-19 crisis. Contact tracing can help, so I thought I'd work on something to help contain the Covid-19 outbreak.
 
-So I made a contract tracing system that doesn't use the phone at all. Say hello to "NPCP," the "no phone contact tracer."
+So I made a totally anonymous contract tracing system that doesn't use a mobile phone at all. Say hello to "NPCT," the "no phone contact tracer."
 
 # NPCT: The "no phone" Contact Tracer
 
+I think Bluetooth (BT) is ideal for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But you can't use a phone. So what's the plan?
+
+$8....$8. A fully BT-enabled ESP32 is $8 on eBay. This about what materials cost for masks people are making.  There had to be someway of using this for a contact tracer.  So here's my plan:
+
+* Come up with some encoding for a unique ID for yourself + your health information (easy: an MD5 + some additional hex codes to describe your health).
+* Put this encoding into the BT name of the ESP32. Tell it to constantly advertise itself. This takes care of broadcasting your information to those who come near you.
+* Also tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info. 
+* Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
+
+That's it. It works, and here's how I did it all.
+
+# 
 
 
 
