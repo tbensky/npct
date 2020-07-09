@@ -102,11 +102,9 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1. Connect the ESP32 to your computer using a USB-A to micro-USB cable.
 
-1.  When run, you'll see
+1.  When run, you'll see <img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
 
-<img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
-
-Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.  
+1. Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.  
 
 1.  Now click the "Flash" button.  
 
