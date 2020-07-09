@@ -96,16 +96,25 @@ So an HTML/Javascript configuration tool for this contact tracer was developed a
 
 ## Flashing the ESP32 Device
 
-The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once.  To do this, download either the Windows or macOS flashing utility [here](https://github.com/doayee/esptool-esp32-gui/releases).  DoayeeESP32DFU.app.zip is for macOS and DoayeeESP32DFU.exe is for Windows. When run, you'll see
+The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once.  To do this:
 
+1. Download either the Windows or macOS flashing utility [here](https://github.com/doayee/esptool-esp32-gui/releases).  DoayeeESP32DFU.app.zip is for macOS and DoayeeESP32DFU.exe is for Windows. 
+
+1. Connect the ESP32 to your computer using a USB-A to micro-USB cable.
+
+1.  When run, you'll see
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
 
-Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.  Now click the "Flash" button.  When the "Connecting...." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  
+Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.  
+
+1.  Now click the "Flash" button.  
+
+1. When the "Connecting...." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  
 
 That's it. The ESP32 is ready to use as a contact tracer, and this step does not need to be done again.
 
- 
+## Configuring the ESP 
 
 
 
