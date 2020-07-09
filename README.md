@@ -17,7 +17,7 @@ So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm 
 
 Mobile phones could be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
-Well, by Summer 2020, it was becoming clear that phone-based contact tracers were getting kind of stuck. Tons of contact-tracing Apps were appearing, some by companies and individuals; others by countries themselves. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+By Summer 2020, phone-based contact tracers were getting kind of stuck. Many  of contact-tracing Apps were appearing, some by companies and individuals; others by countries themselves. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
 Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreasing and trust in Apps and what companies do with your data is always in question.  The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e). 
 
@@ -85,13 +85,23 @@ The software is located in the [npct folder](https://github.com/tbensky/npct/tre
 ### Local Software
 
 Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which we didn't want to do). We also wanted to leave the phone out of this.  Luckily, 
-Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via JavaScript) to communicate with BLE devices.
+Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via Javascript) to communicate with BLE devices.
 
 So an HTML/Javascript configuration tool for this contact tracer was developed and is found [here, called config.html](https://github.com/tbensky/npct/tree/master/configapp). It looks like this:
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png>
 
 
+# Using the contact tracer
+
+## Flashing the ESP32 Device
+
+The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once.  To do this, download either the Windows or macOS flashing utility [here](https://github.com/doayee/esptool-esp32-gui/releases).  DoayeeESP32DFU.app.zip is for macOS and DoayeeESP32DFU.exe is for Windows. When run, you'll see
+
+
+<img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
+
+Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.   
 
 
 
