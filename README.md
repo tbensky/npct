@@ -12,13 +12,17 @@ Well, by Summer 2020, it was becoming clear that phone-based contact tracers wer
 
 Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreacing and trust in Apps and what companies do with your data is always in question.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
 
+
+
+# The *No Phone* Contact Tracer (NPCT) Project
+
 ## Goal of this work
 
 The goal of this work is to provide a totally anonymous contract tracing system that *doesn't use a mobile phone at all.* 
 
 Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
-# The No Phone Contact Tracer (NPCT)
+## Bluetooth
 
 Bluetooth (BT) seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what's the plan?
 
