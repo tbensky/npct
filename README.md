@@ -6,23 +6,23 @@ So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm 
 
 ## Mobile Phones for Contact Tracing?
 
-Mobile phones could be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. Well, by Summer 2020, it was clear phone-based contact tracers weren't going to work. Trust in Apps and what companies do with your data are always in question. Also, App-based contact tracing approaches are too varied and confusing. Whose App do I use? Am I really doing anything? How do I register?  Why are the Apps different? And, the big question: who will have access to my (health) information? 
+Mobile phones could be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
-Also, although a phone as a device is pretty secure, Apps, privacy, and what companies do with your data is kind of a joke.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
+Well, by Summer 2020, it was becoming clear that phone-based contact tracers were getting kind of stuck. Tons of contact-tracing Apps were appearing, some by companies and individuals; others by countries themselves. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+
+Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreacing and trust in Apps and what companies do with your data is always in question.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
 
 ## Goal of this work
 
-By summer 2020, the Corona virus situation was really getting to me. The news was bad and getting worse.  Would we ever emerge from this?  I wanted to "make"  something--anything---that could help us through the Covid-19 crisis. Contact tracing can help, so I thought I'd work on that.
-
-So I made a totally anonymous contract tracing system that doesn't use a mobile phone at all. 
+The goal of this work is to provide a totally anonymous contract tracing system that *doesn't use a mobile phone at all.* 
 
 Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
 # The No Phone Contact Tracer (NPCT)
 
-I think Bluetooth (BT) is ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what's the plan?
+Bluetooth (BT) seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what's the plan?
 
-I continue to be super impressed with the makers' effort in making [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). So maybe some 'maker' themed contract tracer would work?  
+The maker movement continues to impress. They got a quick start in backfilling PPE shortages with a mask-making effort, like this one [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). So maybe some 'maker' themed contract tracer would work?  
 
 $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers use these for all kinds of things, and $8 is about what materials cost for masks people are making.  There had to be some way of using an $8 device for a contact tracer.  So here's my plan:
 
