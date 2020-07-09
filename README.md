@@ -46,12 +46,24 @@ Yes, and I understand this is a show stopper.  But the things are only $8 and pe
 
 # How to build an ESP32 contact tracer
 
+## Items needed
+
 To build the contact tracer, you'll need three items: an [ESP32](https://www.ebay.com/itm/ESP32-ESP-32S-NodeMCU-Development-Board-2-4GHz-WiFi-Bluetooth-Dual-Mode-CP2102/382601606021?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649), a [micro-USB cable](https://www.amazon.com/gp/product/B07PFZDQP6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&psc=1) (most of the time these come with the battery), and a [battery power pack](https://www.amazon.com/gp/product/B00MWU1GGI/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1). (The ones used here are pointed to by the links.)
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/all3.jpg>
 
+## Assembly
 
-# Flash on the software
+Assembling it is just a matter of connecting the ESP32 to the battery like this
+
+<img src=https://github.com/tbensky/npct/blob/master/pics/unit.jpg>
+
+The ESP32 should be protected a bit. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (again, or *anything* metallic), as this is kill the Bluetooth connectivity.
+
+
+## Software
+
+Software needed has two aspects. The first is software that goes on the ESP32 to run the contact tracing. The second is local software to allow a user to configure the ESP32 and retrieve contact tracing information.
 
 
 
