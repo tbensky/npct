@@ -18,9 +18,7 @@ Open-source Apps revealed all kinds of tricks to keep the Apps running and traci
 
 ## Goal of this work
 
-The goal of this work is to provide a totally anonymous contract tracing system that *doesn't use a mobile phone at all.* 
-
-Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
+The goal of this work is to provide a totally anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
 ## Bluetooth
 
@@ -38,14 +36,16 @@ $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers us
 
 * Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
 
-That's it. It works, and here's how I did it all. Want to build one and try it out?
+* Power it with a $10 portable "extra phone charge" battery.
+
+That's it. It works, and here's how. Want to build one and try it out?
 
 # So participants will need an ESP32 (and to carry one around)?
 
-Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe they'll make this too? Plus, there's a global pandemic out there. Let's help stop it?
-
+Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe they'll make this too? Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
 
 # How to build an ESP32 contact tracer
+
 
 # Flash on the software
 
