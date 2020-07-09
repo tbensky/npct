@@ -4,7 +4,10 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 ## Contact Tracing
 
-Contact tracing is about you going out and about, and doing two things: (1) letting people you come in close proximity to know about your health condition and (2) likewise you knowing the health condition of those same people. If you are feeling sick, others would benefit from knowing and perhaps acting accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
+Contact tracing is about you going out and about, and doing two things: 
+
+1. Letting people you come in close proximity to know about your health condition and,
+2. likewise you knowing the health condition of those same people. If you are feeling sick, others would benefit from knowing and perhaps acting accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No, but likely using some technology to quietly inform those around us about our condition would work.
 
@@ -80,11 +83,11 @@ The software is located in the [npct folder](https://github.com/tbensky/npct/tre
 ### Local Software
 
 Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which we didn't want to do). We also wanted to leave the phone out of this.  Luckily, 
-Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via JavaScript) to communicate with BLE devices. Thus the configuration tool for this contact tracer is done through a local .HTML page, that looks like this:
+Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via JavaScript) to communicate with BLE devices.
+
+So an HTML/Javascript configuration tool for this contact tracer was developed and is found [here, called config.html](https://github.com/tbensky/npct/tree/master/configapp). It looks like this:
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png>
-
-It is called config.html and is found [here](https://github.com/tbensky/npct/tree/master/configapp). It has Bootstrap and jQuery dependencies.
 
 
 
