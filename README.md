@@ -40,7 +40,7 @@ $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers us
 
 That's it. It works, and here's how. Want to build one and try it out?
 
-# So participants will need an ESP32 (and to carry one around)?
+## So participants will need an ESP32 (and to carry one around)?
 
 Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe they'll make this too? Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
 
