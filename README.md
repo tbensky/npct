@@ -7,7 +7,9 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 Contact tracing is about you going out and about, and doing two things: 
 
 1. Letting people you come in close proximity to know about your health condition and,
-2. likewise you knowing the health condition of those same people. If you are feeling sick, others would benefit from knowing and perhaps acting accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
+2. likewise you knowing the health condition of those same people. 
+
+If you are feeling sick, others would benefit from knowing and perhaps acting accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No, but likely using some technology to quietly inform those around us about our condition would work.
 
