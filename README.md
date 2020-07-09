@@ -42,9 +42,13 @@ That's it. It works, and here's how. Want to build one and try it out?
 
 ## So participants will need an ESP32 (and to carry one around)?
 
-Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe they'll make this too? Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
+Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe it'll be fun to make and operate your own contact tracer.  Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
 
 # How to build an ESP32 contact tracer
+
+To build the contact tracer, you'll need three items: an [ESP32](https://www.ebay.com/itm/ESP32-ESP-32S-NodeMCU-Development-Board-2-4GHz-WiFi-Bluetooth-Dual-Mode-CP2102/382601606021?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649), a [micro-USB cable](https://www.amazon.com/gp/product/B07PFZDQP6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&psc=1) (most of the time these come with the battery), and a [battery power pack](https://www.amazon.com/gp/product/B00MWU1GGI/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1). (The ones used here are pointed to by the links.)
+
+
 
 
 # Flash on the software
