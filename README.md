@@ -14,7 +14,7 @@ Mobile phones could be ideal for this. "Everyone already has one," and they can 
 
 Well, by Summer 2020, it was becoming clear that phone-based contact tracers were getting kind of stuck. Tons of contact-tracing Apps were appearing, some by companies and individuals; others by countries themselves. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
-Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreacing and trust in Apps and what companies do with your data is always in question.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
+Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreacing and trust in Apps and what companies do with your data is always in question.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. 
 
 
 ### Bluetooth
@@ -39,7 +39,7 @@ That's it. It works, and here's how. Want to build one and try it out?
 
 ### So participants will need an ESP32 (and to carry one around)?
 
-Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe it'll be fun to make and operate your own contact tracer.  Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
+Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of things to adapt and get through the pandemic. Maybe it'll be fun to make and operate your own contact tracer. Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
 
 # How to build an ESP32 contact tracer
 
@@ -55,7 +55,7 @@ Assembling it is just a matter of connecting the ESP32 to the battery like this
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG>
 
-The ESP32 should be protected a bit. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (again, or *anything* metallic), as this is kill the Bluetooth connectivity.
+The ESP32 should be protected some. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) kill the Bluetooth connectivity (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work).
 
 
 ## Software
@@ -63,6 +63,7 @@ The ESP32 should be protected a bit. It can be wrapped in anything non-metallic,
 Software needed has two aspects. The first is software that goes on the ESP32 to run the contact tracing. The second is local software to allow a user to configure the ESP32 and retrieve contact tracing information.
 
 
+### ESP32 Software
 
 
 
