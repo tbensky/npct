@@ -73,7 +73,7 @@ The software for the ESP works to implement "the plan" bullet points above. It a
 
 ### Local Software
 
-Conveniently connecting with a device over BLE sort of requires a custom application to be developed, which we didn't want to do. We also wanted to leave the phone out of this.  Luckily, 
+Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which we didn't want to do). We also wanted to leave the phone out of this.  Luckily, 
 Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via JavaScript) to communicate with BLE devices. Thus the configuration tool for this contact tracer is done through a local .HTML page, that looks like this:
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png>
