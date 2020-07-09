@@ -1,0 +1,20 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "/Users/tom/esp/esp-idf/components/bootloader/subproject",
+    "build_dir":          "/Users/tom/esp/npct/npct/npct/build/bootloader",
+    "config_file":        "/Users/tom/esp/npct/npct/npct/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.2-dev-1541-g5e436be77-dirty",
+    "target":             "esp32",
+    "phy_data_partition": "",
+    "monitor_baud" :      "115200",
+    "monitor_toolprefix": "xtensa-esp32-elf-",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "/Users/tom/esp/esp-idf/components/efuse/Kconfig;/Users/tom/esp/esp-idf/components/esp32/Kconfig;/Users/tom/esp/esp-idf/components/esp_common/Kconfig;/Users/tom/esp/esp-idf/components/log/Kconfig;/Users/tom/esp/esp-idf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "/Users/tom/esp/esp-idf/components/bootloader/Kconfig.projbuild;/Users/tom/esp/esp-idf/components/esptool_py/Kconfig.projbuild;/Users/tom/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_rom", "esptool_py", "log", "main", "micro-ecc", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "/Users/tom/esp/esp-idf/components/bootloader", "/Users/tom/esp/esp-idf/components/bootloader_support", "/Users/tom/esp/esp-idf/components/efuse", "/Users/tom/esp/esp-idf/components/esp32", "/Users/tom/esp/esp-idf/components/esp_common", "/Users/tom/esp/esp-idf/components/esp_rom", "/Users/tom/esp/esp-idf/components/esptool_py", "/Users/tom/esp/esp-idf/components/log", "/Users/tom/esp/esp-idf/components/bootloader/subproject/main", "/Users/tom/esp/esp-idf/components/bootloader/subproject/components/micro-ecc", "/Users/tom/esp/esp-idf/components/partition_table", "/Users/tom/esp/esp-idf/components/soc", "/Users/tom/esp/esp-idf/components/spi_flash", "/Users/tom/esp/esp-idf/components/xtensa", "" ]
+}

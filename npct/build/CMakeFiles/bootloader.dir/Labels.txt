@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/Users/tom/esp/npct/npct/npct/build/CMakeFiles/bootloader
+/Users/tom/esp/npct/npct/npct/build/CMakeFiles/bootloader.rule
+/Users/tom/esp/npct/npct/npct/build/CMakeFiles/bootloader-complete.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/tom/esp/npct/npct/npct/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule

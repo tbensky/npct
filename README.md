@@ -1,6 +1,6 @@
 # The *No Phone* Contact Tracer (NPCT) Project
 
-The goal of this work is to provide an anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
+The goal of this work is to develop an open-source, hardware-based, anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
 ## Contact Tracing
 
