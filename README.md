@@ -37,7 +37,7 @@ $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers us
 
 * Power it with a $10 portable "extra phone charge" battery.
 
-* No server, no storage, no App, no account to make, no Internel required.
+* No server, no storage, no App, no account to make, no Internet required.
 
 That's it. It works, and here's how. Want to build one and try it out?
 
