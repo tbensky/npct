@@ -1,14 +1,14 @@
 # The *No Phone* Contact Tracer (NPCT) Project
 
-The goal of this work is to provide a totally anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
+The goal of this work is to provide an anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
-# Contact Tracing
+## Contact Tracing
 
 Contact tracing is about you going out and about, and doing two things: (1) letting people you come in close proximity to know about your health condition and (2) likewise you knowing the health condition of those same people. If you are feeling sick, others would benefit from knowing and perhaps acting accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No, but likely using some technology to quietly inform those around us about our condition would work.
 
-## Mobile Phones for Contact Tracing?
+### Mobile Phones for Contact Tracing?
 
 Mobile phones could be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
@@ -17,7 +17,7 @@ Well, by Summer 2020, it was becoming clear that phone-based contact tracers wer
 Open-source Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX).  Sounds good, but battery life was decreacing and trust in Apps and what companies do with your data is always in question.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
 
 
-## Bluetooth
+### Bluetooth
 
 Bluetooth (BT) seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what's the plan?
 
@@ -37,7 +37,7 @@ $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers us
 
 That's it. It works, and here's how. Want to build one and try it out?
 
-## So participants will need an ESP32 (and to carry one around)?
+### So participants will need an ESP32 (and to carry one around)?
 
 Yes, and I understand this is a show stopper.  But the things are only $8 and people are making all kinds of masks. Maybe it'll be fun to make and operate your own contact tracer.  Plus, there's a global pandemic out there. Let's help stop it? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token."
 
