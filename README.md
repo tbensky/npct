@@ -116,5 +116,26 @@ That's it. The ESP32 is ready to use as a contact tracer, and this step does not
 
 ## Configuring the ESP 
 
+Now configure the contact tracing aspect.  
+
+1. Get the latest version of Google Chrome (83+). 
+
+1. Keeping all files in the [configapp](https://github.com/tbensky/npct/tree/master/configapp) folder together, in Chrome do a "File->Open..." on `config.html`.
+
+1. The first time you run it, click the green "Generate ID" button to get your unique contact tracing ID.
+
+1. Tick on any relevant health information.
+
+1. Click on "Update hardware." This should allow you to connect to the ESP32 via BLE and it will write your configuration information to it.
+
+1. Sometimes you might have trouble getting Chrome to "see" ESP32. If so, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to connect to the ESP32 manually. When you do so, go back to `config.html` and it should work. 
+
+## Participate in contact tracing
+
+You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours, so be sure not to disconnect it while you're out and about.
+
+Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
+
+
 
 
