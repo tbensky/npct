@@ -4,13 +4,19 @@ Contact tracing is about you going out and about, and doing two things: (1) lett
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No, but likely using some technology to quietly inform those around us about our condition would work.
 
+## Mobile Phones for Contact Tracing?
+
 Mobile phones could be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. Well, by Summer 2020, it was clear phone-based contact tracers weren't going to work. Trust in Apps and what companies do with your data are always in question. Also, App-based contact tracing approaches are too varied and confusing. Whose App do I use? Am I really doing anything? How do I register?  Why are the Apps different? And, the big question: who will have access to my (health) information? 
 
 Also, although a phone as a device is pretty secure, Apps, privacy, and what companies do with your data is kind of a joke.  The latest round is the clipboard spying in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) didn't help. Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home. The "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually works, BTW.)
 
+## Goal of this work
+
 By summer 2020, the Corona virus situation was really getting to me. The news was bad and getting worse.  Would we ever emerge from this?  I wanted to "make"  something--anything---that could help us through the Covid-19 crisis. Contact tracing can help, so I thought I'd work on that.
 
-So I made a totally anonymous contract tracing system that doesn't use a mobile phone at all. Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
+So I made a totally anonymous contract tracing system that doesn't use a mobile phone at all. 
+
+Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project.
 
 # The No Phone Contact Tracer (NPCT)
 
