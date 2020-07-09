@@ -1,16 +1,7 @@
-| Supported Targets | ESP32 |
-| ----------------- | ----- |
+# ESP32 Software for No Phone Contact Tracer
 
-ESP-IDF Gatt Server Demo
-========================
+The software for the ESP works to implement "the plan" bullet points above. It accomplishes two primary functions:
 
-This is the demo of APIs to create a GATT service by adding attributes one by one. However, this method is defined by Bluedroid and is difficult for users to use.
+* Starts a Bluetooth low-energy (BLE) server. This allows for outside connection to the ESP32 device by the user for configuration and reading of the device. "Configuration" here means to be able to set the BLE name of the ESP32 with a unique ID and health-status code (of the user). This BLE name (hence health information) is continually advertised by the ESP32. "Reading" here means to retrieve health related contacts that may have been received. 
 
-Hence, we also allow users to create a GATT service with an attribute table, which releases the user from adding attributes one by one. And it is recommended for users to use. For more information about this method, please refer to [gatt_server_service_table_demo](../gatt_server_service_table).
-
-This demo creates GATT a service and then starts advertising, waiting to be connected to a GATT client. 
-
-To test this demo, we can run the [gatt_client_demo](../gatt_client), which can scan for and connect to this demo automatically. They will start exchanging data once the GATT client has enabled the notification function of the GATT server.
-
-Please check the [tutorial](tutorial/Gatt_Server_Example_Walkthrough.md) for more information about this example.
-
+* Starts a BLE discovery scan, to continually scan for the names of other nearby BLE devices. All contact tracing names as used by this system, start with the hash-tag "#C19:".  Any names not starting with this are ignored. Those starting with it are logged into the ESP32's internal RAM. About 5,000 such names can be logged.
