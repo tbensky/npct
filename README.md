@@ -75,6 +75,8 @@ The software for the ESP works to implement "the plan" bullet points above. It a
 
 * Starts a BLE discovery scan, to continually scan for the names of other nearby BLE devices. All contact tracing names as used by this system, start with the hash-tag "#C19:".  Any names not starting with this are ignored. Those starting with it are logged into the ESP32's internal RAM. About 5,000 such names can be logged.
 
+The software is located in the [npct folder](https://github.com/tbensky/npct/tree/master/npct) and is a full blown ESP32 project developed using the Espressif IoT Development Framework (esp-idf).
+
 ### Local Software
 
 Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which we didn't want to do). We also wanted to leave the phone out of this.  Luckily, 

@@ -1,0 +1,256 @@
+<!doctype html>
+
+<script type="text/javascript" src="md5.js"></script>
+<link rel="stylesheet" href="bootstrap-3.4.1.min.css">
+<script type="text/javascript" src="jquery-3.5.1.js"></script>
+<script src="bootstrap-3.4.1.min.js"></script>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>No Phone Contact Tracer (NPCT)</title>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+
+
+    <h3>Welcome!</h3>
+      <div id="content"></div>
+
+      Welcome to the No Phone Contact Tracer (NPCT) Project
+      <ul>
+        <li> This tracer is completely anonymous and doesn't involve your phone at all.
+        <li> It is based on a small, battery powered circuit board from the "maker world" called the "ESP32."
+        <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
+        <li> This page will help you to get started participating in contact tracing.
+        <li> This page runs only on your own computer, and does not contact any external webserver.
+      </ul>
+
+       <h3>As you go out and about today, click on any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+      
+      <div class="form-group">
+
+        
+          <input type="checkbox" value="1"> I am feeling fine.
+          <br/>
+
+          <input type="checkbox" value="2"> Sore throat
+          <br/>    
+        
+       
+          <input type="checkbox" value="4"> Cough
+          <br/>  
+
+       
+          <input type="checkbox" value="8"> Runny nose or nasal congestion
+          <br/>
+
+        
+          <input type="checkbox" value="16"> Shortness of breath or difficulty breathing
+          <br/>
+
+      
+          <input type="checkbox" value="32"> Muscle pain
+          <br/>
+
+       
+          <input type="checkbox" value="64"> Loss of smell or taste
+          <br/>
+
+        
+          <input type="checkbox" value="128"> Diarrhea
+          <br/>
+
+
+       
+          <input type="checkbox" value="128"> I tested negative for Covid-19
+          <br/>
+
+         
+          <input type="checkbox" value="128"> I tested positive for Covid-19
+          <br/>
+
+    </div>
+       
+
+      <p/>
+      <input type=text id=coords>
+      <button onclick="bt_read()">Read</button>
+      <button class="btn btn-info" onclick="bt_update()">Update hardware</button>
+      <hr/>
+      <h3>Contact Tracer Log</h3>
+      <textarea id="device_dump" class="form-control" rows=10></textarea>
+
+  </div>
+</div>
+
+</body>
+</html>
+
+
+<script>
+
+  var mouseX = 0, mouseY = 0;
+
+$( ".container" ).mousemove(function( event ) {
+  mouseX += event.pageX;
+  mouseY += event.pageY;
+});
+
+//localStorage.clear();
+var id = localStorage.getItem('id');
+
+if (id == null)
+{
+  //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
+  id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
+  id = id.substr(0,15);
+  localStorage.setItem('id',id);
+  console.log(id);
+  $('#content').html(`
+   Looks like you're setting up your contact tracing gadget for the first time.
+   <br/>
+   Your tracing ID will be: <b>` + id + `</b>
+   <p/>
+   Please copy this into a safe place (like a Word document on your computer for safekeeping). It is important that you
+   always use this ID throughout your participation in contact tracing. For you to remain unique in this effort, please 
+   never change this ID, or request a new one.
+                    `);
+
+}
+
+async function bt_read()
+{
+    var bt_device;
+    var read_int;
+
+    try
+    {
+      const device = await navigator.bluetooth.requestDevice({
+      filters: [
+        {namePrefix: '#C19:'},
+        {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+      ],
+    });
+
+      const server = await device.gatt.connect();
+      const service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+      const characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+
+      async function read_encounters()
+            {
+              const value = await characteristic.readValue();
+              var data = new TextDecoder("utf-8").decode(value) + '\n';
+              $('#device_dump').val($('#device_dump').val() + data);
+              if (data.substring(0,3) == 'end')
+                clearInterval(read_int);
+              else read_int = setTimeout(read_encounters,1000);
+            }
+      $('#device_dump').val('');
+      read_encounters();
+        
+
+      } catch(error)
+        {
+          console.log(error);
+        }
+  }
+
+
+
+function bt_read0()
+{
+    var bt_device;
+
+    navigator.bluetooth.requestDevice({
+      filters: [
+        {namePrefix: '#C19:'},
+        {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+      ],
+    })
+      .then(device => 
+                  { 
+                    return device.gatt.connect();
+
+                  })
+      .then(server => {
+        return server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+      })
+      .then(service => {
+        return service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+      })
+      .then(characteristic => {
+        return characteristic.readValue();
+      })
+      .then(value => {
+        var data = new TextDecoder("utf-8").decode(value);
+        $('#device_dump').val($('#device_dump').val() + data);
+
+      }).then(_ => 
+        {
+          bt_device.gatt.disconnect();
+        })
+      .catch(error => { console.log(error); });
+}
+
+function bt_update()
+{
+    var bt_device;
+    var health = 0, health_hex;
+    var update_id;
+    var i;
+    var a = []
+
+    console.log(health);
+
+    $('input[type=checkbox]').each(function () {
+           if (this.checked) {
+              health += parseInt($(this).val()); 
+           }
+      });
+
+    health_hex = health.toString(16).padStart(4,"0");
+    update_id = id + health_hex;
+
+    navigator.bluetooth.requestDevice({
+      filters: [
+        //{namePrefix: '#C19:'}
+         {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+      ],
+      })
+        .then(device => 
+                    { 
+                      console.log(device.name);
+                      bt_device = device;
+                      return device.gatt.connect();
+                    })
+        .then(server => {
+          return server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+        })
+        .then(service => {
+          return service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+        })
+        .then(characteristic => {
+          for (var i = 0; i < update_id.length; i ++)
+            a.push(update_id.charCodeAt(i));
+          return characteristic.writeValue(new Uint8Array(a));
+        })
+        .then(_ => 
+        {
+          console.log('Updated.');
+          bt_device.gatt.disconnect();
+        })
+        .catch(error => 
+          { 
+            console.log(error); 
+          });
+
+}
+
+
+</script>
