@@ -84,6 +84,7 @@ Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png>
 
+It is called config.html and is found [here](https://github.com/tbensky/npct/tree/master/configapp). It has Bootstrap and jQuery dependencies.
 
 
 
