@@ -67,6 +67,8 @@ The ESP32 should be protected some. It can be wrapped in anything non-metallic, 
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg>
 
+This form could easily be tossed into a bag, backpack, or even pocket and actually work as a portable contract tracer.  No soldering or wiring is required at all.
+
 
 ## Software
 
@@ -136,7 +138,7 @@ Come back to `config.html` as needed to update your health information or query 
 # Participate in contact tracing
 
 You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours. Be sure not to disconnect it while you're out and about, as any 
-logged contact information will be lost.
+logged contact information will be lost.  The blue LED will come on if any health-related contacts are logged, so no need to check it if you get home and the blue LED is off (the red LED is always on).
 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
 
