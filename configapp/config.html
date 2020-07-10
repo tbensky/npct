@@ -149,7 +149,7 @@ async function bt_read()
               $('#device_dump').val($('#device_dump').val() + data);
               if (data.substring(0,3) == 'end')
                 clearInterval(read_int);
-              else read_int = setTimeout(read_encounters,1000);
+              else read_int = setTimeout(read_encounters,100);
             }
       $('#device_dump').val('');
       read_encounters();

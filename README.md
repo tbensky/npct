@@ -110,7 +110,7 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1.  Now click the "Flash" button.  
 
-1. When the "Connecting...." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  
+1. When the "Connecting........_____....." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  
 
 That's it. The ESP32 is ready to use as a contact tracer, and this step does not need to be done again.
 
@@ -130,7 +130,7 @@ Now configure the contact tracing aspect.
 
 1. Sometimes you might have trouble getting Chrome to "see" ESP32. If so, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to connect to the ESP32 manually. When you do so, go back to `config.html` and it should work. 
 
-## Participate in contact tracing
+# Participate in contact tracing
 
 You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours, so be sure not to disconnect it while you're out and about.
 

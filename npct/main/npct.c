@@ -260,6 +260,7 @@ void add_encounter(char *encounter)
     char *tptr;
     const int len0 = strlen("#C19:");
 
+    /*
     if (!(encounter[0] == '#' && encounter[1] == 'C' && encounter[2] == '1' && encounter[3] == '9' && encounter[4] == ':'))
     {
         printf("Not a health token.\n");
@@ -284,6 +285,10 @@ void add_encounter(char *encounter)
         return;
     }
 
+    */
+
+
+
     if (Encounters == NULL)
     {
         Encounters = (char *)malloc(PACKET_SIZE);
@@ -305,7 +310,9 @@ void add_encounter(char *encounter)
     }
 
     j = 0;
-    for(i=len0;i<BLE_HEALTH_NAME_LEN;i++)
+    //for(i=len0;i<BLE_HEALTH_NAME_LEN;i++)
+    tptr = ptr;
+    for(i=0;i<strlen(encounter);i++)
     {
         *ptr = encounter[i];
         if (j < ID_SIZE)
@@ -317,6 +324,10 @@ void add_encounter(char *encounter)
     }
     *ptr = '0';
     *(ptr + 1) = '1';
+
+    while(ptr - tptr < PACKET_SIZE)
+        *(ptr++) = 0;
+    
     Encounter_count++;
     printf("Encounter added. Count=%d\n",Encounter_count);
 }
