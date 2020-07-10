@@ -32,6 +32,7 @@
 #include "esp_system.h"
 #include "esp_gattc_api.h"
 #include "esp_gatt_defs.h"
+#include "driver/gpio.h"
 
 #define GATTS_TAG "GATTS_DEMO"
 
@@ -330,6 +331,12 @@ void add_encounter(char *encounter)
     
     Encounter_count++;
     printf("Encounter added. Count=%d\n",Encounter_count);
+
+    if (Encounter_count == 1)
+    {
+        printf("Blue LED turned on.\n");
+        gpio_set_level(2,1);
+    }
 }
 
 void example_write_event_env(esp_gatt_if_t gatts_if, prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
@@ -875,5 +882,10 @@ void app_main(void)
     if (local_mtu_ret){
         ESP_LOGE(GATTS_TAG, "set local  MTU failed, error code = %x", local_mtu_ret);
     }
+
+    gpio_set_direction(2,GPIO_MODE_OUTPUT);
+
+    printf("Blue LED off.\n");
+    gpio_set_level(2,0);
     
 }

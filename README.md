@@ -23,18 +23,17 @@ Open-source Apps revealed all kinds of tricks to keep the Apps running and traci
 
 Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home.) 
 
+### If not a phone, then what?
 
-### Bluetooth
+The maker movement continues to impress. They got a quick start in early 2020 backfilling PPE shortages with a mask and face shield making efforts, like these: [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). So is a 'maker' themed contract tracer possible?  
 
-Bluetooth (BT) seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what's the plan?
+I could not help but wondering about the Arduino world and all of the small and low-priced boards out there.  Also, Bluetooth (BT) does seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what then?
 
-The maker movement continues to impress. They got a quick start in backfilling PPE shortages with a mask-making effort, like this one [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). So maybe some 'maker' themed contract tracer would work?  
-
-$8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers use these for all kinds of things, and $8 is about what materials cost for masks people are making.  There had to be some way of using an $8 device for a contact tracer.  So here's my plan:
+One board that came to mind in particular was the [ESP32](https://esp32.com).  It costs $8....$8 (cheaper than any Arduino, with or without BT)! It's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is about what materials cost for masks people are making.  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
 
 * Come up with some encoding for a unique ID for yourself + your health information (Easy: an MD5 + some additional hex codes to describe your health).
 
-* Come up with a way of broadcasting your information to those who come near you.  (Easy again: put this encoding into the *BT name* of the ESP32, and tell it to constantly advertise itself.)  By putting it into the BT name, devices don't have to pair to exchange info.
+* Come up with a way of broadcasting such information to those who come near you.  (Easy again: put this encoding into the *BT name* of the ESP32, and tell it to constantly advertise itself.)  By putting it into the BT name, devices don't have to pair to exchange info.
 
 * Come up with a way of monitoring the health of those nearby.  (Easy: Tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info.) 
 
@@ -42,7 +41,7 @@ $8....$8. A fully BT-enabled [ESP32](https://esp32.com) is $8 on eBay. Makers us
 
 * Power it with a $10 portable "extra phone charge" battery.
 
-* No server, no storage, no App, no account to make, no Internet required.
+* And, most importantly: No server, no storage, no App, no account to make, no Internet required.
 
 That's it. It works, and here's how. Want to build one and try it out?
 
@@ -64,7 +63,9 @@ Assembling it is just a matter of connecting the ESP32 to the battery like this
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG>
 
-The ESP32 should be protected some. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) kill the Bluetooth connectivity (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work).
+The ESP32 should be protected some. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) kill the Bluetooth connectivity (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work). Here's the 3D printed case in use:
+
+<img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg>
 
 
 ## Software
