@@ -130,9 +130,12 @@ Now configure the contact tracing aspect.
 
 1. Sometimes you might have trouble getting Chrome to "see" ESP32. If so, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to connect to the ESP32 manually. When you do so, go back to `config.html` and it should work. 
 
+Come back to `config.html` as needed to update your health information or query the devices for contacts that may have occurred while you were out.
+
 # Participate in contact tracing
 
-You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours, so be sure not to disconnect it while you're out and about.
+You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours. Be sure not to disconnect it while you're out and about, as any 
+logged contact information will be lost.
 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
 
