@@ -142,7 +142,7 @@ Now configure the contact tracer itself. (This has only been tested on macOS Cat
 
 After you configure the ESP32 for the first time, its BT name will change to reflect your unique ID and health info for other contact tracers to pick up on. It's name will be something like `#C19:abcdefghijklmnop17`.
 
-Come back to `config.html` as needed to update your health information or query the devices for contacts that may have occurred while you were out.
+Come back to `config.html` as needed to update your health information or query the device for contacts that may have occurred while you were out.
 
 # Participate in contact tracing
 
