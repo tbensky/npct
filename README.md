@@ -125,7 +125,7 @@ That's it. The ESP32 is ready to use as a contact tracer, and these steps do not
 
 ## Configuring the ESP 
 
-Now configure the contact tracing aspect.  
+Now configure the contact tracer itself.  
 
 1. Get the latest version of Google Chrome (83+). 
 
