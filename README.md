@@ -139,6 +139,9 @@ Now configure the contact tracer itself. (This has only been tested on macOS Cat
 
 1. Sometimes you might have trouble getting Chrome to "see" ESP32. If so, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to connect to the ESP32 manually. When you do so, go back to `config.html` and it should work. 
 
+
+After you configure the ESP32 for the first time, its BT name will change to reflect your unique ID and healh info. It's name will be something like `#C19:abcdefghijklmnop17`.
+
 Come back to `config.html` as needed to update your health information or query the devices for contacts that may have occurred while you were out.
 
 # Participate in contact tracing
