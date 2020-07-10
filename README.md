@@ -104,7 +104,8 @@ So an HTML/Javascript configuration tool for this contact tracer was developed a
 
 ## Flashing the ESP32 Device
 
-The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once.  To do this:
+The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once. You can certainly download and install the Espressif IoT Development Framework (esp-idf), then compile, and flash the code to the board yourself. Or, you can just [grab the binary(https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) from this repository and flash it using any number of
+"flash utilities" out there. To do this:
 
 1. Download either the Windows or macOS flashing utility [here](https://github.com/doayee/esptool-esp32-gui/releases).  DoayeeESP32DFU.app.zip is for macOS and DoayeeESP32DFU.exe is for Windows. 
 
