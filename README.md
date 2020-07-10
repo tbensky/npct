@@ -63,11 +63,13 @@ Assembling it is just a matter of connecting the ESP32 to the battery like this
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG>
 
-The ESP32 should be protected some. It can be wrapped in anything non-metallic, or try to 3D print a case for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) kill the Bluetooth connectivity (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work). Here's the 3D printed case in use:
+The ESP32 should be protected. It can be placed or wrapped in anything non-metallic. There are 3D printable cases for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put it in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) the Bluetooth connectivity would be severely degraded (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work). 
+
+Here's the assembly in a 3D printed:
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg>
 
-This form could easily be tossed into a bag, backpack, or even pocket and actually work as a portable contract tracer.  No soldering or wiring is required at all.
+All told, wow! This form could easily be tossed into a bag, backpack, or even pocket and actually work as a portable contract tracer.  No soldering or wiring is required at all.
 
 
 ## Software
