@@ -111,7 +111,7 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1. Connect the ESP32 to your computer using a USB-A to micro-USB cable.
 
-1.  When run, you'll see <img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
+1.  When this flashing utility is run, you'll see <img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
 
 1. Select the serial port your ESP32 is attached to. This varies from computer to computer.
 
