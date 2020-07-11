@@ -53,7 +53,7 @@ One board that came to mind in particular was the [ESP32](https://esp32.com).  I
 
 * Power it with a $10 portable "extra phone charge" battery.
 
-* And, most importantly: No server, no storage, no App, no account to make, no Internet required.
+* And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS required.
 
 That's it. It works, and here's how. Want to build one and try it out?
 
@@ -101,7 +101,7 @@ The software is located in the [npct folder](https://github.com/tbensky/npct/tre
 
 ### Local Software
 
-Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which we didn't want to do). We also wanted to leave the phone out of this.  Luckily, 
+Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which I didn't want to do). I also wanted to leave the phone out of this.  Luckily, 
 Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via Javascript) to communicate with BLE devices.
 
 So an HTML/Javascript configuration tool for this contact tracer was developed and is found [here, called config.html](https://github.com/tbensky/npct/tree/master/configapp). It looks like this:
