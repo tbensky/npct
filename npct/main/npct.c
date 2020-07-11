@@ -48,7 +48,7 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
 #define GATTS_DESCR_UUID_TEST_A     0x3333
 #define GATTS_NUM_HANDLE_TEST_A     4
 
-#define DEFAULT_DEVICE_NAME "NoPhoneContactTracer"
+#define DEFAULT_DEVICE_NAME "ContactTracer"
 #define TEST_MANUFACTURER_DATA_LEN  17
 
 #define GATTS_DEMO_CHAR_VAL_LEN_MAX 0x40
@@ -167,7 +167,10 @@ static prepare_type_env_t a_prepare_write_env;
 #define HID_SIZE 18
 #define PACKET_SIZE 20 //18(=id+health) + 2(=encounter count)
 #define BLE_HEALTH_NAME_LEN 23
-#define MAX_BUFFER 100000
+#define MAX_MEMORY_ALLOWED 100000
+#define MAX_PACKETS_ALLOWED (MAX_MEMORY_ALLOWED / PACKET_SIZE)
+#define MAX_BLE_ADVERTISE_NAME ESP_BLE_SCAN_RSP_DATA_LEN_MAX  // from https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gap_ble_api.h#L182
+
 
 char *Encounters = NULL;
 int Encounter_count = 0;
@@ -230,6 +233,17 @@ int get_encounter_count()
     return(Encounter_count);
 }
 
+void fake_test_str(char *str)
+{
+    char t[BLE_HEALTH_NAME_LEN];
+    strcpy(t,"#C19:");
+    strcat(t,str);
+    printf("t=%s\n",t);
+    while(strlen(t) < BLE_HEALTH_NAME_LEN)
+        strcat(t,"0");
+    strcpy(str,t);
+}
+
 int seen_before(char *hid)
 {
     int i, count, ret;
@@ -253,7 +267,6 @@ int seen_before(char *hid)
     }
     return(0);
 }
-
 void add_encounter(char *encounter)
 {
     int i,j;
@@ -261,16 +274,15 @@ void add_encounter(char *encounter)
     char *tptr;
     const int len0 = strlen("#C19:");
 
-    /*
-    if (!(encounter[0] == '#' && encounter[1] == 'C' && encounter[2] == '1' && encounter[3] == '9' && encounter[4] == ':'))
-    {
-        printf("Not a health token.\n");
-        return;
-    }
-
     if (strlen(encounter) != BLE_HEALTH_NAME_LEN)
     {
         printf("Not %d characters in length.\n",BLE_HEALTH_NAME_LEN);
+        return;
+    }
+
+    if (!(encounter[0] == '#' && encounter[1] == 'C' && encounter[2] == '1' && encounter[3] == '9' && encounter[4] == ':'))
+    {
+        printf("Not a health token.\n");
         return;
     }
 
@@ -286,11 +298,7 @@ void add_encounter(char *encounter)
         return;
     }
 
-    */
-
-
-
-    if (Encounters == NULL)
+    if (Encounters == NULL) // first ID to log
     {
         Encounters = (char *)malloc(PACKET_SIZE);
         if (Encounters == NULL)
@@ -299,21 +307,25 @@ void add_encounter(char *encounter)
             return;
         }
         ptr = Encounters;
-        Encounter_count = 0;
+        Encounter_count = 1;
     }
-    else
+    else if (Encounter_count == MAX_PACKETS_ALLOWED) // full, so overwrite oldest ID logged (circular buffer)
+        {
+            memmove(Encounters,Encounters + PACKET_SIZE,(Encounter_count-1) * PACKET_SIZE);
+            ptr = Encounters + (Encounter_count-1) * PACKET_SIZE;
+        }
+    else // concat to IDs already there
     {
         tptr = (char *)realloc(Encounters,(Encounter_count+1) * PACKET_SIZE);
         if (tptr == NULL)
             printf("add_encounter: realloc failed.\n");
         Encounters = tptr;
         ptr = Encounters + Encounter_count * PACKET_SIZE;
+        Encounter_count++;
     }
 
     j = 0;
-    //for(i=len0;i<BLE_HEALTH_NAME_LEN;i++)
-    tptr = ptr;
-    for(i=0;i<strlen(encounter);i++)
+    for(i=len0;i<BLE_HEALTH_NAME_LEN;i++)
     {
         *ptr = encounter[i];
         if (j < ID_SIZE)
@@ -325,19 +337,15 @@ void add_encounter(char *encounter)
     }
     *ptr = '0';
     *(ptr + 1) = '1';
-
-    while(ptr - tptr < PACKET_SIZE)
-        *(ptr++) = 0;
-    
-    Encounter_count++;
-    printf("Encounter added. Count=%d\n",Encounter_count);
-
+    printf("Encounter_count=%d\n",Encounter_count);
     if (Encounter_count == 1)
     {
         printf("Blue LED turned on.\n");
         gpio_set_level(2,1);
     }
+   
 }
+
 
 void example_write_event_env(esp_gatt_if_t gatts_if, prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
 void example_exec_write_event_env(prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
@@ -384,12 +392,13 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
             //printf("searched Device Name Len %d\n", adv_name_len);
             if (adv_name_len != 0)
             {
-                tmp = (char *)malloc(adv_name_len+1);
+                tmp = (char *)malloc( MAX_BLE_ADVERTISE_NAME);
                 if (tmp != NULL)
                 {
                     memset(tmp,0,adv_name_len+1);
                     memmove(tmp,adv_name,adv_name_len);
                     printf("Device found: %s\n",tmp);
+                    fake_test_str(tmp);
                     add_encounter(tmp);
                     printf("Encounters=%d\n",Encounter_count);
                     free(tmp);
@@ -601,20 +610,9 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
         esp_ble_gatts_create_service(gatts_if, &gl_profile_tab[PROFILE_A_APP_ID].service_id, GATTS_NUM_HANDLE_TEST_A);
         break;
 
-    case ESP_GATTS_READ_EVT: 
-   
-    // #define ESP_GATT_MAX_ATTR_LEN   600 //as same as GATT_MAX_ATTR_LEN
-    // // Gatt attribute value 
-    //         typedef struct {
-    //             uint8_t           value[ESP_GATT_MAX_ATTR_LEN];         /*!< Gatt attribute value */
-    //             uint16_t          handle;                               /*!< Gatt attribute handle */
-    //             uint16_t          offset;                               /*!< Gatt attribute value offset */
-    //             uint16_t          len;                                  /*!< Gatt attribute value length */
-    //             uint8_t           auth_req;                             /*!< Gatt authentication request */
-    //         } esp_gatt_value_t;
-
-    
-
+    case ESP_GATTS_READ_EVT:
+        //https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gatt_defs.h#L301
+        //it appears as if 600 bytes is the maximum you can send back to a device doing a BLE read
         ESP_LOGI(GATTS_TAG, "GATT_READ_EVT, conn_id %d, trans_id %d, handle %d\n", param->read.conn_id, param->read.trans_id, param->read.handle);
         esp_gatt_rsp_t rsp;
         memset(&rsp, 0, sizeof(esp_gatt_rsp_t));

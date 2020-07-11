@@ -4,12 +4,19 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></center>
 
+## Why this project?
+
+I worked on this project because of the red line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
+
+<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.jpg></center>
+
 ## Contact Tracing
 
 Contact tracing is about you going out and about, and doing two things: 
 
 1. Letting people you come in close proximity to know about your health condition and,
-2. likewise you knowing the health condition of those same people. 
+
+1. likewise you knowing the health condition of those same people. 
 
 If you are feeling sick, others your encounter might benefit from knowing this, so they can act accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
@@ -19,7 +26,7 @@ So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm 
 
 Mobile phones should be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
-By Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies of whole-countries themselves. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+By Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
 The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.)
 
