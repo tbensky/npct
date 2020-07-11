@@ -6,9 +6,11 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 ## Why this project?
 
-I worked on this project because of the red line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
+I developed this project starting in late June of 2020, because of the red line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.png></center>
+
+I wanted to do something (anything) to help. I know a lot about microcontrollers, and good with the C language, am seem to always be able to figure out APIs. So I developed this open-source, hardware contract tracer token project.
 
 ## Contact Tracing
 
