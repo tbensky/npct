@@ -8,7 +8,7 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 I worked on this project because of the red line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
-<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.jpg></center>
+<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.png></center>
 
 ## Contact Tracing
 
