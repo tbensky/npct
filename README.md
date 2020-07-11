@@ -71,7 +71,7 @@ To build the contact tracer, you'll need three items: an [ESP32](https://www.eba
 
 ## Assembly
 
-Assembling it is just a matter of connecting the ESP32 to the battery like this
+Assembling it is just a matter of connecting the ESP32 to the battery as shown. There is no soldering or wiring required at all.
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG>
 
