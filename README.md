@@ -53,7 +53,7 @@ One board that came to mind in particular was the [ESP32](https://esp32.com).  I
 
 * Power it with a $10 portable "extra phone charge" battery.
 
-* And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS required.
+* And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS.
 
 That's it. It works, and here's how. Want to build one and try it out?
 
