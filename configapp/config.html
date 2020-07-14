@@ -25,7 +25,6 @@
       Welcome to the No Phone Contact Tracer (NPCT) Project
       <ul>
         <li> This tracer is completely anonymous and doesn't involve your phone at all.
-        <li> It is based on a small, battery powered circuit board from the "maker world" called the "ESP32."
         <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
         <li> This page will help you to get started participating in contact tracing.
         <li> This page runs only on your own computer, and does not contact any external webserver.
@@ -96,6 +95,7 @@
 <script>
 
   var mouseX = 0, mouseY = 0;
+  const PACKET_SIZE = 20;
 
 $( ".container" ).mousemove(function( event ) {
   mouseX += event.pageX;
@@ -126,39 +126,56 @@ if (id == null)
 
 async function bt_read()
 {
-    var bt_device;
+    var device;
     var read_int;
 
     try
     {
-      const device = await navigator.bluetooth.requestDevice({
-      filters: [
-        {namePrefix: '#C19:'},
-        {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
-      ],
-    });
+      device = await navigator.bluetooth.requestDevice(
+        {
+          filters: [
+            {namePrefix: '#C19:'},
+            {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+          ],
+        });
 
       const server = await device.gatt.connect();
-      const service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
-      const characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+     
+
+      $('#device_dump').val("");   
+      read_encounters();
 
       async function read_encounters()
             {
+              const service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+              const characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
               const value = await characteristic.readValue();
-              var data = new TextDecoder("utf-8").decode(value) + '\n';
-              $('#device_dump').val($('#device_dump').val() + data);
-              if (data.substring(0,3) == 'end')
-                clearInterval(read_int);
-              else read_int = setTimeout(read_encounters,100);
-            }
-      $('#device_dump').val('');
-      read_encounters();
-        
+              var data = new TextDecoder("utf-8").decode(value);
+              var i, dump;
 
-      } catch(error)
+              if (data.substring(0,3) == 'end')
+              {
+                clearInterval(read_int);
+                device.gatt.disconnect();
+              }
+              else
+              {
+                dump = "";
+                for(i=0;i<data.length;i += PACKET_SIZE)
+                {
+                  dump = dump + data.substring(i,i + PACKET_SIZE) + "\n";
+                }
+                $('#device_dump').val($('#device_dump').val() + dump);              
+                read_int = setTimeout(read_encounters,1000);
+              }
+            }
+       }
+       catch(error)
         {
           console.log(error);
         }
+
+
   }
 
 

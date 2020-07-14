@@ -1,3 +1,10 @@
+# tl;dr
+
+* This presents programming and construction of an inexpensive (approx $20 USD) hardware contact tracer
+* It does not use a mobile phone or the Internet at all
+* It uses an ESP32 to broadcast one's health information using Bluetooth Low Energy and to log the same from those around you
+* Participate in contact tracing! Build it, configure it and carry it around
+
 # The *No Phone* Contact Tracer (NPCT) Project
 
 The goal of this work is to develop an open-source, hardware-based, anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
@@ -10,7 +17,7 @@ I developed this project starting in late June of 2020, because of the U.S. (ora
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.png></center>
 
-I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (Likely this project won't help at all, but here it is.)
+I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is.)
 
 ## Contact Tracing
 

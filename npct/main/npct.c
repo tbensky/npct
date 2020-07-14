@@ -169,8 +169,16 @@ static prepare_type_env_t a_prepare_write_env;
 #define BLE_HEALTH_NAME_LEN 23
 #define MAX_MEMORY_ALLOWED 100000
 #define MAX_PACKETS_ALLOWED (MAX_MEMORY_ALLOWED / PACKET_SIZE)
-#define MAX_BLE_ADVERTISE_NAME ESP_BLE_SCAN_RSP_DATA_LEN_MAX  // from https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gap_ble_api.h#L182
 
+//https://android.googlesource.com/platform/external/bluetooth/bluedroid/+/5738f83aeb59361a0a2eda2460113f6dc9194271/stack/btm/btm_ble_int.h#102
+//What maximum BLE name do we expect?
+//Is it this?
+#define MAX_BLE_ADVERTISE_NAME ESP_BLE_SCAN_RSP_DATA_LEN_MAX  
+//or this? BTM_BLE_CACHE_ADV_DATA_MAX (which is 61?)
+
+// from https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gap_ble_api.h#L182
+//https://github.com/espressif/esp-idf/issues/369
+//#define MAX_BLE_ADVERTISE_NAME BTM_BLE_CACHE_ADV_DATA_MAX
 
 char *Encounters = NULL;
 int Encounter_count = 0;
@@ -235,41 +243,59 @@ int get_encounter_count()
 
 void fake_test_str(char *str)
 {
-    char t[BLE_HEALTH_NAME_LEN];
+    char t[BLE_HEALTH_NAME_LEN+1];
+    int max_len = BLE_HEALTH_NAME_LEN - strlen("#C19:");
+    if (strncmp(str,"#C19:",5) == 0)
+        return;
     strcpy(t,"#C19:");
-    strcat(t,str);
-    printf("t=%s\n",t);
-    while(strlen(t) < BLE_HEALTH_NAME_LEN)
+    if (strlen(str) > max_len)
+        strncat(t,str,max_len);
+    else strcat(t,str);
+    while(strlen(t) < BLE_HEALTH_NAME_LEN )
         strcat(t,"0");
     strcpy(str,t);
+    printf("str=%s\n",str);
 }
 
 int seen_before(char *hid)
 {
-    int i, count, ret;
+    int i, count;
     char hex[3];
     
     for(i=0;i<Encounter_count * PACKET_SIZE;i += PACKET_SIZE)
     {
         if (strncmp(Encounters + i,hid,HID_SIZE) == 0)
         {
-            ret = sscanf(Encounters + i + HID_SIZE,"%x",&count);
-            if (ret == 1)
-            {
-                count++;
-                sprintf(hex,"%02X",count);
-                *(Encounters + i + HID_SIZE) = hex[0];
-                *(Encounters + i + HID_SIZE + 1) = hex[1];
-                return(1);
-            }
+            hex[0] = *(Encounters + i + HID_SIZE);
+            hex[1] = *(Encounters + i + HID_SIZE + 1);
+            hex[2] = 0;
+
+            count = strtol(hex,NULL, 16);
+            count++;
+
+            sprintf(hex,"%02X",count);
+
+            *(Encounters + i + HID_SIZE) = hex[0];
+            *(Encounters + i + HID_SIZE + 1) = hex[1];
+            return(1);
 
         }
     }
     return(0);
 }
+
+
+
+void make_last(char *str)
+{
+    memset(LastEncounter,0,ID_SIZE);
+    memmove(LastEncounter,str,strlen(str) > ID_SIZE ? ID_SIZE : strlen(str));
+    printf("LastEncounter=%s\n",LastEncounter);
+}
+
 void add_encounter(char *encounter)
 {
-    int i,j;
+    int i;
     char *ptr;
     char *tptr;
     const int len0 = strlen("#C19:");
@@ -295,6 +321,7 @@ void add_encounter(char *encounter)
     if (seen_before(encounter + len0))
     {
         printf("Seen before, but not last time. Updating counter.\n");
+        make_last(encounter + len0);
         return;
     }
 
@@ -324,15 +351,11 @@ void add_encounter(char *encounter)
         Encounter_count++;
     }
 
-    j = 0;
+    make_last(encounter+len0);
+
     for(i=len0;i<BLE_HEALTH_NAME_LEN;i++)
     {
         *ptr = encounter[i];
-        if (j < ID_SIZE)
-        {
-            LastEncounter[j] = *ptr;
-            j++;
-        }
         ptr++;
     }
     *ptr = '0';
@@ -346,6 +369,21 @@ void add_encounter(char *encounter)
    
 }
 
+void dump()
+{
+    int i,j;
+
+    for(i=0;i<Encounter_count * PACKET_SIZE;i += PACKET_SIZE)
+    {
+        for(j=i;j<i+PACKET_SIZE;j++)
+            printf("%c",Encounters[j]);
+        printf("\n");
+    }
+
+    printf("Last=%s\n",LastEncounter);
+}
+
+
 
 void example_write_event_env(esp_gatt_if_t gatts_if, prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
 void example_exec_write_event_env(prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param);
@@ -358,6 +396,7 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
     uint8_t adv_name_len = 0;
     esp_ble_gap_cb_param_t *scan_result = (esp_ble_gap_cb_param_t *)param;
     uint32_t duration = 0;
+
     switch (event) 
     {
 
@@ -392,15 +431,16 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
             //printf("searched Device Name Len %d\n", adv_name_len);
             if (adv_name_len != 0)
             {
-                tmp = (char *)malloc( MAX_BLE_ADVERTISE_NAME);
+                tmp = (char *)malloc(BLE_HEALTH_NAME_LEN+1);
                 if (tmp != NULL)
                 {
-                    memset(tmp,0,adv_name_len+1);
-                    memmove(tmp,adv_name,adv_name_len);
+                    memset(tmp,0,BLE_HEALTH_NAME_LEN+1);
+                    memmove(tmp,adv_name,adv_name_len > BLE_HEALTH_NAME_LEN ? BLE_HEALTH_NAME_LEN : adv_name_len);
                     printf("Device found: %s\n",tmp);
                     fake_test_str(tmp);
                     add_encounter(tmp);
                     printf("Encounters=%d\n",Encounter_count);
+                    dump();
                     free(tmp);
                 }           
             }
@@ -586,6 +626,9 @@ int set_device_name_from_nvs()
 
 static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_if, esp_ble_gatts_cb_param_t *param) 
 {
+    esp_gatt_rsp_t rsp;
+    int i;
+
     switch (event) 
     {
     case ESP_GATTS_REG_EVT:
@@ -611,31 +654,41 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
         break;
 
     case ESP_GATTS_READ_EVT:
-        //https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gatt_defs.h#L301
-        //it appears as if 600 bytes is the maximum you can send back to a device doing a BLE read
         ESP_LOGI(GATTS_TAG, "GATT_READ_EVT, conn_id %d, trans_id %d, handle %d\n", param->read.conn_id, param->read.trans_id, param->read.handle);
-        esp_gatt_rsp_t rsp;
+       
         memset(&rsp, 0, sizeof(esp_gatt_rsp_t));
         rsp.attr_value.handle = param->read.handle;
-        rsp.attr_value.len = 4;
+
         if (ReadPointer == -1)
         {
-                sprintf((char *)rsp.attr_value.value,"N=%d",Encounter_count);
-                rsp.attr_value.len = strlen((char *)rsp.attr_value.value);
-                ReadPointer++;
+            printf("ReadPointer=%d. Sending contact count.\n",ReadPointer);
+            sprintf((char *)rsp.attr_value.value,"%d contacts found",Encounter_count);
+            rsp.attr_value.len = strlen((char *)rsp.attr_value.value);
+            ReadPointer++;
         }
         else if (ReadPointer == Encounter_count)
                 {
+                    printf("ReadPointer=%d, about to be reset to -1 (end sent).\n",ReadPointer);
                     sprintf((char *)rsp.attr_value.value,"end");
                     rsp.attr_value.len = strlen((char *)rsp.attr_value.value);
-                    ReadPointer =-1;
+                    ReadPointer = -1;
                 }
-        else
-        {
-             memmove(rsp.attr_value.value,Encounters + ReadPointer * PACKET_SIZE,PACKET_SIZE);
-             rsp.attr_value.len = PACKET_SIZE;
-             ReadPointer++;
-        }
+        else if (ReadPointer < Encounter_count)
+                {   
+                    printf("Assembling block.\n");             
+                    //https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gatt_defs.h#L301
+                    //it appears as if 600 bytes is the maximum you can send back to a device doing a BLE read
+                    while(ReadPointer * PACKET_SIZE < ESP_GATT_MAX_ATTR_LEN && ReadPointer < Encounter_count)
+                    {
+                        memmove(rsp.attr_value.value + ReadPointer * PACKET_SIZE,Encounters + ReadPointer * PACKET_SIZE,PACKET_SIZE);
+                        ReadPointer++;
+                    }
+                    rsp.attr_value.len = ReadPointer * PACKET_SIZE;
+                    printf("ReadPointer=%d\n",ReadPointer);
+                    for(i=0;i<rsp.attr_value.len;i++)
+                        printf("%c",rsp.attr_value.value[i]);
+                    printf("\n");
+                }
         esp_ble_gatts_send_response(gatts_if, param->read.conn_id, param->read.trans_id,ESP_GATT_OK, &rsp);
         break;
     
@@ -683,29 +736,30 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
         break;
     case ESP_GATTS_ADD_INCL_SRVC_EVT:
         break;
-    case ESP_GATTS_ADD_CHAR_EVT: {
-        uint16_t length = 0;
-        const uint8_t *prf_char;
+    case ESP_GATTS_ADD_CHAR_EVT: 
+        {
+        // uint16_t length = 0;
+        // const uint8_t *prf_char;
 
-        ESP_LOGI(GATTS_TAG, "ADD_CHAR_EVT, status %d,  attr_handle %d, service_handle %d\n",
-                param->add_char.status, param->add_char.attr_handle, param->add_char.service_handle);
-        gl_profile_tab[PROFILE_A_APP_ID].char_handle = param->add_char.attr_handle;
-        gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.len = ESP_UUID_LEN_16;
-        gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.uuid.uuid16 = ESP_GATT_UUID_CHAR_CLIENT_CONFIG;
-        esp_err_t get_attr_ret = esp_ble_gatts_get_attr_value(param->add_char.attr_handle,  &length, &prf_char);
-        if (get_attr_ret == ESP_FAIL){
-            ESP_LOGE(GATTS_TAG, "ILLEGAL HANDLE");
-        }
+        // ESP_LOGI(GATTS_TAG, "ADD_CHAR_EVT, status %d,  attr_handle %d, service_handle %d\n",
+        //         param->add_char.status, param->add_char.attr_handle, param->add_char.service_handle);
+        // gl_profile_tab[PROFILE_A_APP_ID].char_handle = param->add_char.attr_handle;
+        // gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.len = ESP_UUID_LEN_16;
+        // gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.uuid.uuid16 = ESP_GATT_UUID_CHAR_CLIENT_CONFIG;
+        // esp_err_t get_attr_ret = esp_ble_gatts_get_attr_value(param->add_char.attr_handle,  &length, &prf_char);
+        // if (get_attr_ret == ESP_FAIL){
+        //     ESP_LOGE(GATTS_TAG, "ILLEGAL HANDLE");
+        // }
 
-        ESP_LOGI(GATTS_TAG, "the gatts demo char length = %x\n", length);
-        for(int i = 0; i < length; i++){
-            ESP_LOGI(GATTS_TAG, "prf_char[%x] =%x\n",i,prf_char[i]);
-        }
-        esp_err_t add_descr_ret = esp_ble_gatts_add_char_descr(gl_profile_tab[PROFILE_A_APP_ID].service_handle, &gl_profile_tab[PROFILE_A_APP_ID].descr_uuid,
-                                                                ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE, NULL, NULL);
-        if (add_descr_ret){
-            ESP_LOGE(GATTS_TAG, "add char descr failed, error code =%x", add_descr_ret);
-        }
+        // ESP_LOGI(GATTS_TAG, "the gatts demo char length = %x\n", length);
+        // for(int i = 0; i < length; i++){
+        //     ESP_LOGI(GATTS_TAG, "prf_char[%x] =%x\n",i,prf_char[i]);
+        // }
+        // esp_err_t add_descr_ret = esp_ble_gatts_add_char_descr(gl_profile_tab[PROFILE_A_APP_ID].service_handle, &gl_profile_tab[PROFILE_A_APP_ID].descr_uuid,
+        //                                                         ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE, NULL, NULL);
+        // if (add_descr_ret){
+        //     ESP_LOGE(GATTS_TAG, "add char descr failed, error code =%x", add_descr_ret);
+        // }
         break;
     }
     case ESP_GATTS_ADD_CHAR_DESCR_EVT:
