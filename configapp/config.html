@@ -20,7 +20,7 @@
 
 
     <h3>Welcome!</h3>
-      <div id="content"></div>
+     
 
       Welcome to the No Phone Contact Tracer (NPCT) Project
       <ul>
@@ -29,6 +29,8 @@
         <li> This page will help you to get started participating in contact tracing.
         <li> This page runs only on your own computer, and does not contact any external webserver.
       </ul>
+
+       <div id="content"></div>
 
        <h3>As you go out and about today, click on any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
       
@@ -86,11 +88,12 @@
        
 
       <p/>
-      <input type=text id=coords>
-      <button onclick="bt_read()">Read</button>
       <button class="btn btn-info" onclick="bt_update()">Update hardware</button>
       <hr/>
       <h3>Contact Tracer Log</h3>
+      <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
+      <br/>
+      <br/>
       <textarea id="device_dump" class="form-control" rows=10></textarea>
 
   </div>
@@ -104,6 +107,7 @@
 
   var mouseX = 0, mouseY = 0;
   const PACKET_SIZE = 20;
+  const hash_salt = "b063f85e5dbc0310dfc860e012965552";
 
 $( ".container" ).mousemove(function( event ) {
   mouseX += event.pageX;
@@ -111,23 +115,30 @@ $( ".container" ).mousemove(function( event ) {
 });
 
 //localStorage.clear();
-var id = localStorage.getItem('id');
+var private_id; 
+var public_id = localStorage.getItem('public_id');
 
-if (id == null)
+if (public_id == null)
 {
   //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
-  id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
-  id = id.substr(0,15);
-  localStorage.setItem('id',id);
-  console.log(id);
+  private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
+  public_id = md5(hash_salt + private_id).substring(0,16);
+  localStorage.setItem('public_id',public_id);
   $('#content').html(`
-   Looks like you're setting up your contact tracing gadget for the first time.
+    <h3>Initial configuration</h3>
+   Looks like you're setting up the contact tracing hardware for the first time.
    <br/>
-   Your tracing ID will be: <b>` + id + `</b>
-   <p/>
-   Please copy this into a safe place (like a Word document on your computer for safekeeping). It is important that you
-   always use this ID throughout your participation in contact tracing. For you to remain unique in this effort, please 
+   <br/>
+   <textarea rows=3 class="form-control" readonly>
+   Your public contact tracing ID will be: ` + public_id + `
+   Your private verification code will be: ` + private_id + `
+   </textarea>
+   <br/>
+   Please copy these into a safe place (like a Word document on your computer for safekeeping). It is important that you
+   always use these IDs throughout your participation in contact tracing. For you to remain unique in this effort, please 
    never change this ID, or request a new one.
+   <br/>
+   <br/>
                     `);
 
 }
@@ -240,43 +251,6 @@ async function bt_read()
 
 
 
-function bt_read0()
-{
-    var bt_device;
-
-    navigator.bluetooth.requestDevice({
-      filters: [
-        {namePrefix: '#C19:'},
-        {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
-      ],
-    })
-      .then(device => 
-                  { 
-                    return device.gatt.connect();
-
-                  })
-      .then(server => {
-        return server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
-      })
-      .then(service => {
-        return service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
-      })
-      .then(characteristic => {
-        return characteristic.readValue();
-      })
-      .then(value => {
-        var data = new TextDecoder("utf-8").decode(value);
-        $('#device_dump').val($('#device_dump').val() + data);
-
-      }).then(_ => 
-        {
-          bt_device.gatt.disconnect();
-        })
-      .catch(error => { console.log(error); });
-}
-
-
-
 function bt_update()
 {
     var bt_device;
@@ -291,8 +265,10 @@ function bt_update()
            }
       });
 
-    health_hex = health.toString(16).padStart(4,"0");
-    update_id = id + health_hex;
+    health_hex = health.toString(16).padStart(2,"0");
+    update_id = public_id + health_hex;
+
+    console.log(update_id);
 
     navigator.bluetooth.requestDevice({
       filters: [
@@ -302,7 +278,6 @@ function bt_update()
       })
         .then(device => 
                     { 
-                      console.log(device.name);
                       bt_device = device;
                       return device.gatt.connect();
                     })
@@ -319,7 +294,7 @@ function bt_update()
         })
         .then(_ => 
         {
-          console.log('Updated.');
+          alert("Device updated. Please remove, then restore power to complete update.")
           bt_device.gatt.disconnect();
         })
         .catch(error => 
