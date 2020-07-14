@@ -2,7 +2,7 @@
 
 * This presents construction of an inexpensive (`~$20`USD) hardware contact tracer.
 * It does not use a mobile phone or the Internet at all.
-* It uses an ESP32 and Bluetooth Low Energy to 1) broadcast one's health information using 2) log the same from those around you.
+* It uses an ESP32 and Bluetooth Low Energy to 1) broadcast your health information and 2) log the same from those around you.
 * Participate in contact tracing! Build it, configure it and carry it around!
 
 # The *No Phone* Contact Tracer (NPCT) Project
