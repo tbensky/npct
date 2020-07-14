@@ -1,11 +1,9 @@
 # tl;dr
 
-* This presents programming and construction of an inexpensive (approx $20 USD) hardware contact tracer.
+* This presents construction of an inexpensive (`~` $20 USD) hardware contact tracer.
 * It does not use a mobile phone or the Internet at all.
-* It uses an ESP32 to 
- * broadcast one's health information using Bluetooth Low Energy,
- * and to log the same from those around you.
-* Participate in contact tracing! Build it, configure it and carry it around
+* It uses an ESP32 and Bluetooth Low Energy to 1) broadcast one's health information using 2) log the same from those around you.
+* Participate in contact tracing! Build it, configure it and carry it around!
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
@@ -19,7 +17,7 @@ I developed this project starting in late June of 2020, because of the U.S. (ora
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases.png></center>
 
-I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is.)
+I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is anyway.)
 
 ## Contact Tracing
 
@@ -168,6 +166,7 @@ You are done. Power the ESP32 using a battery and take it with you when you go o
 logged contact information will be lost.  The blue LED will come on if any health-related contacts are logged, so no need to check it if you get home and the blue LED is off (the red LED is always on).
 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
+
 
 
 
