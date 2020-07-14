@@ -1,4 +1,4 @@
-# tl;dr
+### tl;dr
 
 * This presents construction of an inexpensive (`~$20 USD`) hardware contact tracer.
 * It does not use a mobile phone or the Internet at all.
