@@ -94,7 +94,7 @@
       <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
       <br/>
       <br/>
-      <textarea id="device_dump" class="form-control" rows=10></textarea>
+      <textarea id="device_dump" class="form-control" rows=10 readonly></textarea>
 
   </div>
 </div>
@@ -172,15 +172,17 @@ function decode_health(num)
 function decode(str)
 {
   var id, health, count;
+  var health_str;
 
   if (str.length != 20)
     return(str);
 
   id = str.substring(0,16);
   health = parseInt(str.substring(16,18),16);
+  health_str = decode_health(health);
   count = parseInt(str.substring(18,20),16);
 
-  return("Person: " + id + " was encountered " + count.toString() + " times. Health condition: " + health.toString());
+  return("Person: " + id + " was encountered " + count.toString() + " times. Health condition: " + health_str);
 }
 
 function test_health()
@@ -201,7 +203,8 @@ async function bt_read()
 {
     var device;
     var read_int;
-
+    var values = [];
+    var i;
     try
     {
       device = await navigator.bluetooth.requestDevice(
@@ -212,32 +215,40 @@ async function bt_read()
           ],
         });
 
-      const server = await device.gatt.connect();
-     
+        var server = await device.gatt.connect();
+        var service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+        var characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
 
-      $('#device_dump').val("");   
-      read_encounters();
+        $('#device_dump').val("");
+        read_encounters();
 
-      async function read_encounters()
+        async function read_encounters()
             {
-              const service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
-              const characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
-              const value = await characteristic.readValue();
-              var data = new TextDecoder("utf-8").decode(value);
-              var i, dump;
+              try
+              {       
+                var value = await characteristic.readValue();
+                var data = new TextDecoder("utf-8").decode(value);
+                var i, dump;
 
-              if (data.substring(0,3) == 'end')
+                if (data.substring(0,3) == 'end')
+                {
+                  clearInterval(read_int);
+                  device.gatt.disconnect();
+                }
+                else
+                {
+                  dump = "";
+                  for(i=0;i<data.length;i += PACKET_SIZE)
+                    dump = dump + decode(data.substring(i,i + PACKET_SIZE)) + "\n";
+                  $('#device_dump').val($('#device_dump').val() + dump);              
+                  read_int = setTimeout(read_encounters,100);
+                }
+              }
+              catch(error)
               {
+                console.log(error);
                 clearInterval(read_int);
                 device.gatt.disconnect();
-              }
-              else
-              {
-                dump = "";
-                for(i=0;i<data.length;i += PACKET_SIZE)
-                  dump = dump + decode(data.substring(i,i + PACKET_SIZE)) + "\n";
-                $('#device_dump').val($('#device_dump').val() + dump);              
-                read_int = setTimeout(read_encounters,500);
               }
             }
        }

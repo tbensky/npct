@@ -169,6 +169,9 @@ static prepare_type_env_t a_prepare_write_env;
 #define BLE_HEALTH_NAME_LEN 23
 #define MAX_MEMORY_ALLOWED 100000
 #define MAX_PACKETS_ALLOWED (MAX_MEMORY_ALLOWED / PACKET_SIZE)
+//#define MAX_BLE_WRITE_LEN ESP_GATT_MAX_ATTR_LEN
+#define MAX_BLE_WRITE_LEN 20
+
 
 //https://android.googlesource.com/platform/external/bluetooth/bluedroid/+/5738f83aeb59361a0a2eda2460113f6dc9194271/stack/btm/btm_ble_int.h#102
 //What maximum BLE name do we expect?
@@ -678,12 +681,11 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
                     printf("Assembling block.\n");             
                     //https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/host/bluedroid/api/include/api/esp_gatt_defs.h#L301
                     //it appears as if 600 bytes is the maximum you can send back to a device doing a BLE read
-                    while(ReadPointer * PACKET_SIZE < ESP_GATT_MAX_ATTR_LEN && ReadPointer < Encounter_count)
-                    {
-                        memmove(rsp.attr_value.value + ReadPointer * PACKET_SIZE,Encounters + ReadPointer * PACKET_SIZE,PACKET_SIZE);
-                        ReadPointer++;
-                    }
-                    rsp.attr_value.len = ReadPointer * PACKET_SIZE;
+                    //7/15/2020: no, it's apparently 20 bytes
+                    //7/16/2020: yup, it's 20. Works flawlessly sending 20 bytes at a time.
+                    memmove(rsp.attr_value.value,Encounters + ReadPointer * PACKET_SIZE,PACKET_SIZE);
+                    rsp.attr_value.len = PACKET_SIZE;
+                    ReadPointer++;
                     printf("ReadPointer=%d\n",ReadPointer);
                     for(i=0;i<rsp.attr_value.len;i++)
                         printf("%c",rsp.attr_value.value[i]);
@@ -843,6 +845,45 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
 
 }
 
+//from: https://stackoverflow.com/questions/15767691/whats-the-c-library-function-to-generate-random-string
+void rand_str(char *dest, size_t length) 
+{
+    char charset[] = "0123456789"
+                     "abcdefghijklmnopqrstuvwxyz"
+                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    while (length-- > 0) 
+    {
+        size_t index = (double) rand() / RAND_MAX * (sizeof charset - 1);
+        *dest++ = charset[index];
+    }
+    *dest = '\0';
+}
+
+void fill_fake_encounters()
+{
+    int i;
+    char temp[PACKET_SIZE];
+
+    Encounters = (char *)malloc(400);
+    if (Encounters == NULL)
+    {
+        printf("No Encounters memory.\n");
+        return;
+    }
+    Encounter_count = 20;
+
+    for(i=0;i<Encounter_count;i++)
+    {
+        rand_str(temp,PACKET_SIZE);
+        temp[16] = '0';
+        temp[17] = '2';
+        temp[18] = '0';
+        temp[19] = '1';
+        memcpy(Encounters + i * PACKET_SIZE,temp,PACKET_SIZE);
+    }
+}
+
 
 void app_main(void)
 {
@@ -888,6 +929,9 @@ void app_main(void)
 
     Encounters = NULL;
     Encounter_count = 0;
+
+    //for testing data reads over BLE
+    //fill_fake_encounters();
    
     // //register the  callback function to the gap module
     // ret = esp_ble_gap_register_callback(esp_gap_cb);
@@ -930,6 +974,7 @@ void app_main(void)
     }
 
     
+    //not sure if this line helps with anything.  
     esp_err_t local_mtu_ret = esp_ble_gatt_set_local_mtu(500);
     if (local_mtu_ret){
         ESP_LOGE(GATTS_TAG, "set local  MTU failed, error code = %x", local_mtu_ret);
