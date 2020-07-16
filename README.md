@@ -172,7 +172,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 # Technical notes
 
-* The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rock'in USB cable I cut into and modified to read current.
+* The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rock'in USB cable I cut into and modified to read current. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/current.jpg></center>
 
