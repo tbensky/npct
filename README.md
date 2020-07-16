@@ -192,6 +192,10 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * Testing the ESP32 logging.
 
-	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval.
+	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval. In use as a contact tracer, we'll reject any name that doesn't start with `#C19:`. 
 
+	* For testing, a line in this function, ` fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. This is kind of fun.  Walking around a local hardware store and then a grocery store with it revealed these BLE names:
+
+
+	<center><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.jpg></center>
 
