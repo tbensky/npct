@@ -186,6 +186,6 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 2-digit hex code about their health. So something like `#C19:abcdefghijklmnop06` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for "important" health codes I pulled from the CDC).
 
-	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharin their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. 
+	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharin their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this pandemic.) 
 
 
