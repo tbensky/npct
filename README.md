@@ -190,4 +190,8 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	1. Users are asked to store both codes on their own computer and are also stored in "local storage" in Chrome for convenience.
 
+* Testing the ESP32 logging.
+
+	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval.
+
 
