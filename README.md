@@ -34,11 +34,11 @@ So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm 
 
 ### Mobile Phones for Contact Tracing?
 
-Mobile phones should be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
+Mobile phones might be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
-By Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+ However, by Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
-The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.)
+The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.) It's also not clear you need an instantaenous notification if you encounter someone who is sick.
 
 Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home.) 
 
@@ -169,6 +169,14 @@ logged contact information will be lost.  The blue LED will come on if any healt
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
 
 
+
+# Technical notes
+
+* The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rock'in USB cable I cut into and modified to read current.
+
+<center><img src=https://github.com/tbensky/npct/blob/master/pics/current.jpg></center>
+
+* The ESP32 code, [npct.c](https://github.com/tbensky/npct/blob/master/npct/main/npct.c) is a mashup of two example files in the ESP32 development package: [gatts_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_server/main/gatts_demo.c) and [gattc_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c). The server demo (gatt**s**) handles incoming BLE requsts on a couple of pseudo BLE services.  The client demo, gatt**c** scans for the server's services in BLE space and connects to it. So I pared down the server to just one service and characteristic, and pulled the BLE name scanning out of the client, then combine it all into one. The code needs more refactoring and pruning of code that isn't needed. Kudos to the ESP32 team for providing such a useful set of complete, and comprehensive examples.
 
 
 

@@ -11,6 +11,15 @@
 
   <title>No Phone Contact Tracer (NPCT)</title>
 
+  <style>
+    textarea
+    {
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: scroll;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -37,49 +46,49 @@
       <div class="form-group">
 
         
-          <input type="checkbox" value="1"> I am feeling fine.
+          <input  class="form-check-input" type="checkbox" value="1"> I am feeling fine.
           <br/>
 
-          <input type="checkbox" value="2"> Sore throat
+          <input  class="form-check-input" type="checkbox" value="2"> Sore throat
           <br/>    
         
        
-          <input type="checkbox" value="4"> Cough
+          <input  class="form-check-input" type="checkbox" value="4"> Cough
           <br/>  
 
        
-          <input type="checkbox" value="8"> Runny nose or nasal congestion
+          <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
           <br/>
 
         
-          <input type="checkbox" value="16"> Shortness of breath or difficulty breathing
+          <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
           <br/>
 
       
-          <input type="checkbox" value="32"> Muscle pain
+          <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
           <br/>
 
        
-          <input type="checkbox" value="64"> Loss of smell or taste
+          <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
           <br/>
 
         
-          <input type="checkbox" value="128"> Diarrhea
+          <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
           <br/>
 
 
        
-          <input type="checkbox" value="256"> I tested negative for Covid-19
+          <input  class="form-check-input" type="checkbox" value="256"> I tested negative for Covid-19
           <br/>
 
          
-          <input type="checkbox" value="512"> I tested positive for Covid-19
+          <input  class="form-check-input" type="checkbox" value="512"> I tested positive for Covid-19
           <br/>
 
-          <input type="checkbox" value="1024"> I was wearing a mask
+          <input  class="form-check-input" type="checkbox" value="1024"> I was wearing a mask
           <br/>
 
-          <input type="checkbox" value="2048"> I was not wearing a mask
+          <input  class="form-check-input" type="checkbox" value="2048"> I was not wearing a mask
           <br/>
 
     </div>
@@ -94,7 +103,20 @@
       <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
       <br/>
       <br/>
-      <textarea id="device_dump" class="form-control" rows=10 readonly></textarea>
+      <textarea id="device_dump"  class="form-control" rows=10 readonly wrap="soft"></textarea>
+      <hr/>
+
+    
+      <h3>Do you mind sharing your encounters?
+        <button data-toggle="collapse" class="btn btn-info btn-xs" data-target="#share">Maybe...</button>
+      </h3>
+      <div id="share" class="collapse">
+        <br/>
+        An added power of contact tracing is if you can share the encounters you had with others and even communicate with them about your conditions.
+        <br/>
+        <textarea id="device_dump_uncoded"  class="form-control" rows=10 readonly wrap="soft"></textarea>
+      </div>
+      <br/><br/>
 
   </div>
 </div>
@@ -114,7 +136,7 @@ $( ".container" ).mousemove(function( event ) {
   mouseY += event.pageY;
 });
 
-//localStorage.clear();
+localStorage.clear();
 var private_id; 
 var public_id = localStorage.getItem('public_id');
 
@@ -124,12 +146,15 @@ if (public_id == null)
   private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
   public_id = md5(hash_salt + private_id).substring(0,16);
   localStorage.setItem('public_id',public_id);
+  localStorage.setItem('private_id',private_id);
   $('#content').html(`
     <h3>Initial configuration</h3>
    Looks like you're setting up the contact tracing hardware for the first time.
    <br/>
+   These are your anonymous IDs that are used to broadcast your health information to those you encounter:
    <br/>
-   <textarea rows=3 class="form-control" readonly>
+   <br/>
+   <textarea rows=3  class="form-control" readonly>
    Your public contact tracing ID will be: ` + public_id + `
    Your private verification code will be: ` + private_id + `
    </textarea>
@@ -203,8 +228,8 @@ async function bt_read()
 {
     var device;
     var read_int;
-    var values = [];
     var i;
+    var line;
     try
     {
       device = await navigator.bluetooth.requestDevice(
@@ -219,7 +244,9 @@ async function bt_read()
         var service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
         var characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
 
+        line = 0;
         $('#device_dump').val("");
+        $('#device_dump_uncoded').val("");
         read_encounters();
 
         async function read_encounters()
@@ -228,7 +255,7 @@ async function bt_read()
               {       
                 var value = await characteristic.readValue();
                 var data = new TextDecoder("utf-8").decode(value);
-                var i, dump;
+                var i, dump, uncoded;
 
                 if (data.substring(0,3) == 'end')
                 {
@@ -238,9 +265,19 @@ async function bt_read()
                 else
                 {
                   dump = "";
+                  uncoded = "";
                   for(i=0;i<data.length;i += PACKET_SIZE)
+                  {
                     dump = dump + decode(data.substring(i,i + PACKET_SIZE)) + "\n";
-                  $('#device_dump').val($('#device_dump').val() + dump);              
+                    uncoded = uncoded + data.substring(i,i + PACKET_SIZE) + "\n";
+                  }
+                  $('#device_dump').val($('#device_dump').val() + dump);  
+                  if (line == 0)
+                  {
+                    $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
+                  }  
+                  else $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);   
+                  line++;           
                   read_int = setTimeout(read_encounters,100);
                 }
               }
