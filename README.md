@@ -5,6 +5,7 @@
 * It *does not* use a mobile phone or the Internet at all.
 * It uses an ESP32 and Bluetooth Low Energy to 1) broadcast your health information and 2) log the same from those around you.
 * Build this, configure it and carry it around!
+* Teachers: good students project?
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
