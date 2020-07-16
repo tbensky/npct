@@ -202,6 +202,8 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* Leaving it on all night at home reveals a neighbor turing on an "Oral B toothbrush" twice a day.
 
+	<center><img src=https://github.com/tbensky/npct/blob/master/pics/oralb.png></center>
+
 	* This line should be commented out in contact tracer use and is so in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).
 
 * Name logging algorithm
