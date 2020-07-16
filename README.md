@@ -140,7 +140,7 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 That's it. The ESP32 is ready to use as a contact tracer, and these steps do not need to be done again.
 
-## Configuring the ESP 
+## Configuring the ESP32
 
 Now configure the contact tracer itself. (This has only been tested on macOS Catalina and Windows 10.)  
 
@@ -163,7 +163,7 @@ Come back to `config.html` as needed to update your health information or query 
 
 # Participate in contact tracing
 
-You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 20+ hours. Be sure not to disconnect it while you're out and about, as any 
+You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
 logged contact information will be lost.  The blue LED will come on if any health-related contacts are logged, so no need to check it if you get home and the blue LED is off (the red LED is always on).
 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
