@@ -316,8 +316,6 @@ function bt_update()
     health_hex = health.toString(16).padStart(2,"0");
     update_id = public_id + health_hex;
 
-    console.log(update_id);
-
     navigator.bluetooth.requestDevice({
       filters: [
         //{namePrefix: '#C19:'}

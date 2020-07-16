@@ -180,5 +180,12 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * The ESP32 code, [npct.c](https://github.com/tbensky/npct/blob/master/npct/main/npct.c) is a mashup of two example files in the ESP32 development package: [gatts_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_server/main/gatts_demo.c) and [gattc_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c). The server demo (gatt**s**) handles incoming BLE requsts on a couple of pseudo BLE services.  The client demo, gatt**c** scans for the server's services in BLE space and connects to it. So I pared down the server to just one service and characteristic, and pulled the BLE name scanning out of the client, then combine it all into one. The code needs more refactoring and pruning of code that isn't needed. Kudos to the ESP32 team for providing such a useful set of complete, and comprehensive examples (that actually work). Thanks also to two people I never met or communcationed with for various BLE postings around Github and the web: [nkolban](https://github.com/nkolban) and [chegewara](https://github.com/chegewara).
 
+* The ID system used here works as follow.
+
+	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in the `config.html` code. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
+
+	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 2-digit hex code about their health. So something like `#C19:abcdefghijklmnop06` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for "important" health codes I pulled from the CDC).
+
+	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharin their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. 
 
 
