@@ -202,3 +202,5 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* Leave it on all night at home reveals by neighbor turing on a "Oral B toothbrush" twice a day.
 
+	* This line should be commented out in contact tracer use and is in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).
+
