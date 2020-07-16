@@ -182,7 +182,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * The ID system used here works as follow.
 
-	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in the `config.html` code. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
+	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in `config.html`. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
 
 	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 2-digit hex code about their health. So something like `#C19:abcdefghijklmnop06` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for "important" health codes I pulled from the CDC).
 
