@@ -208,8 +208,8 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition). 
 
-	* It'll also maintain a simple count for repeated incoming names.
+	* It maintains a count for repeated incoming names.
 
-	* It won't allow the same name to be logged (or counted) again, until *some other* name comes in first.
+	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must comes in first.
 
-	* For each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
+	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
