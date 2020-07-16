@@ -210,6 +210,6 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* It maintains a count for repeated incoming names.
 
-	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must comes in first.
+	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
 
 	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
