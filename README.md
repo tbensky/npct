@@ -200,7 +200,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* I have no idea what these devices are; some even ended in a hex code that matched some health conditions.
 
-	* Leaving it on all night at home reveals a neighbor turing on an "Oral B toothbrush" twice a day.
+	* Leaving it on all night at home reveals an "Oral B toothbrush" advertising (likely from a neighbor; I don't own one).
 
 	<center><img src=https://github.com/tbensky/npct/blob/master/pics/oralb.png></center>
 
