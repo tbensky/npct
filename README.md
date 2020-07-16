@@ -49,7 +49,7 @@ The maker movement continues to impress. They got a quick start in early 2020 ba
 Bluetooth (BT) does seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what then?  I could not help but wondering about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
 
 
-One board that came to mind in particular was the [ESP32](https://esp32.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
+One board that came to mind in particular was the [ESP32](https://expressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
 
 * Come up with some encoding for a unique ID for yourself + your health information (Easy: an MD5 hash + some additional codes to describe your health).
 
@@ -180,6 +180,8 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * The ESP32 code, [npct.c](https://github.com/tbensky/npct/blob/master/npct/main/npct.c) is a mashup of two example files in the ESP32 development package: [gatts_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_server/main/gatts_demo.c) and [gattc_demo.c](https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c). The server demo (gatt**s**) handles incoming BLE requsts on a couple of pseudo BLE services.  The client demo, gatt**c** scans for the server's services in BLE space and connects to it. So I pared down the server to just one service and characteristic, and pulled the BLE name scanning out of the client, then combine them all into one. The code needs more refactoring and pruning of code that isn't needed. Kudos to the ESP32 team for providing such a useful set of complete, and comprehensive examples (that actually work). Thanks also to two people I never met or communcationed with for various BLE postings around Github and the web: [nkolban](https://github.com/nkolban) and [chegewara](https://github.com/chegewara).
 
+* The ESP32 is pretty awesome. Work, great documentation, etc.
+
 * The ID system used here works as follow.
 
 	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in `config.html`. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
@@ -208,13 +210,15 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * Name logging algorithm
 
-	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition). 
+	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count.
+
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition, and 100,000/20 = 5,000 possible name stored. 
 
 	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.
 
 	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
 
-	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
+	
 
 
 
