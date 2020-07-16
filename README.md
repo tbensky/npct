@@ -89,7 +89,7 @@ Here's the assembly in a 3D printed:
 
 <img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg>
 
-All told, wow! This form could easily be tossed into a bag, backpack, or even pocket and actually work as a portable contract tracer.  No soldering or wiring is required at all.
+All told, wow! Throwing these parts together is very portable, and a kind of viable "product."  This form could easily be tossed into a bag, backpack, or even pocket and be used as a portable contract tracer.  No soldering or wiring is required at all.
 
 
 ## Software
