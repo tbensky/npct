@@ -188,4 +188,6 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharin their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this pandemic.) 
 
+	1. Users are asked to store both codes on their own computer and are also stored in "local storage" in Chrome.
+
 
