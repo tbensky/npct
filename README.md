@@ -204,3 +204,4 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* This line should be commented out in contact tracer use and is in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).
 
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at 5,000 (seems like one can malloc 100,000 bytes on the stock ESP32 partition OK). It'll also maintain a simple count for repeated incoming names, and won't allow the same name to be logged (or counted) until *some other* name comes in first.
