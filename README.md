@@ -190,7 +190,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	1. Users are asked to store both codes on their own computer and are also stored in "local storage" in Chrome for convenience.
 
-* Testing the ESP32 BLE name logging.
+* Testing the ESP32 BLE name logging
 
 	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval. In use as a contact tracer, we'll reject any name that doesn't start with `#C19:`. 
 
@@ -202,6 +202,14 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* Leaving it on all night at home reveals a neighbor turing on an "Oral B toothbrush" twice a day.
 
-	* This line should be commented out in contact tracer use and is in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).
+	* This line should be commented out in contact tracer use and is so in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).
 
-	* The logging algorithm is a circular buffer that starts kicking out the oldest name at 5,000 (seems like one can malloc 100,000 bytes on the stock ESP32 partition OK). It'll also maintain a simple count for repeated incoming names, and won't allow the same name to be logged (or counted) until *some other* name comes in first.
+* Name logging algorithm
+
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition). 
+
+	* It'll also maintain a simple count for repeated incoming names.
+
+	* It won't allow the same name to be logged (or counted) again, until *some other* name comes in first.
+
+	* For each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
