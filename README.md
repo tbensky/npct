@@ -173,7 +173,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 # Technical notes
 
-* The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rock'in USB cable I cut into and modified so current can be routed into a meter. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
+* The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rockin' USB cable I cut into and modified so current can be routed into a meter. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
 
 <center><img src=https://github.com/tbensky/npct/blob/master/pics/current.jpg></center>
 
@@ -195,7 +195,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval. In use as a contact tracer, we'll reject any name that doesn't start with `#C19:`. 
 
-	* For testing, a line in this function, ` fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. This is kind of fun.  Walking around a local hardware store and then a grocery store with it revealed these BLE names:
+	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. This is kind of fun.  Walking around a local hardware store and then a grocery store with it revealed these BLE names:
 
 	<center><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.png></center>
 
@@ -209,8 +209,11 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition). 
 
-	* It maintains a count for repeated incoming names.
+	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.
 
 	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
 
 	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count (from above: 100,000/20 = 5,000 possible name stored).
+
+
+
