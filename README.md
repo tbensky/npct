@@ -184,11 +184,11 @@ Here's what we know, and we can apply some logic to guide us:
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
-* What we know is that this: Around July 2020, the virus is spreading. If you were around someone who is sick, you may be infected now.
+* What we know is that this: Around July 2020, the virus is spreading. If you were around someone who is sick, it may have spreaded to you.
 
 * Do we trust this contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
 
-* If you go to[rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
+* If you go to [rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
 
 * You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
 
