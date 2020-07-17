@@ -28,15 +28,15 @@
   <div class="row">
 
 
-    <h3>Welcome!</h3>
+    <h3>NPCT Configuration App</h3>
      
 
       Welcome to the No Phone Contact Tracer (NPCT) Project
       <ul>
         <li> This tracer is completely anonymous and doesn't involve your phone at all.
         <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
-        <li> This page will help you to get started participating in contact tracing.
-        <li> This page runs only on your own computer, and does not contact any external webserver.
+        <li> This page will get you started in using the contact tracing hardware.
+        <li> This page runs only on the computer you are using. It does not contact any external webserver.
       </ul>
 
        <div id="content"></div>
@@ -46,7 +46,7 @@
       <div class="form-group">
 
         
-          <input  class="form-check-input" type="checkbox" value="1"> I am feeling fine.
+          <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine.
           <br/>
 
           <input  class="form-check-input" type="checkbox" value="2"> Sore throat
@@ -97,32 +97,74 @@
        
 
       <p/>
-      <button class="btn btn-info" onclick="bt_update()">Update hardware</button>
+      <button class="btn btn-success btn-xs" onclick="bt_update()">Update hardware</button>
       <hr/>
       <h3>Contact Tracer Log</h3>
       <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
+      <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Do you mind sharing your encounters?</button>
+      <button class="btn btn-info btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
       <br/>
       <br/>
       <textarea id="device_dump"  class="form-control" rows=10 readonly wrap="soft"></textarea>
-      <hr/>
-
-    
-      <h3>Do you mind sharing your encounters?
-        <button data-toggle="collapse" class="btn btn-info btn-xs" data-target="#share">Maybe...</button>
-      </h3>
-      <div id="share" class="collapse">
-        <br/>
-        An added power of contact tracing is if you can share the encounters you had with others and even communicate with them about your conditions.
-        <br/>
-        <textarea id="device_dump_uncoded"  class="form-control" rows=10 readonly wrap="soft"></textarea>
-      </div>
-      <br/><br/>
-
   </div>
 </div>
 
 </body>
 </html>
+
+
+<div id="share" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share your contact tracing data</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+         <br/>
+        An added power of contact tracing is in sharing your encounters, and possibly communicating with those you've encountered.
+        <br/>
+        <br/>
+        If you don't mind sharing your encounters, can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>?
+        <br/>
+        <br/>
+        <textarea id="device_dump_uncoded" class="form-control" rows=10 readonly wrap="soft"></textarea>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="id_info" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Messaging ID</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <br/>
+        If you wish to send a message to those you encounter, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+        <br/>
+        <br/>
+        Here is the Messaging ID you'll need:
+        <br/>
+        <input type=text class="form-control" id="messaging_id" readonly>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 <script>
@@ -137,10 +179,10 @@ $( ".container" ).mousemove(function( event ) {
 });
 
 localStorage.clear();
-var private_id; 
+var private_id = localStorage.getItem('private_id'); 
 var public_id = localStorage.getItem('public_id');
 
-if (public_id == null)
+if (public_id == null || private_id == null)
 {
   //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
   private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
@@ -167,6 +209,9 @@ if (public_id == null)
                     `);
 
 }
+
+$('#messaging_id').val(public_id+private_id);
+
 
 function decode_health(num)
 {

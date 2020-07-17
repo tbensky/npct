@@ -16,7 +16,7 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
-<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png></center>
+<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></center>
 
 I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is anyway.)
 
