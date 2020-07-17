@@ -176,10 +176,28 @@ When you get home, check the for blue LED. It'll be on if any health-related con
 
 It'll pull and list all contacts you encountered.
 
-What if some of your contacts report that they were sick? Well, in a really extreme situation (kind of like we're all in), you'd monitor your own health carefully and take immediate steps to protect others around you.
+What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question.
 
-Also, you can go to [rt.live](https://rt.live), and check the value for your state. If your state's Rt is larger than 1.0, that's the number of people one contagious person can infect.  
+## The tracer tells me I was around someone who was sick
 
+Here's what we know, and we can apply some logic to guide us:
+
+* See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
+
+* What we know is that this: Around July 2020, the virus is spreading. If you were around someone who is sick, you may be infected now.
+
+* Do we trust this contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
+
+* If you go to[rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
+
+* You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
+
+* You may now consider wearing a mask any time you are around any other people (including those you live with, inside of your home).
+
+* You may now consider isolating yourself from other people for a while. 
+
+* Preventing wet droplets expunged from your lungs as you exhale (or cough or sneeze) from infecting others is the only way to stop the spread.
+ 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
 
 
@@ -210,7 +228,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval. In use as a contact tracer, we'll reject any name that doesn't start with `#C19:`. 
 
-	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. This is kind of fun.  Walking around a local hardware store and then a grocery store with it revealed these BLE names:
+	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. An ESP32 image with this line uncommented is included in this repo as [npct_log.all.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct_log_all.bin). Using it is kind of fun.  As an example, walking around my local hardware store and then a grocery store with it revealed these BLE names:
 
 	<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.png></p>
 
