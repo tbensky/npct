@@ -257,9 +257,9 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 	* The BLE name is set via `esp_ble_gap_set_device_name();` at various places inside of the code. Name changes to the device are stored in NVS (non-volatile storage) and are retrieved and set to the BLE name on any startup (device reset or power up).
 
-	* The GATT service UUID is set to 0x00FEED ("feed" [hexspeak](https://en.wikipedia.org/wiki/Hexspeak). 
+	* The GATT service UUID is set to 0x00FEED ("feed" in [hexspeak](https://en.wikipedia.org/wiki/Hexspeak)). 
 
-	* Likewise the service's characteristic is 0x00C0DE ("code" in hexspeak)
+	* Likewise the service's characteristic is 0x00C0DE ("code" in hexspeak).
 
 	* That said, the actual service UUID appears to be `0000feed-0000-1000-8000-00805f9b34fb`.
 
