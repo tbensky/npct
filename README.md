@@ -2,9 +2,9 @@
 
 * Contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) can help to get us out of the Covid-pandemic. 
 * This presents construction of an inexpensive (`~$20 USD`) hardware-based contact tracer.
-* It *does not* use a mobile phone.
+* This contact tracer *does not use a mobile phone at all*.
+* If you build this and carry this around, you can participate in contact tracing and help to stop the spread of Covid.
 * It uses an ESP32 and Bluetooth Low Energy to 1) broadcast your health information and 2) log the same from those around you.
-* Build this, configure it and carry it around! It allows you to directly participate in stopping the Covid-spread.
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
