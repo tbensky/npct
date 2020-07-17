@@ -172,7 +172,7 @@ logged contact information will be lost.
 
 When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App you used to set up the device `(config.html)` and click on the blue "read device log" button:
 
-<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png></p>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png width=400></p>
 
 It'll pull and list all contacts you encountered.
 
