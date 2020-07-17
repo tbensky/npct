@@ -168,7 +168,17 @@ Come back to `config.html` as needed to update your health information or query 
 # Participate in contact tracing
 
 You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
-logged contact information will be lost.  The blue LED will come on if any health-related contacts are logged, so no need to check it if you get home and the blue LED is off (the red LED is always on).
+logged contact information will be lost.  
+
+When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App you used to set up the device `(config.html)` and click on the blue "read device log" button:
+
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png></p>
+
+It'll pull and list all contacts you encountered.
+
+What if some of your contacts report that they were sick? Well, in a really extreme situation (kind of like we're all in), you'd monitor your own health carefully and take immediate steps to protect others around you.
+
+Also, you can go to [rt.live](https://rt.live), and check the value for your state. If your state's Rt is larger than 1.0, that's the number of people one contagious person can infect.  
 
 Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
 
