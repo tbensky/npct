@@ -173,7 +173,7 @@
 <script>
 
   var mouseX = 0, mouseY = 0;
-  const PACKET_SIZE = 20;
+  const PACKET_SIZE = 22;
   const hash_salt = "b063f85e5dbc0310dfc860e012965552";
 
 $( ".container" ).mousemove(function( event ) {
@@ -248,13 +248,13 @@ function decode(str)
   var id, health, count;
   var health_str;
 
-  if (str.length != 20)
+  if (str.length != 22)
     return(str);
 
   id = str.substring(0,16);
-  health = parseInt(str.substring(16,18),16);
+  health = parseInt(str.substring(16,20),16);
   health_str = decode_health(health);
-  count = parseInt(str.substring(18,20),16);
+  count = parseInt(str.substring(20,22),16);
 
   return("Person: " + id + " was encountered " + count.toString() + " times. Health condition: " + health_str);
 }
@@ -279,6 +279,7 @@ async function bt_read()
     var read_int;
     var i;
     var line;
+    var device_log;
     try
     {
       device = await navigator.bluetooth.requestDevice(
@@ -293,8 +294,9 @@ async function bt_read()
         var service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
         var characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
 
+        device_log = "";
         line = 0;
-        $('#device_dump').val("");
+        $('#device_dump').val("Reading...");
         $('#device_dump_uncoded').val("");
         read_encounters();
 
@@ -305,28 +307,32 @@ async function bt_read()
                 var value = await characteristic.readValue();
                 var data = new TextDecoder("utf-8").decode(value);
                 var i, dump, uncoded;
+                var pre;
 
                 if (data.substring(0,3) == 'end')
                 {
                   clearInterval(read_int);
                   device.gatt.disconnect();
+
+                  uncoded = "";
+                  dump = "";
+                  for(i=0;i<device_log.length;i += PACKET_SIZE)
+                  {
+                    dump = dump + decode(device_log.substring(i,i + PACKET_SIZE)) + "\n";
+                    uncoded = uncoded + device_log.substring(i,i + PACKET_SIZE) + "\n";
+                  }
+
+                  pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
+                  $('#device_dump').val(pre + dump);  
+                  if (line == 0)
+                    $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
+                  else $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);   
+                  line++;           
                 }
                 else
                 {
-                  dump = "";
-                  uncoded = "";
-                  for(i=0;i<data.length;i += PACKET_SIZE)
-                  {
-                    dump = dump + decode(data.substring(i,i + PACKET_SIZE)) + "\n";
-                    uncoded = uncoded + data.substring(i,i + PACKET_SIZE) + "\n";
-                  }
-                  $('#device_dump').val($('#device_dump').val() + dump);  
-                  if (line == 0)
-                  {
-                    $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
-                  }  
-                  else $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);   
-                  line++;           
+                  device_log = device_log + data;
+                  $('#device_dump').val($('#device_dump').val() + ".");  
                   read_int = setTimeout(read_encounters,100);
                 }
               }
@@ -362,9 +368,10 @@ function bt_update()
            }
       });
 
-    health_hex = health.toString(16).padStart(2,"0");
-    update_id = public_id + health_hex;
 
+    health_hex = health.toString(16).padStart(4,"0");
+    update_id = public_id + health_hex;
+    console.log(health_hex,health,update_id)
     navigator.bluetooth.requestDevice({
       filters: [
         //{namePrefix: '#C19:'}

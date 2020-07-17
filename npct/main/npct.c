@@ -163,11 +163,11 @@ static prepare_type_env_t a_prepare_write_env;
 
 ///////////// for discovery
 
-#define ID_SIZE 16
-#define HID_SIZE 18
-#define PACKET_SIZE 20 //18(=id+health) + 2(=encounter count)
-#define BLE_HEALTH_NAME_LEN 23
-#define MAX_MEMORY_ALLOWED 100000
+#define ID_SIZE 16              //1/2 of an md5
+#define HID_SIZE 20             // +4 for 4 digit hex health code
+#define PACKET_SIZE 22          //20(=id+health) + 2(=encounter count)
+#define BLE_HEALTH_NAME_LEN 25  // 5(#C19:) + 16 + 4 = 25
+#define MAX_MEMORY_ALLOWED 110000
 #define MAX_PACKETS_ALLOWED (MAX_MEMORY_ALLOWED / PACKET_SIZE)
 //#define MAX_BLE_WRITE_LEN ESP_GATT_MAX_ATTR_LEN
 #define MAX_BLE_WRITE_LEN 20
@@ -269,16 +269,19 @@ int seen_before(char *hid)
     {
         if (strncmp(Encounters + i,hid,HID_SIZE) == 0)
         {
-            hex[0] = *(Encounters + i + HID_SIZE);
+            hex[0] = *(Encounters + i + HID_SIZE + 0);
             hex[1] = *(Encounters + i + HID_SIZE + 1);
             hex[2] = 0;
 
             count = strtol(hex,NULL, 16);
             count++;
 
+            if (count > 255) //occurrence counts only have 2 hex digits (8 bits)
+                count = 255;
+
             sprintf(hex,"%02X",count);
 
-            *(Encounters + i + HID_SIZE) = hex[0];
+            *(Encounters + i + HID_SIZE + 0) = hex[0];
             *(Encounters + i + HID_SIZE + 1) = hex[1];
             return(1);
 
@@ -610,6 +613,7 @@ int set_device_name_from_nvs()
         {
             printf("nvs_get_str fail. Using default name.\n");
             strcpy(str,DEFAULT_DEVICE_NAME);
+            len = strlen(DEFAULT_DEVICE_NAME);
         }
     for(i=0;i<len;i++)
         printf("str[%d]=%d (%c)\n",i,str[i],str[i]);
@@ -664,12 +668,14 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
 
         if (ReadPointer == -1)
         {
-            printf("ReadPointer=%d. Sending contact count.\n",ReadPointer);
-            sprintf((char *)rsp.attr_value.value,"%d contacts found",Encounter_count);
-            rsp.attr_value.len = strlen((char *)rsp.attr_value.value);
+            //printf("ReadPointer=%d. Sending contact count.\n",ReadPointer);
+            //sprintf((char *)rsp.attr_value.value,"%d contacts found",Encounter_count);
+            //rsp.attr_value.len = strlen((char *)rsp.attr_value.value);
             ReadPointer++;
         }
-        else if (ReadPointer == Encounter_count)
+
+
+        if (ReadPointer == Encounter_count)
                 {
                     printf("ReadPointer=%d, about to be reset to -1 (end sent).\n",ReadPointer);
                     sprintf((char *)rsp.attr_value.value,"end");
@@ -864,22 +870,25 @@ void fill_fake_encounters()
 {
     int i;
     char temp[PACKET_SIZE];
+    const int test_encounters = 20;
 
-    Encounters = (char *)malloc(400);
+    Encounters = (char *)malloc(test_encounters * PACKET_SIZE);
     if (Encounters == NULL)
     {
         printf("No Encounters memory.\n");
         return;
     }
-    Encounter_count = 20;
+    Encounter_count = test_encounters;
 
     for(i=0;i<Encounter_count;i++)
     {
         rand_str(temp,PACKET_SIZE);
         temp[16] = '0';
-        temp[17] = '2';
+        temp[17] = '0';
         temp[18] = '0';
-        temp[19] = '1';
+        temp[19] = '2';
+        temp[20] = '0';
+        temp[21] = '1';
         memcpy(Encounters + i * PACKET_SIZE,temp,PACKET_SIZE);
     }
 }
@@ -897,7 +906,7 @@ void app_main(void)
     }
     ESP_ERROR_CHECK( ret );
     
-    ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));\
+    ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));
 
 
     esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();

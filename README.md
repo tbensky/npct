@@ -180,7 +180,7 @@ What if some of your contacts report that they were sick (and perhaps not wearin
 
 ## The tracer tells me I was around someone who was sick
 
-Here's what we know, and we can apply some logic to guide us:
+Here's what we know, and we can apply some logic to guide us (disclaimer: we are not epidemiologists):
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
@@ -220,7 +220,7 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in `config.html`. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
 
-	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 2-digit hex code about their health. So something like `#C19:abcdefghijklmnop06` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for "important" health codes I pulled from the CDC).
+	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 4-digit hex code about their health (so up to 32 health conditions can be presented). So something like `#C19:abcdefghijklmnop0006` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for relevant health codes pulled from the CDC).
 
 	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharing their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But who cares....this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this damn pandemic.) 
 
@@ -244,11 +244,11 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 * Name logging algorithm
 
-	* For storing each name, 20 bytes are needed: 16 for the ID + 2 for the health code + 2 for the occurrence count.
+	* For storing each contact, 22 hex-digits are needed (for simplicity, the 22 hex-digits are literally stored in the ESP32 memory): 16 for the ID + 4 for the health code + 2 for the occurrence count.
 
-	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 100,000 bytes on the stock ESP32 partition, and 100,000/20 = 5,000 possible name stored. 
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 110,000 bytes on the stock ESP32 partition, and 110,000/20 = 5,000 possible name stored. 
 
-	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.
+	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.  Counts max out at 255 (8-bits, or two hex digits).
 
 	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
 
