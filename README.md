@@ -16,7 +16,7 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
-<center><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></center>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
 I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is anyway.)
 
@@ -174,7 +174,7 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 * The ESP32 in full BLE mode seems to draw 112 mA. I measured it using this rockin' USB cable I cut into and modified so current can be routed into a meter. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
 
-<center><img src=https://github.com/tbensky/npct/blob/master/pics/current.jpg></center>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/current.jpg></p>
 
 (I would have used my Fluke to measure the current, but the fuse ($$$) in it is blown, so I used this free meter from HFT.)
 
@@ -198,13 +198,13 @@ Be sure to re-visit `config.html` as your health situation changes. Also you can
 
 	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. This is kind of fun.  Walking around a local hardware store and then a grocery store with it revealed these BLE names:
 
-	<center><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.png></center>
+	<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.png></p>
 
 	* I have no idea what these devices are; some even ended in a hex code that matched some health conditions.
 
 	* Leaving it on all night at home reveals an "Oral B toothbrush" advertising (likely from a neighbor; I don't own one).
 
-	<center><img src=https://github.com/tbensky/npct/blob/master/pics/oralb.png></center>
+	<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/oralb.png></p>
 
 	* So, the `fake_test_str(tmp);` line should be commented out for dedicated contact tracing (and it is in the binary [file to flash](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin)).
 
