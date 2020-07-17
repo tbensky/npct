@@ -91,6 +91,8 @@ Here's the assembly in a 3D printed:
 
 All told, wow! Throwing these parts together is very portable, and a kind of viable "product."  This form could easily be tossed into a bag, backpack, or even pocket and be used as a portable contract tracer.  No soldering or wiring is required at all.
 
+No on off button or mass storage is needed. The battery will run it for about two days.
+
 
 ## Software
 
