@@ -10,7 +10,7 @@
 
 The goal of this work is to develop an open-source, hardware-based, anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
-<center><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></center>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></p>
 
 ## Why this project?
 
