@@ -75,19 +75,19 @@ Yes, and this is likely a show stopper.  But an ESP32 is only $8 and people are 
 
 To build the contact tracer, you'll need three items: an [ESP32](https://www.ebay.com/itm/ESP32-ESP-32S-NodeMCU-Development-Board-2-4GHz-WiFi-Bluetooth-Dual-Mode-CP2102/382601606021?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649), a [micro-USB cable](https://www.amazon.com/gp/product/B07PFZDQP6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&psc=1) (most of the time these come with the battery), and a [battery power pack](https://www.amazon.com/gp/product/B00MWU1GGI/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1). (The ones used here are pointed to by the links.)
 
-<img src=https://github.com/tbensky/npct/blob/master/pics/all3.jpg>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/all3.jpg></p>
 
 ## Assembly
 
 Assembling it is just a matter of connecting the ESP32 to the battery as shown. There is no soldering or wiring required at all.
 
-<img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/unit.JPG></p>
 
 The ESP32 should be protected. It can be placed or wrapped in anything non-metallic. There are 3D printable cases for it, like [this one](https://www.thingiverse.com/thing:3195951). Do not put it in an Altoids box (or *anything* metallic) for two reasons: 1) It could short out a pin or two and 2) the Bluetooth connectivity would be severely degraded (the "bag trick" [here](https://youtu.be/s3poKUuvtyM?t=55) would actually work). 
 
 Here's the assembly in a 3D printed:
 
-<img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></p>
 
 All told, wow! Throwing these parts together is very portable, and a kind of viable "product."  This form could easily be tossed into a bag, backpack, or even pocket and be used as a portable contract tracer.  No soldering or wiring is required at all.
 
@@ -114,7 +114,7 @@ Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015
 
 So an HTML/Javascript configuration tool for this contact tracer was developed and is found [here, called config.html](https://github.com/tbensky/npct/tree/master/configapp). It looks like this:
 
-<img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/chrome.png></p>
 
 
 # Using the contact tracer
@@ -128,7 +128,9 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1. Connect the ESP32 to your computer using a USB-A to micro-USB cable.
 
-1.  When this flashing utility is run, you'll see <img src=https://github.com/tbensky/npct/blob/master/pics/flash.png>
+1.  When this flashing utility is run, you'll see 
+
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/flash.png></p>
 
 1. Select the serial port your ESP32 is attached to. This varies from computer to computer.
 
