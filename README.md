@@ -197,6 +197,8 @@ Here's what we know, and we can apply some logic to guide us:
 * You may now consider isolating yourself from other people for a while. 
 
 * Preventing wet droplets expunged from your lungs as you exhale (or cough or sneeze) from infecting others is the only way to stop the spread.
+
+* Take some steps to stop the spread.
  
 Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
