@@ -170,7 +170,7 @@ Come back to `config.html` as needed to update your health information or query 
 You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
 logged contact information will be lost.  
 
-When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App you used to set up the device `(config.html)` and click on the blue "read device log" button:
+When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png width=400></p>
 
@@ -198,7 +198,7 @@ Here's what we know, and we can apply some logic to guide us:
 
 * Preventing wet droplets expunged from your lungs as you exhale (or cough or sneeze) from infecting others is the only way to stop the spread.
  
-Be sure to re-visit `config.html` as your health situation changes. Also you can use `config.html` to read any contact information that came in while you were out.
+Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
 
 
