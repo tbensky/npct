@@ -253,7 +253,7 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
 
 
-* BLE name, server, characterisitc.
+* BLE name, server, characteristic.
 
 	* The BLE name is set via `esp_ble_gap_set_device_name();` at various places inside of the code. Name changes to the device are stored in NVS (non-volatile storage) and are retrieved and set to the BLE name on any startup (device reset or power up).
 
