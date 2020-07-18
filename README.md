@@ -1,6 +1,6 @@
 ### tl;dr
 
-* Contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) can help to get us out of the Covid-pandemic. 
+* Contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something we all can do to help us get out of the Covid-pandemic. 
 * This presents construction of an inexpensive (`~$20 USD`) hardware-based contact tracer.
 * This contact tracer *does not use a mobile phone at all*.
 * If you build this and carry this around, you can participate in contact tracing and help to stop the spread of Covid.
@@ -111,7 +111,7 @@ The software is located in the [npct folder](https://github.com/tbensky/npct/tre
 
 ### Local Software
 
-Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which I didn't want to do). I also wanted to leave the phone out of this.  Luckily, 
+Conveniently connecting with a device over BLE sort of requires a custom application to be developed (which I didn't really want to do). I also wanted to leave the phone out of this.  Luckily, 
 Google Chrome has [Web Bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web) built into it. It allows a browser (via Javascript) to communicate with BLE devices.
 
 So an HTML/Javascript configuration tool for this contact tracer was developed and is found [here, called config.html](https://github.com/tbensky/npct/tree/master/configapp). It looks like this:
@@ -123,7 +123,7 @@ So an HTML/Javascript configuration tool for this contact tracer was developed a
 
 ## Flashing the ESP32 Device
 
-The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once. You can certainly download and install the Espressif IoT Development Framework (esp-idf), then compile, and flash the code to the board yourself. Or, you can just [grab the binary](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) from this repository and flash it using any number of
+The contact tracing software needs to be flashed onto the ESP32 device. This only has to be once. You can certainly download and install the Espressif IoT Development Framework (esp-idf), then compile, and flash the code to the board yourself. Or, you can just [grab the binary](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) in this repository and flash it using any number of
 "flash utilities" out there. To do this:
 
 1. [Here's](https://github.com/doayee/esptool-esp32-gui/releases) a very nice flashing utility.  Download for Windows or macOS:  DoayeeESP32DFU.app.zip is for macOS and DoayeeESP32DFU.exe is for Windows. 
@@ -136,7 +136,7 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1. Select the serial port your ESP32 is attached to. This varies from computer to computer.
 
-1. Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin) file in the ncpt repository.  
+1. Click the "Browse..." button next to the "Flash App 0x10000" button (red arrow), and select the file called [npct.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct.bin).  
 
 1.  Now click the "Flash" button.  
 
@@ -158,23 +158,27 @@ Now configure the contact tracer itself. (This has only been tested on macOS Cat
 
 1. Click on "Update hardware." This should allow you to connect to the ESP32 via BLE and it will write your configuration information to it.
 
-1. Sometimes you might have trouble getting Chrome to "see" ESP32. If so, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to connect to the ESP32 manually. When you do so, go back to `config.html` and it should work. 
+1. Sometimes you might have trouble getting Chrome to "see" ESP32. Initally the BLE name of it will `ContactTracer`.  If you do have trouble, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to scan for and "inspect" the ESP32 manually. When you do so, go back to `config.html` and it should work. 
 
 
-After you configure the ESP32 for the first time, its BT name will change to reflect your unique ID and health info for other contact tracers to pick up on. It's name will be something like `#C19:abcdefghijklmnop17`.
+After you configure the ESP32 for the first time, its BLE name will change to reflect your unique ID and health info for other contact tracers to pick up on. It's name will be something like `#C19:abcdefghijklmnop17`.
 
 Come back to `config.html` as needed to update your health information or query the device for contacts that may have occurred while you were out.
 
 # Participate in contact tracing
 
-You are done. Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
+You are done. Now, do two things:
+
+1.  Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
 logged contact information will be lost.  
 
-When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
+1. When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png width=400></p>
 
 It'll pull and list all contacts you encountered.
+
+1. Make a contact tracer for someone you know, and tell them to make one for someone they know. 
 
 What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question.
 
