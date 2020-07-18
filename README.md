@@ -1,6 +1,6 @@
 ### tl;dr
 
-* Voluntatily contributing to contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something we all can do to help us get out of the Covid-pandemic. 
+* Participating in contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something we all can do to help us get out of the Covid-pandemic. 
 * This presents construction of an inexpensive (`~$20 USD`) hardware-based contact tracer.
 * This contact tracer *does not use a mobile phone at all*.
 * If you build this and carry this around, you can participate in contact tracing and help to stop the spread of Covid.
