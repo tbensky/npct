@@ -178,7 +178,7 @@ logged contact information will be lost.
 
 It'll pull and list all contacts you encountered.
 
-1. Make a contact tracer for someone you know, and tell them to make one for someone they know. 
+Next, make a contact tracer for someone you know, and tell them to make one for someone they know. 
 
 What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question.
 
@@ -224,7 +224,7 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 	1. Everyone starts by running `config.html` to configure the ESP32. The first time though, An md5 is computed based on as many random things as I could think of in `config.html`. This initial md5 is their `private code.`  Another md5 is then calculated from `some salt` + `private code.`  The 32 character length of this 2nd md5 is their `public code`, but it is a tad long for a BLE name, so it is cut in half to 16 (I read somwhere that entropy is still pretty uniform in such a thing). 
 
-	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 4-digit hex code about their health (so up to 32 health conditions can be presented). So something like `#C19:abcdefghijklmnop0006` for someone's who public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for relevant health codes pulled from the CDC).
+	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 4-digit hex code about their health (so up to 32 health conditions can be presented). So something like `#C19:abcdefghijklmnop0006` for someone whose public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for relevant health codes pulled from the CDC).
 
 	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharing their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But who cares....this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this damn pandemic.) 
 
