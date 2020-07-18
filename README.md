@@ -226,7 +226,7 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 	1. The ESP32's BLE name will be the tag `#C19:` + `public code` + a 4-digit hex code about their health (so up to 32 health conditions can be presented). So something like `#C19:abcdefghijklmnop0006` for someone whose public md5 is `abcdefghijklmnop` and has a sore throat and a cough (see `config.html` for relevant health codes pulled from the CDC).
 
-	1. The `private code` is used to verify the person tossing around the public md5 is also the person who ran `config.html` and got all of this going in the first place. That is (in particular for sharing their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But who cares....this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this damn pandemic.) 
+	1. The `private code` is used to verify the person tossing around the public md5 is also the person who initially ran `config.html` and got all of this going in the first place. That is (in particular for sharing their log data online) they might be asked for both md5s, and only if `substr(md5(salt+private),16) == public` do we believe them. I am guessing that knowing the salt (it's in the source code) and the public code will not allow anyone to "compute" the private md5. (But who cares....this isn't a bank--the whole system relies on everyone "playing nice" to help us get out of this damn pandemic.) 
 
 	1. Users are asked to store both codes on their own computer (Word doc? Text file?) and are also stored in "local storage" in Chrome for convenience.
 
@@ -234,7 +234,7 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 	* In function `gap_event_handler`, the case `ESP_GAP_BLE_SCAN_RESULT_EVT` means the ESP32 found a BLE name and it should be added to a dynamic memory location called `Encounters` for later retrieval. In use as a contact tracer, we'll reject any name that doesn't start with `#C19:`. 
 
-	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. An ESP32 image with this line uncommented is included in this repo as [npct_log.all.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct_log_all.bin). Using it is kind of fun.  As an example, walking around my local hardware store and then a grocery store with it revealed these BLE names:
+	* For testing, a line in this function, `fake_test_str(tmp);` forces any incoming BLE name into the `#C19:` format, thus allowing it to be logged.  If this line is uncommented, the ESP32 will log all BLE names it sees. An ESP32 image with this line uncommented is included in this repo as [npct_log.all.bin](https://github.com/tbensky/npct/blob/master/npct/build/npct_log_all.bin). Using this is kind of fun.  As an example, walking around my local hardware store and then a grocery store with it revealed these BLE names:
 
 	<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/allscan.png></p>
 
