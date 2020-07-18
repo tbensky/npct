@@ -196,13 +196,15 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
 
 * You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
 
-* You may now consider wearing a mask any time you are around any other people (including those you live with, inside of your home).
+* You may now consider:
 
-* You may now consider isolating yourself from other people for a while. 
+1. Wearing a mask any time you are around any other people (including those you live with, inside of your home).
 
-* Preventing wet droplets expunged from your lungs as you exhale (or cough or sneeze) from infecting others is the only way to stop the spread.
+1. Quarantining yourself from other people for a while (up to 2 weeks). 
 
-* Take some steps to stop the spread.
+* Preventing droplets expunged from your lungs as you exhale, cough, sneeze, or cough from infecting others can stop the spread.
+
+* *Take some steps* to stop the spread.
  
 Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
