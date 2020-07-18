@@ -198,9 +198,9 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
 
 * You may now consider:
 
-1. Wearing a mask any time you are around any other people (including those you live with, inside of your home).
+	1. Wearing a mask any time you are around any other people (including those you live with, inside of your home).
 
-1. Quarantining yourself from other people for a while (up to 2 weeks). 
+	1. Quarantining yourself from other people for a while (up to 2 weeks). 
 
 * Preventing droplets expunged from your lungs as you exhale, cough, sneeze, or cough from infecting others can stop the spread.
 
