@@ -40,7 +40,7 @@ Mobile phones might be ideal for this. "Everyone already has one," and they can 
 
 The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.) It's also not clear you need an instantaenous notification if you encounter someone who is sick.
 
-Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home.) 
+Phones and Apps are for fun and communication, but we will likely not trust them with health information. (If you want full privacy, you'd have to leave your phone off and at home.[ref.](https://www.bunniestudios.com)) 
 
 ### If not a phone, then what?
 
