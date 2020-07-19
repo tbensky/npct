@@ -280,7 +280,6 @@ async function bt_read()
     var device;
     var read_int;
     var i;
-    var line;
     var device_log;
     try
     {
@@ -322,14 +321,13 @@ async function bt_read()
                   {
                     dump = dump + decode(device_log.substring(i,i + PACKET_SIZE)) + "\n";
                     uncoded = uncoded + device_log.substring(i,i + PACKET_SIZE) + "\n";
+                    line++;
                   }
 
                   pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
                   $('#device_dump').val(pre + dump);  
-                  if (line == 0)
-                    $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
-                  else $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);   
-                  line++;           
+                  $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
+                  $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);          
                 }
                 else
                 {
