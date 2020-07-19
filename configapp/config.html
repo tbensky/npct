@@ -1,15 +1,16 @@
 <!doctype html>
 
-<script type="text/javascript" src="md5.js"></script>
-<link rel="stylesheet" href="bootstrap-3.4.1.min.css">
-<script type="text/javascript" src="jquery-3.5.1.js"></script>
-<script src="bootstrap-3.4.1.min.js"></script>
 
 <html lang="en">
 <head>
   <meta charset="utf-8">
 
   <title>No Phone Contact Tracer (NPCT)</title>
+
+  <script type="text/javascript" src="md5.js"></script>
+  <link rel="stylesheet" href="bootstrap-3.4.1.min.css">
+  <script type="text/javascript" src="jquery-3.5.1.js"></script>
+  <script src="bootstrap-3.4.1.min.js"></script>
 
   <style>
     textarea
@@ -19,10 +20,10 @@
       overflow-x: scroll;
     }
   </style>
-
 </head>
 
 <body>
+
 
 <div class="container">
   <div class="row">
@@ -35,86 +36,84 @@
       <ul>
         <li> This tracer is completely anonymous and doesn't involve your phone at all.
         <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
-        <li> This page will get you started using the contact tracing hardware.
+        <li> Please connect your hardware tracer to your computer via a USB cable.
         <li> This page runs only on the computer you are using. It does not contact an external webserver.
       </ul>
 
        <div id="content"></div>
 
-       <h3>As you go out and about today, tick on any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+       <h3>Update your device with any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
       
       <div class="form-group">
-
-        
-          <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine.
           <hr/>
+          <div class="row">
+            <div class="col-xs-4">
+              <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine
+            </div>
 
-          <input  class="form-check-input" type="checkbox" value="2"> Sore throat
-          <br/>    
-        
-       
-          <input  class="form-check-input" type="checkbox" value="4"> Cough
-          <br/>  
+            <div class="col-xs-4">
+              <input  class="form-check-input" type="checkbox" value="2"> Sore throat
+              <br/>    
+                      
+              <input  class="form-check-input" type="checkbox" value="4"> Cough
+              <br/>  
+           
+              <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
+              <br/>
+            
+              <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
+              <br/>
+          
+              <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
+              <br/>
+           
+              <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
+              <br/>
+            
+              <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
+              <br/>
 
-       
-          <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
-          <br/>
+              <input  class="form-check-input" type="checkbox" value="256"> Fever
+              <br/>
 
-        
-          <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
-          <br/>
+              <input  class="form-check-input" type="checkbox" value="512"> Headache
+            </div>
 
-      
-          <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
-          <br/>
+           <div class="col-xs-4">
+            <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
+            <br/>
 
-       
-          <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
-          <br/>
+            <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
+            <br/>
+            <br/>
 
-        
-          <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
-          <br/>
+            <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
+            <br/>
 
-          <input  class="form-check-input" type="checkbox" value="256"> Fever
-          <br/>
+            <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
+            <br/>
+            <br/>
 
-           <input  class="form-check-input" type="checkbox" value="512"> Headache
-          <hr/>
-
-          <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
-          <br/>
-
+            <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
+            <br/>
          
-          <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
-          <hr/>
+            <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
+          </div>
 
-          <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
-          <br/>
-
-          <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
-          <hr/>
-
-          <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
-          <br/>
-       
-          <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
-
-    
-
+          <div class="col-xs-12" align="center">
+            <br/><br/>
+             <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
+        </div>
+      </div>
     </div>
 
-
-       
-
-      <p/>
-      <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
+ 
       <hr/>
-      <h3>Contact Tracing</h3>
-      <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
+      <h3>Participate in Contact Tracing</h3>
+      <button onclick="bt_read()" class="btn btn-success btn-xs">Read Device Log</button>
       <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
-      <button class="btn btn-info btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
-      <button class="btn btn-info btn-xs" onclick="update_health_id()">Share my health update</button>
+      <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
+      <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
       <br/>
       <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
       <br/>
@@ -138,12 +137,10 @@
         <h4 class="modal-title">Share your contact tracing data</h4>
       </div>
       <div class="modal-body">
-        <p>
-         <br/>
         An added power of contact tracing is in sharing your encounters.
         <br/>
         <br/>
-        If you don't mind sharing your encounters (it's all anonymous), can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>?
+        If you don't mind sharing your encounters (it's all anonymous), can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>? (If the box is empty, click the "Read Device Log" button on the main screen first.)
         <br/>
         <br/>
         <textarea id="device_dump_uncoded" class="form-control" rows=10 readonly wrap="soft"></textarea>
@@ -164,8 +161,6 @@
         <h4 class="modal-title">Messaging ID</h4>
       </div>
       <div class="modal-body">
-        <p>
-        <br/>
         If you wish to send a message to those you encounter, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
         <br/>
         <br/>
@@ -189,16 +184,13 @@
         <h4 class="modal-title">Share an update to my health</h4>
       </div>
       <div class="modal-body">
-        <p>
-        <br/>
-        If you wish to update those you've encountered with an update to your health, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+        If you wish to share an update to your health, with those you've encountered, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
         <br/>
         <br/>
-        Be sure your health tick marks are updated before opening this window.
+        Be sure you update your health tick marks doing so.
         <br/>
         <br/>
-        Here is the Health-update code you'll need:
-        <br/>
+        <label for="health_update_id"> Here is the Health-update code you'll need:</label>
         <input type=text class="form-control" id="health_update_id" readonly>
         </p>
       </div>
