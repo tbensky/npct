@@ -184,7 +184,7 @@ What if some of your contacts report that they were sick (and perhaps not wearin
 
 ## The tracer tells me I was around someone who was sick
 
-Here's what we know, and we can apply some logic to guide us (disclaimer: we are not epidemiologists):
+Here's what we know, and we can apply some logic to guide us (disclaimer: we are not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)):
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
@@ -196,7 +196,7 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
 
 * You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
 
-* You may now consider:
+* You may now consider some form of quarantine for yourself:
 
 	1. Wearing a mask any time you are around any other people (including those you live with, inside of your home).
 

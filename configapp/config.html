@@ -35,19 +35,19 @@
       <ul>
         <li> This tracer is completely anonymous and doesn't involve your phone at all.
         <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
-        <li> This page will get you started in using the contact tracing hardware.
-        <li> This page runs only on the computer you are using. It does not contact any external webserver.
+        <li> This page will get you started using the contact tracing hardware.
+        <li> This page runs only on the computer you are using. It does not contact an external webserver.
       </ul>
 
        <div id="content"></div>
 
-       <h3>As you go out and about today, click on any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+       <h3>As you go out and about today, tick on any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
       
       <div class="form-group">
 
         
           <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine.
-          <br/>
+          <hr/>
 
           <input  class="form-check-input" type="checkbox" value="2"> Sore throat
           <br/>    
@@ -76,23 +76,31 @@
           <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
           <br/>
 
+          <input  class="form-check-input" type="checkbox" value="256"> Fever
+          <br/>
 
-       
-          <input  class="form-check-input" type="checkbox" value="256"> I tested negative for Covid-19
+           <input  class="form-check-input" type="checkbox" value="512"> Headache
+          <hr/>
+
+          <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
           <br/>
 
          
-          <input  class="form-check-input" type="checkbox" value="512"> I tested positive for Covid-19
+          <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
+          <hr/>
+
+          <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
           <br/>
 
-          <input  class="form-check-input" type="checkbox" value="1024"> I was wearing a mask
-          <br/>
+          <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
+          <hr/>
 
-          <input  class="form-check-input" type="checkbox" value="2048"> I was not wearing a mask
+          <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
           <br/>
+       
+          <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
 
-          <input  class="form-check-input" type="checkbox" value="4096"> I was around someone who was sick
-          <br/>
+    
 
     </div>
 
@@ -100,17 +108,21 @@
        
 
       <p/>
-      <button class="btn btn-success btn-xs" onclick="bt_update()">Update hardware</button>
+      <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
       <hr/>
-      <h3>Contact Tracer Log</h3>
+      <h3>Contact Tracing</h3>
       <button onclick="bt_read()" class="btn btn-primary btn-xs">Read Device Log</button>
-      <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Do you mind sharing your encounters?</button>
+      <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
       <button class="btn btn-info btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
+      <button class="btn btn-info btn-xs" onclick="update_health_id()">Share my health update</button>
       <br/>
       <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
       <br/>
       <br/>
       <textarea id="device_dump"  class="form-control" rows=10 readonly wrap="soft"></textarea>
+      <br/>
+      <br/>
+      <hr/>
   </div>
 </div>
 
@@ -128,10 +140,10 @@
       <div class="modal-body">
         <p>
          <br/>
-        An added power of contact tracing is in sharing your encounters, and possibly communicating with those you've encountered.
+        An added power of contact tracing is in sharing your encounters.
         <br/>
         <br/>
-        If you don't mind sharing your encounters, can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>?
+        If you don't mind sharing your encounters (it's all anonymous), can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>?
         <br/>
         <br/>
         <textarea id="device_dump_uncoded" class="form-control" rows=10 readonly wrap="soft"></textarea>
@@ -141,7 +153,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -161,6 +172,34 @@
         Here is the Messaging ID you'll need:
         <br/>
         <input type=text class="form-control" id="messaging_id" readonly>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="health_share" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share an update to my health</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <br/>
+        If you wish to update those you've encountered with an update to your health, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+        <br/>
+        <br/>
+        Be sure your health tick marks are updated before opening this window.
+        <br/>
+        <br/>
+        Here is the Health-update code you'll need:
+        <br/>
+        <input type=text class="form-control" id="health_update_id" readonly>
         </p>
       </div>
       <div class="modal-footer">
@@ -229,11 +268,14 @@ function decode_health(num)
       32: "Muscle pain" ,
       64: "Loss of smell or taste",
       128: "Diarrhea",
-      256: "Tested negative for Covid-19",
-      512: "Tested positive for Covid-19",
-      1024: "Wearing a mask",
-      2048: "Not wearing a mask",
-      4096: "Around someone who was sick"
+      256: "Fever",
+      512: "Headache",
+      1024: "Tested negative for Covid-19",
+      2048: "Tested positive for Covid-19",
+      4096: "Wearing a mask",
+      8192: "Not wearing a mask",
+      16384: "Symptoms are getting better",
+      32768: "Symptoms are getting worse",
     };
   var ret = "";
 
@@ -243,6 +285,17 @@ function decode_health(num)
                                   ret = ret + codes[key] + ", ";
                               });
   return(ret);
+}
+
+function update_health_id()
+{
+  var health;
+  var health_hex;
+
+  health = get_health_code();
+  health_hex = health.toString(16).padStart(4,"0");
+  $("#health_update_id").val(public_id + private_id + health_hex);
+  $('#health_share').modal('show')
 }
 
 function decode(str)
@@ -261,7 +314,7 @@ function decode(str)
   return("Person: " + id + " was encountered " + count.toString() + " times. Health condition: " + health_str);
 }
 
-function test_health()
+function get_health_code()
 {
   var health = 0;
   
@@ -271,7 +324,7 @@ function test_health()
      }
   });
 
-  console.log(health,decode_health(health));
+  return(health);
 
 }
 
@@ -326,7 +379,7 @@ async function bt_read()
 
                   pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
                   $('#device_dump').val(pre + dump);  
-                  $('#device_dump_uncoded').val(public_id + "\n" + private_id + "\n");
+                  $('#device_dump_uncoded').val(public_id + private_id + "\n");
                   $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);          
                 }
                 else
