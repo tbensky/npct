@@ -203,7 +203,7 @@ When you get home, check the for blue LED. It'll be on if any health-related con
 It'll pull and list all contacts you encountered. Nothing is saved or sent to any server. Be sure to cut and paste the enounters into a document on your computer (in Word perhaps?) if you want to save them.
 
 
-## The tracer tells me I was around someone who was sick
+## Now what? The tracer tells me I was around someone who was sick
 
 What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question. 
 
