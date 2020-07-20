@@ -213,11 +213,11 @@ Contact tracing is more about making an informed decision about what to do next,
 
 * You know what you were doing when the encounter came in. Were you shoulder-to-shoulder at a street party?  Or moving quickly through a large warehouse store shopping?
 
-* At least for Covid-19, the danger is being less than 6 feet for more than 15 minutes. Were you (and/or them) not wearing a mask? 
+* At least for Covid-19, the danger is being less than 6 feet for more than 15 minutes. Could this have happened? Were you (and/or them) not wearing a mask? 
 
 * The log will tell you the number of times each encounters happened. One encounter is likely just a quick passer by.  But many? Maybe that meets the 6 feet/15 minute rule.
 
-* The log gave you some information about people you were around and one is claiming to have symptoms. *Take some steps* to stop the spread:
+* The log gives you information about people you were around and one is claiming to have symptoms. *Take some steps* to stop the spread:
 
 	* Lie low for a couple of days and see if symptoms appear.
 
