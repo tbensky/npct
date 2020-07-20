@@ -46,24 +46,24 @@ Phones and Apps are for fun and communication, but we will likely not trust them
 
 The maker movement continues to impress. They got a quick start in early 2020 backfilling PPE shortages with a mask and face shield producing efforts, like these: [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). **Is a 'maker' themed contract tracer possible?**
 
-Bluetooth (BT) does seems to be an ideal technology for contact tracing. It's a short-range protocol that can broadcast messages to receiving devices nearby. But I didn't want to to use a phone for this, so what then?  I could not help but wondering about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
+Bluetooth (BT) does seems to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocol that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wondering about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
 
 
 One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
 
 * Come up with some encoding for a unique ID for yourself + your health information (Easy: an MD5 hash + some additional codes to describe your health).
 
-* Come up with a way of broadcasting such information to those who come near you.  (Easy again: put this encoding into the *BT name* of the ESP32, and tell it to constantly advertise itself.)  By putting it into the BT name, other devices can just "discover" each other and grab health info, so devices don't have to pair to exchange info.
+* Come up with a way of broadcasting such information to those who come near you.  (Easy again: put this encoding into the *BLE name* of the ESP32, and tell it to constantly advertise itself.)  By putting it into the BT name, other devices can just "discover" each other and grab health info, so devices don't have to pair to exchange info.
 
-* Come up with a way of monitoring the health of those nearby.  (Easy: As mentioned, tell the ESP32 to constantly discover advertising devices, and log ones that have a BT name that also encodes one's health info.) 
+* Come up with a way of monitoring the health of those nearby.  (Easy: As mentioned, tell the ESP32 to constantly discover advertising BLE devices, and log ones that have a health-related BLE name.) 
 
-* Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found.
+* Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found. (Easy: Some computer-based BLE configuration App.)
 
 * Power it with a $10 portable "extra phone charge" battery.
 
 * And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS.
 
-That's it. It works, and here's how. Want to build one and try it out?
+That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome browser.  It all works, and here's how. Want to build one and try it out?
 
 ### So participants will need an ESP32 (and to carry one around)?
 
