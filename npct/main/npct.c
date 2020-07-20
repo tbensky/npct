@@ -304,7 +304,8 @@ void add_encounter(char *encounter)
     int i;
     char *ptr;
     char *tptr;
-    const int len0 = strlen("#C19:");
+    const char *tag = "#C19";
+    const int len0 = strlen(tag);
 
     if (strlen(encounter) != BLE_HEALTH_NAME_LEN)
     {
@@ -312,7 +313,7 @@ void add_encounter(char *encounter)
         return;
     }
 
-    if (!(encounter[0] == '#' && encounter[1] == 'C' && encounter[2] == '1' && encounter[3] == '9' && encounter[4] == ':'))
+    if (!strncmp(encounter,tag,len0))
     {
         printf("Not a health token.\n");
         return;
@@ -443,7 +444,7 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
                     memset(tmp,0,BLE_HEALTH_NAME_LEN+1);
                     memmove(tmp,adv_name,adv_name_len > BLE_HEALTH_NAME_LEN ? BLE_HEALTH_NAME_LEN : adv_name_len);
                     printf("Device found: %s\n",tmp);
-                    fake_test_str(tmp);
+                    //fake_test_str(tmp);
                     add_encounter(tmp);
                     printf("Encounters=%d\n",Encounter_count);
                     dump();
