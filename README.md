@@ -14,11 +14,11 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 ## Why this project?
 
-I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)), and after taking [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing):
+I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
-I wanted to focus some quarantine stress/energy and do something (anything) to help. I know a lot about microcontrollers, am good with the C language, and always seem to be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...Likely this project won't help at all, but here it is anyway.)
+I wanted to focus some quarantine stress/energy and do something (anything) to help. I took [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing), and I mixed it all with my solid knowledge of microcontrollers, the C language, and being be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...likely this project won't help at all, but here it is anyway.)
 
 ## Contact Tracing
 
