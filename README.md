@@ -24,7 +24,7 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this: Someone who gets sick (the case) should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
 
-But this requires a lot of "leg work." Those who test positive should be contacted by local public health to tell them this, so public health can ask them to isolate and inquire about their recent contacts. Public health will then contact the contacts, discuss them going into quarantine, etc. and on it goes.  
+But this requires a lot of "leg work" (and nevermind the hardship of isolating and quaratining). Those who test positive should be contacted by local public health to tell them this, so public health can ask them to isolate and inquire about their recent contacts. Public health will then contact the contacts, discuss them going into quarantine, etc. and on it goes.  
 
 Typically this is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely become infectious within days, spreading the disease. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-0days, contacts should quarantine for 2-weeks.
 
