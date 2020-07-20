@@ -24,9 +24,9 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this.
 
-Suppose someone gets infected with the disease. They're called "the case." The case should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
+Suppose someone gets infected with the disease. They're called "the case." The case should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop the spread of an infectious disease.
 
-But this requires a lot of legwork. In the contact tracing protocol, typically carried out by public health, those who test positive (each now a "case") will be contacted (by public health) to tell them of/confirm their test result. They will be asked them to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
+But this requires a lot of legwork. In the contact tracing protocol, typically carried out by public health, those who test positive (each now a "case") will be contacted (by public health) to tell them of/confirm their test result. They will be asked to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
 
 Typically contact tracing is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease to those *they* contact. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
 
@@ -50,7 +50,7 @@ Using some technology to quietly inform those around us about our condition *mig
 
 Mobile phones might be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
-However, by Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+However, by Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide deployment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
 The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process, but it's not clear their efforts helped.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.) It's also not clear you need an *instantaenous notification* if you encounter someone who is sick.
 
@@ -60,7 +60,7 @@ Phones and Apps are for fun and communication, but we will likely not trust them
 
 The maker movement continues to impress. They got a quick start in early 2020 backfilling PPE shortages with a mask and face shield producing efforts, like these: [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). **Is a 'maker' themed contract tracer possible?**
 
-Bluetooth (BT) does seems to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocol that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wondering about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
+Bluetooth (BT) does seem to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocol that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wonder about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
 
 
 One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. 
@@ -205,36 +205,46 @@ It'll pull and list all contacts you encountered. Nothing is saved or sent to an
 
 ## The tracer tells me I was around someone who was sick
 
-What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question.
+What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question. 
 
+Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (W are not epidemiologists either, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
 
-Here's what we know, and we can apply some logic to guide us (disclaimer: we are not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)):
+Contact tracing is more about making an informed decision about what to do next, given you were near someone who is claiming to be sick and maybe contagious. You'll have to think some now.
+
+* You know what you were doing when the encounter came in. Were you shoulder-to-shoulder at a street party?  Or moving quickly through a large warehouse store shopping?
+
+* At least for Covid-19, the danger is being less than 6 feet for more than 15 minutes. Were you (and/or them) not wearing a mask? 
+
+* The log will tell you the number of times each encounters happened. One encounter is likely just a quick passer by.  But many? Maybe that meets the 6 feet/15 minute rule.
+
+* The log gave you some information about people you were around and one is claiming to have symptoms. *Take some steps* to stop the spread:
+
+	* Lie low for a couple of days and see if symptoms appear.
+
+	* Gently quarantine yourself: wear a mask, even at home, and distance within your home (if possible).
+
+	* Have your doctor or testing station on speed-dial.  Get tested if any symptoms appear.
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
-* What we know this: Around July 2020, the virus is spreading. If you were around someone who is sick (typically for 15 min or more), it may have spreaded to you.
+* What we know this: 
 
-* 50% of people show symptoms of Covid-19 within 5 days of being infected.
+	* Around July 2020, the virus is spreading. If you were around someone who is sick (typically for 15 min or more), it may have spreaded to you.
 
-* You will however, yourself be contagious 2-days before you show symptoms.
+	* 50% of people show symptoms of Covid-19 within 5 days of being infected.
+
+	* Infected people are contagious 2-days before they show symptoms.
 
 * Do we trust this "self" contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
 
-* If you go to [rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
+* More logic given your information:
 
-* You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
+	* Go to [rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
 
-* You may now consider some form of quarantine for yourself:
+	* You could be the 1 person someone else just infected, or you could be the 0.15 person to be infected (0.15=15% chance of becoming infected, or if the sick person gets around 6 more people (1/.15 is about 7...you + 6 others), odds are one of you will get infected.
 
-	1. Wearing a mask any time you are around any other people (including those you live with, inside of your home).
-
-	1. Quarantining yourself from other people for a while (up to 2 weeks). 
-
-* Preventing droplets expunged from your lungs as you exhale, cough, sneeze, or cough from infecting others can stop the spread.
-
-* *Take some steps* to stop the spread.  Call your doctor? Get tested? Lie low until you know more?
  
-Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
+* Be sure to re-use `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
 ## Next: Make another contact tracer for someone else
 
