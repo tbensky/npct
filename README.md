@@ -229,7 +229,7 @@ Contact tracing is more about making an informed decision about what to do next,
 
 * What we know this: 
 
-	* Around July 2020, the virus is spreading. If you were around someone who is sick (typically for 15 min or more), it may have spreaded to you.
+	* Around July 2020, the virus is spreading. If you were around (within 6 ft) of someone who is sick (for 15 min or more), it may have spreaded to you.
 
 	* 50% of people show symptoms of Covid-19 within 5 days of being infected.
 
