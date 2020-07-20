@@ -3,12 +3,12 @@
 * Participating in contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something each of us can do to help us get out of the Covid-pandemic. 
 * This work shows an inexpensive (`~$20 USD`) hardware-based contact tracer.
 * This contact tracer *does not use a mobile phone at all*.
-* If you build this and carry this around, you can participate in contact tracing and help to stop the spread of Covid.
+* If you build this and carry this around, you can participate in "self" contact tracing and help to stop the spread of Covid.
 * It uses an ESP32 and Bluetooth Low Energy to 1) broadcast your health information and 2) log the same from those around you.
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
-The goal of this work is to develop an open-source, hardware-based, anonymous contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
+The goal of this work is to develop an open-source, hardware-based, anonymous and "self-driven" contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></p>
 
@@ -180,7 +180,7 @@ Come back to `config.html` as needed to update your health information or query 
 You are done. Now, do two things:
 
 1.  Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
-logged contact information will be lost.  
+logged contact information will be lost.  You can disconnect it and/or charge the battery after you get home and download any contacts.
 
 1. When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
 
