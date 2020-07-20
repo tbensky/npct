@@ -61,7 +61,9 @@ The maker movement continues to impress. They got a quick start in early 2020 ba
 Bluetooth (BT) does seems to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocol that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wondering about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
 
 
-One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
+One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. 
+
+Here was my implementation plan:
 
 * Come up with a way of coding an anonymous ID and health information for each participant.
 
@@ -241,9 +243,9 @@ Next, make a contact tracer for someone you know, and tell them to make one for 
 
 # Technical notes
 
-* On the bullet point plans above:
+* On the bullet point implementation plan above:
 
-	* A unique ID and health information can is a randomly generated MD5 hash with some additional digits tacked on to describe one's health. 
+	* A unique ID and health information is a randomly generated MD5 hash with some additional digits tacked on to describe one's health. 
 
 	* Broadcasting one's ID and health information to those nearby, is done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
 
