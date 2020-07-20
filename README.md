@@ -30,7 +30,7 @@ But this requires a lot of legwork. In the contact tracing protocol, typically c
 
 Typically contact tracing is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease to those *they* contact. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
 
-### Can technology help? Can we "self" contact trace? 
+### Can technology help? Can we do self-driven contact tracing? 
 
 What if you go out and about, and do two things: 
 
@@ -40,7 +40,7 @@ What if you go out and about, and do two things:
 
 If you are feeling sick, others your encounter might benefit from knowing this, so they can act accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
-Would this be a way for us all to "self" contact trace?
+Would this be a way for us all to participate in self-driven contact tracing?
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
 
@@ -85,7 +85,7 @@ That's it. I put all of this together using an ESP32 and Web-Bluetooth in the Ch
 
 Yes, and this is likely a show stopper.  But an ESP32 is only $8 and people are making all kinds of things to adapt and get through the pandemic. Maybe it'll be fun to make and operate your own contact tracer? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token." Singapore apparently [developed one](https://www.bbc.com/news/technology-53146360) too.
 
-# How to build an ESP32 "self" contact tracer
+# How to build an ESP32 self-driven contact tracer
 
 ## Items needed
 
@@ -181,7 +181,7 @@ After you configure the ESP32 for the first time, its BLE name will change to re
 
 Come back to `config.html` as needed to update your health information or query the device for contacts that may have occurred while you were out.
 
-# Participate in "self" contact tracing
+# Participate in self-driven contact tracing
 
 You are done. Now, here's what you do:
 
@@ -235,7 +235,7 @@ Contact tracing is more about making an informed decision about what to do next,
 
 	* Infected people are contagious 2-days before they show symptoms.
 
-* Do we trust this "self" contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
+* Do we trust this self-driven contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
 
 * More logic given your information:
 
