@@ -22,11 +22,17 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Contact Tracing
 
-Contact tracing is about you going out and about, and doing two things: 
+Contact tracing is a mechanism for stopping the spread of an infectious disease.  At its root level, someone who gets sick (the case) should let everyone they've been on contact with (the contacts) recently know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
 
-1. Letting people you come in close proximity to know about your health condition and,
+This requires a lot of "leg work." Those who test are positive should be contacted by local public health to tell them this, and to ask about recent contacts. Typically this is all done by phone. It is slow, arduous work, but time is of the essence, as a contact (if they then become sick) will likely become infectious within days, spreading the disease.
 
-1. likewise you knowing the health condition of those same people. 
+Can technology help? Can we "self" contact trace? 
+
+What if you going out and about, and doing two things: 
+
+1. Let people you come in close proximity with about your health condition and,
+
+1. likewise yourself learn about the health condition of those same people. 
 
 If you are feeling sick, others your encounter might benefit from knowing this, so they can act accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
