@@ -175,7 +175,7 @@ After you configure the ESP32 for the first time, its BLE name will change to re
 
 Come back to `config.html` as needed to update your health information or query the device for contacts that may have occurred while you were out.
 
-# Participate in contact tracing
+# Participate in "self" contact tracing
 
 You are done. Now, do two things:
 
