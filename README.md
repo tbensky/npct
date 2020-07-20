@@ -63,13 +63,13 @@ Bluetooth (BT) does seems to be an ideal technology for contact tracing. In part
 
 One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
 
-* Come up with some encoding for a unique ID for each person + their health information.
+* Come up with a way of coding an anonymous ID and health information for each participant.
 
 * Come up with a way of broadcasting such information to those who come near you.  
 
-* Come up with a way of monitoring the health of those nearby.  
+* Come up with a way of recieving health information of those nearby.  
 
-* Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found. (Easy: Some computer-based BLE configuration App.)
+* Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found. 
 
 * Power it with a $10 portable "extra phone charge" battery.
 
@@ -83,6 +83,7 @@ As far as implementing these items:
 
 * Monitoring health of others nearby can be done by "discovering" the BLE names of other advertising devices, and simply grab and log the ID+health info. This way, devices don't have to pair to exchange info.
 
+* A configuration and log retrieval App can be a computer (i.e. non-server based) BLE configuration App.
 
 That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome browser.  It all works, and here's how. Want to build one and try it out?
 
