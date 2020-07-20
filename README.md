@@ -22,7 +22,9 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Contact Tracing
 
-Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this: Suppose someone gets infected with the disease. They're "the case," and should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
+Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this.
+
+ Suppose someone gets infected with the disease. They're "the case," and should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
 
 But this requires a lot of "leg work." In the contact tracing system, typically carried out by public health, those who test positive will be contacted (by public health) to tell them of their test result, can ask them to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
 
