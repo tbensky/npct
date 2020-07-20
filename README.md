@@ -223,7 +223,7 @@ Contact tracing is more about making an informed decision about what to do next,
 
 	* Gently quarantine yourself: wear a mask, even at home, and distance within your home (if possible).
 
-	* Have your doctor or testing station on speed-dial.  Get tested if any symptoms appear.
+	* Have your doctor or testing station on speed-dial.  Make the call if any symptoms appear.
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
