@@ -48,7 +48,7 @@ Using some technology to quietly inform those around us about our condition *mig
 
 Mobile phones might be ideal for this. "Everyone already has one," and they can broadcast short Bluetooth messages about your health to those (phones) nearby for easy and automated tracking by all later on. 
 
- However, by Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
+However, by Summer 2020, phone-based contact tracers were getting kind of [becoming a mess](https://www.forbes.com/sites/zakdoffman/2020/06/19/how-apple-and-google-created-this-contact-tracing-disaster/#3ce3f7797ca2). Many  of contact-tracing Apps were appearing, some by companies and individuals; others developed by governmental agencies for countrywide depolyment. Whose App do I use? Am I really doing anything? How do I register? Are they all compatible with each other? And most importantly: Who will have access to my (health) information? 
 
 The (open-source) Apps revealed all kinds of tricks to keep the Apps running and tracing [in the background on a phone](https://github.com/NHSX). Google and Apple also [stepped in](https://www.apple.com/newsroom/2020/04/apple-and-google-partner-on-covid-19-contact-tracing-technology/) to unify the development process, but it's not clear their efforts helped.  The Apps decreased battery life of the phones, but more importantly, trust in Apps and what companies do with your data was becoming a larger and larger question.  (The latest round is "clipboard spying" in stories such as [this one](https://www.computing.co.uk/news/4017082/tiktok-spying-clipboard-researchers-warn-iphone-users) and [this one](https://www.forbes.com/sites/daveywinder/2020/07/04/apple-ios-14-catches-microsofts-linkedin-spying-on-clipboard-tiktok-apps-privacy-iphone-ipad-macbook/#ecac5085896e) certainly didn't help.) It's also not clear you need an *instantaenous notification* if you encounter someone who is sick.
 
@@ -81,11 +81,11 @@ That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome 
 
 Yes, and this is likely a show stopper.  But an ESP32 is only $8 and people are making all kinds of things to adapt and get through the pandemic. Maybe it'll be fun to make and operate your own contact tracer? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token." Singapore apparently [developed one](https://www.bbc.com/news/technology-53146360) too.
 
-# How to build an ESP32 "self" or "crowd sourced" contact tracer
+# How to build an ESP32 "self" contact tracer
 
 ## Items needed
 
-To build this contact tracer, you'll need three items: an [ESP32](https://www.ebay.com/itm/ESP32-ESP-32S-NodeMCU-Development-Board-2-4GHz-WiFi-Bluetooth-Dual-Mode-CP2102/382601606021?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649), a [micro-USB cable](https://www.amazon.com/gp/product/B07PFZDQP6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&psc=1) (most of the time these come with the battery), and a [battery power pack](https://www.amazon.com/gp/product/B00MWU1GGI/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1). (The ones used here are pointed to by the links.)
+To build this contact tracer, you'll need three items: an [ESP32](https://www.ebay.com/itm/ESP32-ESP-32S-NodeMCU-Development-Board-2-4GHz-WiFi-Bluetooth-Dual-Mode-CP2102/382601606021?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649), a [battery power pack](https://www.amazon.com/gp/product/B00MWU1GGI/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1), and a [micro-USB cable](https://www.amazon.com/gp/product/B07PFZDQP6/ref=ppx_yo_dt_b_asin_image_o00_s00?ie=UTF8&psc=1) (most of the time these come with the battery). (The items I used are pointed to by the links.)
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/all3.jpg></p>
 
