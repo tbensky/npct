@@ -63,17 +63,26 @@ Bluetooth (BT) does seems to be an ideal technology for contact tracing. In part
 
 One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. Here was my plan:
 
-* Come up with some encoding for a unique ID for yourself + your health information (Easy: an MD5 hash + some additional codes to describe your health).
+* Come up with some encoding for a unique ID for each person + their health information.
 
-* Come up with a way of broadcasting such information to those who come near you.  (Easy again: put this encoding into the *BLE name* of the ESP32, and tell it to constantly advertise itself.)  By putting it into the BT name, other devices can just "discover" each other and grab health info, so devices don't have to pair to exchange info.
+* Come up with a way of broadcasting such information to those who come near you.  
 
-* Come up with a way of monitoring the health of those nearby.  (Easy: As mentioned, tell the ESP32 to constantly discover advertising BLE devices, and log ones that have a health-related BLE name.) 
+* Come up with a way of monitoring the health of those nearby.  
 
 * Make it easy for one to set/change their health status, and to retrieve a log of other's health info the device found. (Easy: Some computer-based BLE configuration App.)
 
 * Power it with a $10 portable "extra phone charge" battery.
 
 * And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS.
+
+As far as implementing these items: 
+
+* A unique ID and health information can be an MD5 hash with some additional codes to describe one's health. 
+
+* Broadcasting your ID and informatiom to those around you, can be done by putting the ID+health codes into the *BLE name* of the ESP32, and then tell it to advertise itself.
+
+* Monitoring health of others nearby can be done by "discovering" the BLE names of other advertising devices, and simply grab and log the ID+health info. This way, devices don't have to pair to exchange info.
+
 
 That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome browser.  It all works, and here's how. Want to build one and try it out?
 
