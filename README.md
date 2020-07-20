@@ -198,10 +198,6 @@ When you get home, check the for blue LED. It'll be on if any health-related con
 
 It'll pull and list all contacts you encountered.
 
-## Make another contact tracer
-
-Next, make a contact tracer for someone you know, and tell them to make one for someone they know. 
-
 
 ## The tracer tells me I was around someone who was sick
 
@@ -236,19 +232,24 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
  
 Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
+## Next: Make another contact tracer for someone else
+
+Next, make a contact tracer for someone you know, and tell them to make one for someone they know. 
+
+
 
 
 # Technical notes
 
 On the bullet point plans above:
 
-	* A unique ID and health information can is a randomly generated MD5 hash with some additional digits tacked on to describe one's health. 
+	1. A unique ID and health information can is a randomly generated MD5 hash with some additional digits tacked on to describe one's health. 
 
-	* Broadcasting one's ID and health information to those nearby, is done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
+	1. Broadcasting one's ID and health information to those nearby, is done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
 
-	* Monitoring health of others nearby can be done by discovering BLE names of other advertising devices. There are a lot of BLE devices out there, but we reject those not in our ID+health code format.  If recognized, we simply grab and log the names (ID+health code) on the recieving device. (This way, devices don't have to pair to exchange info.)
+	1. Monitoring health of others nearby can be done by discovering BLE names of other advertising devices. There are a lot of BLE devices out there, but we reject those not in our ID+health code format.  If recognized, we simply grab and log the names (ID+health code) on the recieving device. (This way, devices don't have to pair to exchange info.)
 
-	* A configuration and log retrieval App is a local Chrome (i.e. non-server based) `.html` page that uses Chrome's Web-Bluetooth implementation oto exchange BLE information with the ESP32.
+	1. A configuration and log retrieval App is a local Chrome (i.e. non-server based) `.html` page that uses Chrome's Web-Bluetooth implementation oto exchange BLE information with the ESP32.
 
 * The ESP32 in full BLE mode seems to draw 112mA. I measured it using this rockin' USB cable I cut into and modified so current can be routed into a meter. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
 
