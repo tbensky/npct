@@ -209,7 +209,7 @@ What if some of your contacts report that they were sick (and perhaps not wearin
 
 Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (We're also not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
 
-Contact tracing is more about making an informed decision about what to do next, given you were near someone who is claiming to be sick and maybe contagious. You'll have to think some now.
+Contact tracing is more about making an informed decision about what to do next, given you were near someone who is claiming to be sick and maybe contagious. You'll have to do some thinking now.
 
 * You know what you were doing when the encounter came in. Were you shoulder-to-shoulder at a street party?  Or moving quickly through a large warehouse store shopping?
 
