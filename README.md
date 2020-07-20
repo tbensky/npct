@@ -207,7 +207,7 @@ It'll pull and list all contacts you encountered. Nothing is saved or sent to an
 
 What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question. 
 
-Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (W are not epidemiologists either, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
+Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (We are not epidemiologists either, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
 
 Contact tracing is more about making an informed decision about what to do next, given you were near someone who is claiming to be sick and maybe contagious. You'll have to think some now.
 
