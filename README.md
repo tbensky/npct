@@ -18,7 +18,7 @@ I developed this project starting in late June of 2020, because of the U.S. (red
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
-I wanted to focus some quarantine stress/energy and do something (anything) to help. I took [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing), and I mixed it all with my solid knowledge of microcontrollers, the C language, and being be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...likely this project won't help at all, but here it is anyway.)
+I wanted to focus some quarantine stress/energy and do something (anything) to help. I took [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing), and mixed it all with my solid knowledge of microcontrollers, the C language, and being be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...likely this project won't help at all, but here it is anyway. Contact me (email on Github home) if you'd like to talk about it.)
 
 ## Contact Tracing
 
