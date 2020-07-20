@@ -22,11 +22,11 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Contact Tracing
 
-Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this: Someone who gets sick (the case) should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
+Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this: Suppose someone gets infected with the disease. They're "the case," and should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
 
-But this requires a lot of "leg work." Those who test positive should be contacted by local public health to tell them this, so public health can ask them to isolate and inquire about their recent contacts. Public health will then contact the contacts, discuss them going into quarantine, etc. and on it goes.  
+But this requires a lot of "leg work." In the contact tracing system, typically carried out by public health, those who test positive will be contacted (by public health) to tell them of their test result, can ask them to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
 
-Typically this is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
+Typically contact tracing is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease to those *they* contact. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
 
 ### Can technology help? Can we "self" contact trace? 
 
@@ -40,7 +40,7 @@ If you are feeling sick, others your encounter might benefit from knowing this, 
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
 
-But likely using some technology to quietly inform those around us about our condition *would* work.
+But likely using some technology to quietly inform those around us about our condition *might* work.
 
 ### Mobile Phones for Contact Tracing?
 
@@ -79,7 +79,7 @@ That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome 
 
 Yes, and this is likely a show stopper.  But an ESP32 is only $8 and people are making all kinds of things to adapt and get through the pandemic. Maybe it'll be fun to make and operate your own contact tracer? Also, there is some precedence for a (non-phone) [hardware device for contact tracing](https://simmel.betrusted.io). It's called a "contact tracing hardware token." Singapore apparently [developed one](https://www.bbc.com/news/technology-53146360) too.
 
-# How to build an ESP32 contact tracer
+# How to build an ESP32 "self" or "crowd sourced" contact tracer
 
 ## Items needed
 
