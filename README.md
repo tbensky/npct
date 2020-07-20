@@ -28,7 +28,7 @@ But this requires a lot of "leg work." Those who test positive should be contact
 
 Typically this is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely become infectious within days, spreading the disease. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-0days, contacts should quarantine for 2-weeks.
 
-## Can technology help? Can we "self" contact trace? 
+### Can technology help? Can we "self" contact trace? 
 
 What if you go out and about, and do two things: 
 
