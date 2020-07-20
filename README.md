@@ -26,7 +26,7 @@ Contact tracing is a mechanism for stopping the spread of an infectious disease.
 
  Suppose someone gets infected with the disease. They're "the case," and should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop spread of an infectious disease.
 
-But this requires a lot of "leg work." In the contact tracing system, typically carried out by public health, those who test positive will be contacted (by public health) to tell them of their test result, can ask them to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
+But this requires a lot of legwork. In the contact tracing system, typically carried out by public health, those who test positive will be contacted (by public health) to tell them of their test result, can ask them to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
 
 Typically contact tracing is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease to those *they* contact. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
 
