@@ -42,7 +42,7 @@ If you are feeling sick, others your encounter might benefit from knowing this, 
 
 Would this be a way for us all to participate in self-driven contact tracing?
 
-So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
+To start, how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
 
 Using some technology to quietly inform those around us about our condition *might* work.
 
