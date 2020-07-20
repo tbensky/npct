@@ -214,7 +214,7 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
 
 * Preventing droplets expunged from your lungs as you exhale, cough, sneeze, or cough from infecting others can stop the spread.
 
-* *Take some steps* to stop the spread.
+* *Take some steps* to stop the spread.  Call your doctor? Get tested? Lie low until you know more?
  
 Be sure to re-visit `config.html` to reconfigure your contact tracing device, as your health situation changes. 
 
