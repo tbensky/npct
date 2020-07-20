@@ -40,6 +40,8 @@ What if you go out and about, and do two things:
 
 If you are feeling sick, others your encounter might benefit from knowing this, so they can act accordingly if they get sick a few days later.  Likewise, if you are around people who are sick, you might take appropriate actions if you start to feel sick.
 
+Would this be a way for us all to "self" contact trace?
+
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
 
 Using some technology to quietly inform those around us about our condition *might* work.
