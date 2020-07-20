@@ -79,7 +79,7 @@ As far as implementing these items:
 
 * A unique ID and health information can be a hash code with some additional codes to describe one's health. 
 
-* Broadcasting one's ID and information to those nearby, can be done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
+* Broadcasting one's ID and health information to those nearby, can be done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
 
 * Monitoring health of others nearby can be done by "discovering" the BLE names of other advertising devices, and simply grabbing and logging the names (ID+health code) on the recieving device. (This way, devices don't have to pair to exchange info.)
 
