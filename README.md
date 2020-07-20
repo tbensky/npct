@@ -14,7 +14,7 @@ The goal of this work is to develop an open-source, hardware-based, anonymous co
 
 ## Why this project?
 
-I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
+I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)), and after taking [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing):
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
