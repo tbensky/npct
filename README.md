@@ -42,7 +42,7 @@ If you are feeling sick, others your encounter might benefit from knowing this, 
 
 So how do we do (1) and (2)?  Do we walk into a grocery store and yell out "I'm not feeling well...if you get sick in a couple of days, it might be because of me!" No. And [this](https://youtu.be/kSSibWkQcTA?t=130) won't do it either. 
 
-But likely using some technology to quietly inform those around us about our condition *might* work.
+Using some technology to quietly inform those around us about our condition *might* work.
 
 ### Mobile Phones for Contact Tracing?
 
