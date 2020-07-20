@@ -200,7 +200,7 @@ When you get home, check the for blue LED. It'll be on if any health-related con
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png width=400></p>
 
-It'll pull and list all contacts you encountered.
+It'll pull and list all contacts you encountered. Nothing is saved or sent to any server. Be sure to cut and paste the enounters into a document on your computer (in Word perhaps?) if you want to save them.
 
 
 ## The tracer tells me I was around someone who was sick
