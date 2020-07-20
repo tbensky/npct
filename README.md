@@ -75,17 +75,7 @@ One board that came to mind in particular was the [ESP32](https://www.espressif.
 
 * And, most importantly: No server, no storage, no App, no account to make, no Internet, no GPS.
 
-As far as implementing these items: 
-
-* A unique ID and health information can be a hash code with some additional codes to describe one's health. 
-
-* Broadcasting one's ID and health information to those nearby, can be done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
-
-* Monitoring health of others nearby can be done by "discovering" the BLE names of other advertising devices, and simply grabbing and logging the names (ID+health code) on the recieving device. (This way, devices don't have to pair to exchange info.)
-
-* A configuration and log retrieval App can be a computer (i.e. non-server based) BLE configuration App.
-
-That's it. I put it all together using an ESP32 and Web-Bluetooth in the Chrome browser.  It all works, and here's how. Want to build one and try it out?
+That's it. I put all of this together using an ESP32 and Web-Bluetooth in the Chrome browser.  It all works, and here's how. Want to build one and try it out?
 
 ### So participants will need an ESP32 (and to carry one around)?
 
@@ -249,6 +239,16 @@ Be sure to re-visit `config.html` to reconfigure your contact tracing device, as
 
 
 # Technical notes
+
+On the bullet point plans above:
+
+	* A unique ID and health information can is a randomly generated MD5 hash with some additional digits tacked on to describe one's health. 
+
+	* Broadcasting one's ID and health information to those nearby, is done by putting the ID+health codes into the *BLE name* of the ESP32, and then telling it to advertise itself.
+
+	* Monitoring health of others nearby can be done by discovering BLE names of other advertising devices. There are a lot of BLE devices out there, but we reject those not in our ID+health code format.  If recognized, we simply grab and log the names (ID+health code) on the recieving device. (This way, devices don't have to pair to exchange info.)
+
+	* A configuration and log retrieval App is a local Chrome (i.e. non-server based) `.html` page that uses Chrome's Web-Bluetooth implementation oto exchange BLE information with the ESP32.
 
 * The ESP32 in full BLE mode seems to draw 112mA. I measured it using this rockin' USB cable I cut into and modified so current can be routed into a meter. With a 5000mA battery, the ESP32 should run for 44 hours (a couple of days) on a single charge.
 
