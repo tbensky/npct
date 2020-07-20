@@ -248,7 +248,7 @@ Contact tracing is more about making an informed decision about what to do next,
 
 ## Next: Make another contact tracer for someone else
 
-Next, make a contact tracer for someone you know, and tell them to make one for someone they know. 
+Next, make this contact tracer project for someone you know, and tell them to make one for someone they know. :smiley:
 
 
 
