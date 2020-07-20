@@ -179,22 +179,34 @@ Come back to `config.html` as needed to update your health information or query 
 
 # Participate in "self" contact tracing
 
-You are done. Now, do two things:
+You are done. Now, here's what you do:
 
-1.  Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
+## Update your health information
+
+Regularly update your health information on the contact tracer device.
+
+## Take the contact tracer device with you
+
+Power the ESP32 using a battery and take it with you when you go out! The battery should power it for 40+ hours. Be sure not to disconnect it while you're out and about, as any 
 logged contact information will be lost.  You can disconnect it and/or charge the battery after you get home and download any contacts.
 
-1. When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
+## Download any encounters
+
+When you get home, check the for blue LED. It'll be on if any health-related contacts were logged. (The red LED is always on.) To read out your contact log, go back to the Chrome-App `(config.html)` to read any contact information that came in while you were out.  Click on the blue "read device log" button:
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/readlog.png width=400></p>
 
 It'll pull and list all contacts you encountered.
 
+## Make another contact tracer
+
 Next, make a contact tracer for someone you know, and tell them to make one for someone they know. 
+
+
+## The tracer tells me I was around someone who was sick
 
 What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question.
 
-## The tracer tells me I was around someone who was sick
 
 Here's what we know, and we can apply some logic to guide us (disclaimer: we are not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)):
 
