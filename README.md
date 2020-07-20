@@ -198,9 +198,13 @@ Here's what we know, and we can apply some logic to guide us (disclaimer: we are
 
 * See [here](https://www.cdc.gov/coronavirus/2019-ncov/php/principles-contact-tracing.html) under "Time is of the essence."
 
-* What we know is that this: Around July 2020, the virus is spreading. If you were around someone who is sick (typically for 15 min or more), it may have spreaded to you.
+* What we know this: Around July 2020, the virus is spreading. If you were around someone who is sick (typically for 15 min or more), it may have spreaded to you.
 
-* Do we trust this contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
+* 50% of people show symptoms of Covid-19 within 5 days of being infected.
+
+* You will however, yourself be contagious 2-days before you show symptoms.
+
+* Do we trust this "self" contact tracing system? We don't know. We hope someone isn't going through the trouble of configuring it and carrying it around, only to lie about their condition.
 
 * If you go to [rt.live](https://rt.live), and check the value of r0 (r-naught) for your state. Suppose it's 1.15. This means every infected person is infecting 1.15 other people.
 
