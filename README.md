@@ -60,8 +60,7 @@ Phones and Apps are for fun and communication, but we will likely not trust them
 
 The maker movement continues to impress. They got a quick start in early 2020 backfilling PPE shortages with a mask and face shield producing efforts, like these: [masks](https://www.makethemasks.com) and [face shields](https://www.prusaprinters.org/prints/25857-prusa-face-shield). **Is a 'maker' themed contract tracer possible?**
 
-Bluetooth (BT) does seem to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocol that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wonder about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
-
+Bluetooth (BT) does seem to be an ideal technology for contact tracing. In particular, Bluetooth Low Energy (BLE). Both are a short-range protocols that can broadcast messages to receiving devices nearby. BLE is meant for *short* messages, like "I'm sick."  But I didn't want to to use a phone for this, so what then?  I could not help but wonder about the Arduino world and all of the small and low-priced boards out there. Even the good-old Arduino Uno is relatively portable and will run off of a 9V battery for half a day or so.  Plus, there are plenty of Arduino+BT options.  
 
 One board that came to mind in particular was the [ESP32](https://www.espressif.com).  It costs $8....$8! This is cheaper than any Arduino, with or without BT, and it's a fully BT-enabled board about 2"x1" in size. Makers use it for all kinds of things, and $8 is pretty "no-risk."  (It is about what materials cost for masks people are making.)  There had to be some way of using an $8 device for a contact tracer. So I bought 3 on ebay and got to work. 
 
@@ -207,7 +206,7 @@ It'll pull and list all contacts you encountered. Nothing is saved or sent to an
 
 Good question. 
 
-Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (We're also not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
+Any answer in the context of contact tracing will be careful to avoid any *medical advice*. Contact tracers are not doctors and we're certainly not either.  (We're also not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
 
 Contact tracing is more about making an informed decision about what to do next, given you were near someone who is claiming to be sick and maybe contagious. You'll have to do some thinking now.
 
