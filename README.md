@@ -1,9 +1,9 @@
 ### tl;dr
 
-* Participating in contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something each of us can do to help us get out of the Covid-pandemic. 
+* Participating in contact tracing[(1)](https://www.cdc.gov/coronavirus/2019-ncov/php/open-america/contact-tracing/index.html)[(2)](https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19) is something each of us can do to help slow the spread the Covid-pandemic. 
 * This work shows an inexpensive (`~$20 USD`) hardware-based contact tracer.
 * This contact tracer *does not use a mobile phone at all*.
-* If you build this and carry this around, you can participate in self-driven contact tracing and maybe help to stop the spread of Covid.
+* If you build this and carry this around, you can participate in self-driven contact tracing.
 * It uses an ESP32 and Bluetooth Low Energy to 1) broadcast your health information and 2) log the same from those around you.
 
 # The *No Phone* Contact Tracer (NPCT) Project
@@ -14,7 +14,7 @@ The goal of this work is to develop an open-source, hardware-based, anonymous an
 
 ## Why this project?
 
-I developed this project starting in late June of 2020, because of the U.S. (red) line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
+I developed this project starting in late June of 2020, because of the red line in this graph (source: [Johns Hopkins](https://coronavirus.jhu.edu/data/new-cases)):
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
@@ -22,7 +22,7 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Contact Tracing
 
-Contact tracing is a mechanism for stopping the spread of an infectious disease.  It works like this.
+Contact tracing is a mechanism for slowing the spread of an infectious disease.  It works like this.
 
 Suppose someone gets infected with the disease. They're called "the case." The case should let everyone they've been in recent contact with (the contacts) know that they're sick.  The case should isolate and the contacts should quarantine. This can help stop the spread of an infectious disease.
 
@@ -309,7 +309,7 @@ Next, make this contact tracer project for someone you know, and tell them to ma
 
 	* For storing each contact, 22 hex-digits are needed (for simplicity, the 22 hex-digits are literally stored in the ESP32 memory): 16 for the ID + 4 for the health code + 2 for the occurrence count.
 
-	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 110,000 bytes on the stock ESP32 partition, and 110,000/20 = 5,000 possible name stored. 
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 110,000 bytes on the stock ESP32 partition, and 110,000/20 = 5,000 possible names stored. 
 
 	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.  Counts max out at 255 (8-bits, or two hex digits).
 
