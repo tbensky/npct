@@ -203,9 +203,9 @@ When you get home, check the for blue LED. It'll be on if any health-related con
 It'll pull and list all contacts you encountered. Nothing is saved or sent to any server. Be sure to cut and paste the enounters into a document on your computer (in Word perhaps?) if you want to save them.
 
 
-## Now what? The tracer tells me I was around someone who was sick
+## Now what? The tracer tells me I was around someone with Covid-related symptoms?
 
-What if some of your contacts report that they were sick (and perhaps not wearing a mask)? Good question. 
+Good question. 
 
 Any answer in the context of contact tracing will be careful to avoid any *medical advice*, as will we here. Contact tracers are not doctors and we're certainly not either.  (We're also not epidemiologists, but did complete [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing)).  
 
