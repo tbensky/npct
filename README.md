@@ -219,7 +219,7 @@ Contact tracing is more about making an informed decision about what to do next,
 
 * The log gives you information about people you were around and one is claiming to have symptoms. *Take some steps* to stop the spread:
 
-	* Change your plans and lie low for a couple of days. See if symptoms appear.
+	* Change your plans and lie low for a couple of days. See if symptoms appear. Remember, we're in a pandemic. You don't need an excuse to hide out.
 
 	* Gently quarantine yourself: wear a mask, even at home, and distance within your home (if possible).
 
