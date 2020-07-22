@@ -155,7 +155,11 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1.  Now click the "Flash" button.  
 
-1. When the "Connecting........_____....." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  (Boot button: hold the ESP32 so both buttons and the USB connector point "up," and the face of the board points toward you. The boot button is to the left of the USB connector.)
+1. When the "Connecting........_____....." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  The "boot button" is this one:
+
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/esp32_buttons.jpg width=640></p>
+
+
 
 That's it. The ESP32 is ready to use as a contact tracer, and these steps do not need to be done again.
 
