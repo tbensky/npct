@@ -157,7 +157,7 @@ The contact tracing software needs to be flashed onto the ESP32 device. This onl
 
 1. When the "Connecting........_____....." message starts up, press and hold the "Boot" button on the ESP32 until you see "Writing .... (10%)..." such messages.  The "boot button" is this one:
 
-<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/esp32_buttons.jpg width="640"></p>
+<p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/esp32_buttons.jpg width="320"></p>
 
 
 
