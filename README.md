@@ -338,5 +338,5 @@ Next, make this contact tracer project for someone you know, and tell them to ma
 
 * Advertising BLE power can be lowered, presumably to make subsequent discovery more local.
 
-	* See [https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/include/esp_bt.h#L205](constants here), and [esp_ble_tx_power_set](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/controller_vhci.html#_CPPv420esp_ble_tx_power_set20esp_ble_power_type_t17esp_power_level_t).
+	* See [constants here](https://github.com/espressif/esp-idf/blob/cf056a7/components/bt/include/esp_bt.h#L205), and [esp_ble_tx_power_set](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/controller_vhci.html#_CPPv420esp_ble_tx_power_set20esp_ble_power_type_t17esp_power_level_t).
 
