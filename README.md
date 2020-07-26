@@ -11,7 +11,7 @@
 ## <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
 
 ## Project Goals
-The goal of this work is to develop an open-source, hardware-based, anonymous and "self-driven" contract tracing system that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
+The goal of this work is to develop an open-source, anonymous, crowd-driven contract tracing hardware token that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/3dcase.jpg></p>
 
