@@ -1,0 +1,468 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>No Phone Contact Tracer (NPCT)</title>
+
+  <script>
+    {% include "./md5.js" %}
+  </script>
+
+  <style>
+    {% include "./bootstrap-3.4.1.min.css" %}
+  </style>
+
+  <script>
+    {% include "./jquery-3.5.1.js" %}
+  </script>
+
+  <script>
+    {% include "./bootstrap-3.4.1.min.js" %}
+  </script>
+
+
+  <style>
+    textarea
+    {
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: scroll;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<div class="container">
+  <div class="row">
+
+
+    <h3>NPCT Configuration App</h3>
+     
+
+      Welcome to the No Phone Contact Tracer (NPCT) Project
+      <ul>
+        <li> This tracer is completely anonymous and doesn't involve your phone at all.
+        <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
+        <li> Please connect your hardware tracer to your computer via a USB cable.
+        <li> This page runs only on the computer you are using. It does not contact an external webserver.
+      </ul>
+
+       <div id="content"></div>
+
+       <h3>Update your device with any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+      
+      <div class="form-group">
+          <hr/>
+          <div class="row">
+            <div class="col-xs-4">
+              <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine
+            </div>
+
+            <div class="col-xs-4">
+              <input  class="form-check-input" type="checkbox" value="2"> Sore throat
+              <br/>    
+                      
+              <input  class="form-check-input" type="checkbox" value="4"> Cough
+              <br/>  
+           
+              <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
+              <br/>
+            
+              <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
+              <br/>
+          
+              <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
+              <br/>
+           
+              <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
+              <br/>
+            
+              <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
+              <br/>
+
+              <input  class="form-check-input" type="checkbox" value="256"> Fever
+              <br/>
+
+              <input  class="form-check-input" type="checkbox" value="512"> Headache
+            </div>
+
+           <div class="col-xs-4">
+            <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
+            <br/>
+
+            <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
+            <br/>
+            <br/>
+
+            <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
+            <br/>
+
+            <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
+            <br/>
+            <br/>
+
+            <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
+            <br/>
+         
+            <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
+          </div>
+
+          <div class="col-xs-12" align="center">
+            <br/><br/>
+             <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
+        </div>
+      </div>
+    </div>
+
+ 
+      <hr/>
+      <h3>Participate in Contact Tracing</h3>
+      <button onclick="bt_read()" class="btn btn-success btn-xs">Download Device Log</button>
+      <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
+      <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
+      <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
+      <br/>
+      <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
+      <br/>
+      <br/>
+      <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
+      <small>If you wish to keep these, copy and paste these encounters into a document on your own computer. Nothing is stored or saved for you here.</small>
+      <br/>
+      <hr/>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+<div id="share" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share your contact tracing data</h4>
+      </div>
+      <div class="modal-body">
+        An added power of contact tracing is in sharing your encounters.
+        <br/>
+        <br/>
+        If you don't mind sharing your encounters (it's all anonymous), can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>? (If the box is empty, click the "Read Device Log" button on the main screen first.)
+        <br/>
+        <br/>
+        <textarea id="device_dump_uncoded" class="form-control" rows=10 readonly wrap="soft"></textarea>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="id_info" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Messaging ID</h4>
+      </div>
+      <div class="modal-body">
+        If you wish to send a message to those you encounter, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+        <br/>
+        <br/>
+        Here is the Messaging ID you'll need:
+        <br/>
+        <input type=text class="form-control" id="messaging_id" readonly>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="health_share" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share an update to my health</h4>
+      </div>
+      <div class="modal-body">
+        If you wish to share an update to your health, with those you've encountered, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+        <br/>
+        <br/>
+        Be sure you update your health tick marks doing so.
+        <br/>
+        <br/>
+        <label for="health_update_id"> Here is the Health-update code you'll need:</label>
+        <input type=text class="form-control" id="health_update_id" readonly>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+  var mouseX = 0, mouseY = 0;
+  const PACKET_SIZE = 22;
+  const hash_salt = "b063f85e5dbc0310dfc860e012965552";
+
+$( ".container" ).mousemove(function( event ) {
+  mouseX += event.pageX;
+  mouseY += event.pageY;
+});
+
+localStorage.clear();
+var private_id = localStorage.getItem('private_id'); 
+var public_id = localStorage.getItem('public_id');
+
+if (public_id == null || private_id == null)
+{
+  //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
+  private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
+  public_id = md5(hash_salt + private_id).substring(0,16);
+  localStorage.setItem('public_id',public_id);
+  localStorage.setItem('private_id',private_id);
+  $('#content').html(`
+    <h3>Initial configuration</h3>
+   Looks like you're setting up the contact tracing hardware for the first time.
+   <br/>
+   These are your anonymous IDs that are used to broadcast your health information to those you encounter:
+   <br/>
+   <br/>
+   <textarea rows=3  class="form-control" readonly>
+   Your public contact tracing ID will be: ` + public_id + `
+   Your private verification code will be: ` + private_id + `
+   </textarea>
+   <br/>
+   Please copy these into a safe place (like a Word document on your computer for safekeeping). It is important that you
+   always use these IDs throughout your participation in contact tracing. For you to remain unique in this effort, please 
+   never change this ID, or request a new one.
+   <br/>
+   <br/>
+                    `);
+
+}
+
+$('#messaging_id').val(public_id+private_id);
+
+
+function decode_health(num)
+{
+  var codes = {
+      1: "Feeling fine",
+      2: "Sore throat", 
+      4: "Cough", 
+      8: "Runny nose or nasal congestion", 
+      16: "Shortness of breath or difficulty breathing", 
+      32: "Muscle pain" ,
+      64: "Loss of smell or taste",
+      128: "Diarrhea",
+      256: "Fever",
+      512: "Headache",
+      1024: "Tested negative for Covid-19",
+      2048: "Tested positive for Covid-19",
+      4096: "Wearing a mask",
+      8192: "Not wearing a mask",
+      16384: "Symptoms are getting better",
+      32768: "Symptoms are getting worse",
+    };
+  var ret = "";
+
+  Object.keys(codes).forEach(function(key) 
+                              {
+                                if (num & key)
+                                  ret = ret + codes[key] + ", ";
+                              });
+  return(ret);
+}
+
+function update_health_id()
+{
+  var health;
+  var health_hex;
+
+  health = get_health_code();
+  health_hex = health.toString(16).padStart(4,"0");
+  $("#health_update_id").val(public_id + private_id + health_hex);
+  $('#health_share').modal('show')
+}
+
+function decode(str)
+{
+  var id, health, count;
+  var health_str;
+
+  if (str.length != 22)
+    return(str);
+
+  id = str.substring(0,16);
+  health = parseInt(str.substring(16,20),16);
+  health_str = decode_health(health);
+  count = parseInt(str.substring(20,22),16);
+
+  return("Person: " + id + " was encountered " + count.toString() + " times. Health condition: " + health_str);
+}
+
+function get_health_code()
+{
+  var health = 0;
+  
+  $('input[type=checkbox]').each(function () {
+     if (this.checked) {
+        health += parseInt($(this).val()); 
+     }
+  });
+
+  return(health);
+
+}
+
+async function bt_read()
+{
+    var device;
+    var read_int;
+    var i;
+    var device_log;
+    try
+    {
+      device = await navigator.bluetooth.requestDevice(
+        {
+          filters: [
+            {namePrefix: '#C19:'},
+            {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+          ],
+        });
+
+        var server = await device.gatt.connect();
+        var service = await server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+        var characteristic = await service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+
+        device_log = "";
+        line = 0;
+        $('#device_dump').val("Reading...");
+        $('#device_dump_uncoded').val("");
+        read_encounters();
+
+        async function read_encounters()
+            {
+              try
+              {       
+                var value = await characteristic.readValue();
+                var data = new TextDecoder("utf-8").decode(value);
+                var i, dump, uncoded;
+                var pre;
+
+                if (data.substring(0,3) == 'end')
+                {
+                  clearInterval(read_int);
+                  device.gatt.disconnect();
+
+                  uncoded = "";
+                  dump = "";
+                  for(i=0;i<device_log.length;i += PACKET_SIZE)
+                  {
+                    dump = dump + decode(device_log.substring(i,i + PACKET_SIZE)) + "\n";
+                    uncoded = uncoded + device_log.substring(i,i + PACKET_SIZE) + "\n";
+                    line++;
+                  }
+
+                  pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
+                  $('#device_dump').val(pre + dump);  
+                  $('#device_dump_uncoded').val(public_id + private_id + "\n");
+                  $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);          
+                }
+                else
+                {
+                  device_log = device_log + data;
+                  $('#device_dump').val($('#device_dump').val() + ".");  
+                  read_int = setTimeout(read_encounters,100);
+                }
+              }
+              catch(error)
+              {
+                console.log(error);
+                clearInterval(read_int);
+                device.gatt.disconnect();
+              }
+            }
+       }
+       catch(error)
+        {
+          console.log(error);
+        }
+
+
+  }
+
+
+
+function bt_update()
+{
+    var bt_device;
+    var health = 0, health_hex;
+    var update_id;
+    var i;
+    var a = []
+
+    $('input[type=checkbox]').each(function () {
+           if (this.checked) {
+              health += parseInt($(this).val()); 
+           }
+      });
+
+
+    health_hex = health.toString(16).padStart(4,"0");
+    update_id = public_id + health_hex;
+    console.log(health_hex,health,update_id)
+    navigator.bluetooth.requestDevice({
+      filters: [
+        //{namePrefix: '#C19:'}
+         {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
+      ],
+      })
+        .then(device => 
+                    { 
+                      bt_device = device;
+                      return device.gatt.connect();
+                    })
+        .then(server => {
+          return server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
+        })
+        .then(service => {
+          return service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
+        })
+        .then(characteristic => {
+          for (var i = 0; i < update_id.length; i ++)
+            a.push(update_id.charCodeAt(i));
+          return characteristic.writeValue(new Uint8Array(a));
+        })
+        .then(_ => 
+        {
+          alert("Device updated. Please remove, then restore power to complete update.")
+          bt_device.gatt.disconnect();
+        })
+        .catch(error => 
+          { 
+            console.log(error); 
+          });
+
+}
+</script>
+
+</body>
+</html>
