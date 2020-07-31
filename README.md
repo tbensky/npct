@@ -172,7 +172,7 @@ Now configure the contact tracer itself. (This has only been tested on macOS Cat
 
 1. Get the latest version of Google Chrome (83+). 
 
-1. Keeping all files in the [configapp](https://github.com/tbensky/npct/tree/master/configapp) folder together, in Chrome do a "File->Open..." on `config.html`.
+1. Get the file called `config.html` from [here](https://github.com/tbensky/npct/blob/master/configapp/config.html). Open it in Chrome with a "File->Open...".
 
 1. The first time you run it, click the green "Generate ID" button to get your unique contact tracing ID.
 
