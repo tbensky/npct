@@ -182,6 +182,8 @@ Now configure the contact tracer itself. (This has only been tested on macOS Cat
 
 1. Sometimes you might have trouble getting Chrome to "see" ESP32. Initally the BLE name of it will `ContactTracer`.  If you do have trouble, type `chrome://bluetooth-internals/#devices` into the URL location field, and try to scan for and "inspect" the ESP32 manually. When you do so, go back to `config.html` and it should work. 
 
+1. On Windows: Use Windows 10 for this to work. Make sure to enable "Experimental Web Features" in “chrome://flags”. 
+
 
 After you configure the ESP32 for the first time, its BLE name will change to reflect your unique ID and health info for other contact tracers to pick up on. It's name will be something like `#C19:abcdefghijklmnop17`.
 

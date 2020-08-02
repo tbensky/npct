@@ -534,16 +534,18 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
  
       <hr/>
       <h3>Participate in Contact Tracing</h3>
-      <button onclick="bt_read()" class="btn btn-success btn-xs">Download Device Log</button>
+      <button onclick="read_token()" class="btn btn-success btn-xs">Download Device Log</button>
+      <!---
       <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
       <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
       <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
+      --->
+      <a id="device_log_download" class="btn btn-primary btn-xs" download="Download.csv" type="text/csv">Save device log</a>
       <br/>
       <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
       <br/>
       <br/>
       <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
-      <small>If you wish to keep these, copy and paste these encounters into a document on your own computer. Nothing is stored or saved for you here.</small>
       <br/>
       <hr/>
   </div>
@@ -632,45 +634,53 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
   var mouseX = 0, mouseY = 0;
   const PACKET_SIZE = 22;
   const hash_salt = "b063f85e5dbc0310dfc860e012965552";
+  var d = new Date();
+  var dstr = d.getFullYear() + "-" + d.getMonth().toString().padStart(2,'0') + "-" + d.getDate().toString().padStart(2,'0') + "_encounters.csv";
 
-$( ".container" ).mousemove(function( event ) {
-  mouseX += event.pageX;
-  mouseY += event.pageY;
+  $( document ).ready(function() 
+  {
+  
+    $('#device_log_download').attr("download",dstr);
+    $( ".container" ).mousemove(function( event ) {
+      mouseX += event.pageX;
+      mouseY += event.pageY;
+    });
+
+    localStorage.clear();
+    var private_id = localStorage.getItem('private_id'); 
+    var public_id = localStorage.getItem('public_id');
+
+    if (public_id == null || private_id == null)
+    {
+      //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
+      private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
+      public_id = md5(hash_salt + private_id).substring(0,16);
+      localStorage.setItem('public_id',public_id);
+      localStorage.setItem('private_id',private_id);
+      $('#content').html(`
+        <h3>Initial configuration</h3>
+       Looks like you're setting up the contact tracing hardware for the first time.
+       <br/>
+       These are your anonymous IDs that are used to broadcast your health information to those you encounter:
+       <br/>
+       <br/>
+       <textarea rows=3  class="form-control" readonly>
+       Your public contact tracing ID will be: ` + public_id + `
+       Your private verification code will be: ` + private_id + `
+       </textarea>
+       <br/>
+       Please copy these into a safe place (like a Word document on your computer for safekeeping). It is important that you
+       always use these IDs throughout your participation in contact tracing. For you to remain unique in this effort, please 
+       never change this ID, or request a new one.
+       <br/>
+       <br/>
+                        `);
+
+    }
+
+    $('#messaging_id').val(public_id+private_id);
+
 });
-
-localStorage.clear();
-var private_id = localStorage.getItem('private_id'); 
-var public_id = localStorage.getItem('public_id');
-
-if (public_id == null || private_id == null)
-{
-  //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
-  private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
-  public_id = md5(hash_salt + private_id).substring(0,16);
-  localStorage.setItem('public_id',public_id);
-  localStorage.setItem('private_id',private_id);
-  $('#content').html(`
-    <h3>Initial configuration</h3>
-   Looks like you're setting up the contact tracing hardware for the first time.
-   <br/>
-   These are your anonymous IDs that are used to broadcast your health information to those you encounter:
-   <br/>
-   <br/>
-   <textarea rows=3  class="form-control" readonly>
-   Your public contact tracing ID will be: ` + public_id + `
-   Your private verification code will be: ` + private_id + `
-   </textarea>
-   <br/>
-   Please copy these into a safe place (like a Word document on your computer for safekeeping). It is important that you
-   always use these IDs throughout your participation in contact tracing. For you to remain unique in this effort, please 
-   never change this ID, or request a new one.
-   <br/>
-   <br/>
-                    `);
-
-}
-
-$('#messaging_id').val(public_id+private_id);
 
 
 function decode_health(num)
@@ -741,7 +751,12 @@ function get_health_code()
   });
 
   return(health);
+}
 
+function read_token()
+{
+  bt_read();
+  save_device_log();
 }
 
 async function bt_read()
@@ -873,6 +888,15 @@ function bt_update()
             console.log(error); 
           });
 
+}
+
+
+function save_device_log()
+{
+  var log = $('#device_dump').val();
+  var data = new Blob([log]);
+  var a = document.getElementById("device_log_download");
+  a.href = URL.createObjectURL(data);
 }
 </script>
 
