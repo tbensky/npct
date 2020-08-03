@@ -8,7 +8,11 @@
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
-## <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
+## Project Resources
+
+* <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
+
+* <a href="https://github.com/tbensky/npct/blob/master/Manuscript/npct.pdf">Project manuscript</a>
 
 ## Project Goals
 The goal of this work is to develop an open-source, anonymous, self-driven contract tracing hardware token that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
