@@ -52,88 +52,94 @@
 
        <div id="content"></div>
 
-       <h3>Update your device with any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+
+       <div id="update_area" style="display: none">
+            <h3>Update your device with any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
       
-      <div class="form-group">
-          <hr/>
-          <div class="row">
-            <div class="col-xs-4">
-              <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine
+            <div class="form-group">
+                <hr/>
+                <div class="row">
+                  <div class="col-xs-4">
+                    <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine
+                  </div>
+
+                  <div class="col-xs-4">
+                    <input  class="form-check-input" type="checkbox" value="2"> Sore throat
+                    <br/>    
+                            
+                    <input  class="form-check-input" type="checkbox" value="4"> Cough
+                    <br/>  
+                 
+                    <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
+                    <br/>
+                  
+                    <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
+                    <br/>
+                
+                    <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
+                    <br/>
+                 
+                    <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
+                    <br/>
+                  
+                    <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
+                    <br/>
+
+                    <input  class="form-check-input" type="checkbox" value="256"> Fever
+                    <br/>
+
+                    <input  class="form-check-input" type="checkbox" value="512"> Headache
+                  </div>
+
+                 <div class="col-xs-4">
+                  <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
+                  <br/>
+
+                  <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
+                  <br/>
+                  <br/>
+
+                  <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
+                  <br/>
+
+                  <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
+                  <br/>
+                  <br/>
+
+                  <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
+                  <br/>
+               
+                  <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
+                </div>
+
+                <div class="col-xs-12" align="center">
+                  <br/><br/>
+                   <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
+              </div>
             </div>
-
-            <div class="col-xs-4">
-              <input  class="form-check-input" type="checkbox" value="2"> Sore throat
-              <br/>    
-                      
-              <input  class="form-check-input" type="checkbox" value="4"> Cough
-              <br/>  
-           
-              <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
-              <br/>
-            
-              <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
-              <br/>
-          
-              <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
-              <br/>
-           
-              <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
-              <br/>
-            
-              <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
-              <br/>
-
-              <input  class="form-check-input" type="checkbox" value="256"> Fever
-              <br/>
-
-              <input  class="form-check-input" type="checkbox" value="512"> Headache
-            </div>
-
-           <div class="col-xs-4">
-            <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
-            <br/>
-
-            <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
-            <br/>
-            <br/>
-
-            <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
-            <br/>
-
-            <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
-            <br/>
-            <br/>
-
-            <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
-            <br/>
-         
-            <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
           </div>
-
-          <div class="col-xs-12" align="center">
-            <br/><br/>
-             <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
-        </div>
-      </div>
-    </div>
+   
 
  
-      <hr/>
-      <h3>Participate in Contact Tracing</h3>
-      <button onclick="read_token()" class="btn btn-success btn-xs">Download Device Log</button>
-      <!---
-      <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
-      <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
-      <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
-      --->
-      <a id="device_log_download" class="btn btn-primary btn-xs" download="Download.csv" type="text/csv">Save device log</a>
-      <br/>
-      <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
-      <br/>
-      <br/>
-      <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
-      <br/>
-      <hr/>
+                <hr/>
+                <h3>Participate in Contact Tracing</h3>
+                <button onclick="read_token()" class="btn btn-success btn-xs">Download Device Log</button>
+                <!---
+                <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
+                <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
+                <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
+                --->
+                <a id="device_log_download" class="btn btn-primary btn-xs" download="Download.csv" type="text/csv">Save device log</a>
+                <br/>
+                <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
+                <br/>
+                <br/>
+                <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
+                <br/>
+                <hr/>
+      </div>
+
+
   </div>
 </div>
 
@@ -222,6 +228,7 @@
   const hash_salt = "b063f85e5dbc0310dfc860e012965552";
   var d = new Date();
   var dstr = d.getFullYear() + "-" + d.getMonth().toString().padStart(2,'0') + "-" + d.getDate().toString().padStart(2,'0') + "_encounters.csv";
+  var public_id, private_id;
 
   $( document ).ready(function() 
   {
@@ -232,39 +239,56 @@
       mouseY += event.pageY;
     });
 
+    $('#id_area').css("visibility","hidden");
+
     //localStorage.clear();
-    var private_id = localStorage.getItem('private_id'); 
-    var public_id = localStorage.getItem('public_id');
+    private_id = localStorage.getItem('private_id'); 
+    public_id = localStorage.getItem('public_id');
 
     if (public_id == null || private_id == null)
     {
-      //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
-      private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
-      public_id = md5(hash_salt + private_id).substring(0,16);
-      localStorage.setItem('public_id',public_id);
-      localStorage.setItem('private_id',private_id);
       $('#content').html(`
-        <h3>Initial configuration</h3>
-       Looks like you're setting up the contact tracing hardware for the first time.
-       <br/>
-       These are your anonymous IDs that are used to broadcast your health information to those you encounter:
-       <br/>
-       <br/>
-       <textarea rows=1 class="form-control" readonly>
-       Your public contact tracing ID will be: ` + public_id + `</textarea>
-       <br/>
-       Please copy this into a safe place (like a Word document on your computer for safekeeping). It is important that you
-       always use this ID throughout your participation in contact tracing. For you to remain unique in this effort, please 
-       never change this ID, or request a new one.
-       <br/>
-       <br/>
-                        `);
-
+        <div id="config_front">
+          <h3>Initial configuration</h3>
+          Looks like you're setting up the contact tracing hardware for the first time. Click this button to get your anonymous ID:
+          <br/>
+          <br/>
+          <center><button onclick="create_ids()" class="btn btn-success btn-lg">Create ID</button></center>
+          <br/>
+          <div id="id_area" style="display: none">
+            Here is your anonymous ID that is used to broadcast your health information to those you encounter:
+            <br/>
+            <br/>
+            <textarea rows=1 class="form-control" readonly id="public_id_field"></textarea>
+            <br/>
+            Please copy this into a safe place (like a Word document on your computer for safekeeping). It is important that you
+            always use this ID throughout your participation in contact tracing. For you to remain unique in this effort, please 
+            never change this ID, or request a new one.
+            <br/>
+            <br/>
+          </div>
+        </div>`);
+    }
+    else
+    {
+       $('#update_area').css("display","inline");
     }
 
-    $('#messaging_id').val(public_id+private_id);
-
 });
+
+function create_ids()
+{
+  //https://stackoverflow.com/questions/8532406/create-a-random-token-in-javascript-based-on-user-details
+  private_id = md5(navigator.userAgent + new Date().getTime() + mouseX.toString() + mouseY.toString() + window.outerHeight.toString() + window.outerWidth.toString());
+  public_id = md5(hash_salt + private_id).substring(0,16);
+  localStorage.setItem('public_id',public_id);
+  localStorage.setItem('private_id',private_id);
+  
+  $('#public_id_field').val("Your public contact tracing ID will be: "+public_id);
+  $('#id_area').css("display","inline");
+  $('#update_area').css("display","inline");
+  $('#config_front').css("display","none");
+}
 
 
 function decode_health(num)
