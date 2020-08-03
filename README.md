@@ -8,14 +8,6 @@
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
-## Project Resources
-
-* <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
-
-* <a href="https://github.com/tbensky/npct/blob/master/Manuscript/npct.pdf">Project manuscript</a>
-
-* <a href="https://hackaday.com/2020/07/28/esp32-turned-open-source-covid-19-contact-tracer/">Hackaday writeup</a>
-
 ## Project Goals
 The goal of this work is to develop an open-source, anonymous, self-driven contract tracing hardware token that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
@@ -28,6 +20,14 @@ I developed this project starting in late June of 2020, because of the red line 
 <p align="center"><img src=https://github.com/tbensky/npct/blob/master/pics/new_cases01.png width=500></p>
 
 I wanted to focus some quarantine stress/energy and do something (anything) to help. I took [this course](https://www.coursera.org/learn/covid-19-contact-tracing?edocomorp=covid-19-contact-tracing), and mixed it all with my knowledge of microcontrollers, the C language, and being be able to figure out APIs. So I developed this open-source, hardware contract tracer token project. (I know...I know...likely this project won't help at all, but here it is anyway. Contact me (see email [here](https://github.com/tbensky)) if you'd like to talk about it.)
+
+## Project Resources
+
+* <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
+
+* <a href="https://github.com/tbensky/npct/blob/master/Manuscript/npct.pdf">Project manuscript</a>
+
+* <a href="https://hackaday.com/2020/07/28/esp32-turned-open-source-covid-19-contact-tracer/">Hackaday writeup</a>
 
 ## Contact Tracing
 
