@@ -41,15 +41,13 @@
   <div class="row">
 
 
-    <h3>NPCT Configuration App</h3>
+    <h3>The No-phone/no app contact tracer - Configuration App</h3>
      
-
-      Welcome to the No Phone Contact Tracer (NPCT) Project
       <ul>
-        <li> This tracer is completely anonymous and doesn't involve your phone at all.
+        <li> This contact tracer is completely anonymous and doesn't involve your phone at all.
         <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
-        <li> Please connect your hardware tracer to your computer via a USB cable.
-        <li> This page runs only on the computer you are using. It does not contact an external webserver.
+        <li> Please power on your hardware tracer.
+        <li> This app runs only on the computer you are using. It does not contact an external server.
       </ul>
 
        <div id="content"></div>
@@ -252,10 +250,8 @@
        These are your anonymous IDs that are used to broadcast your health information to those you encounter:
        <br/>
        <br/>
-       <textarea rows=3  class="form-control" readonly>
-       Your public contact tracing ID will be: ` + public_id + `
-       Your private verification code will be: ` + private_id + `
-       </textarea>
+       <textarea rows=1 class="form-control" readonly>
+       Your public contact tracing ID will be: ` + public_id + `</textarea>
        <br/>
        Please copy these into a safe place (like a Word document on your computer for safekeeping). It is important that you
        always use these IDs throughout your participation in contact tracing. For you to remain unique in this effort, please 
@@ -344,7 +340,7 @@ function get_health_code()
 function read_token()
 {
   bt_read();
-  save_device_log();
+  //save_device_log();
 }
 
 async function bt_read()
@@ -398,8 +394,9 @@ async function bt_read()
 
                   pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
                   $('#device_dump').val(pre + dump);  
-                  $('#device_dump_uncoded').val(public_id + private_id + "\n");
-                  $('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);          
+                  save_device_log();
+                  //$('#device_dump_uncoded').val(public_id + private_id + "\n");
+                  //$('#device_dump_uncoded').val($('#device_dump_uncoded').val() + uncoded);          
                 }
                 else
                 {
@@ -483,6 +480,7 @@ function save_device_log()
 {
   var log = $('#device_dump').val();
   var data = new Blob([log]);
+  console.log("log="+log);
   var a = document.getElementById("device_log_download");
   a.href = URL.createObjectURL(data);
 }
