@@ -14,6 +14,8 @@
 
 * <a href="https://github.com/tbensky/npct/blob/master/Manuscript/npct.pdf">Project manuscript</a>
 
+* <a href="https://hackaday.com/2020/07/28/esp32-turned-open-source-covid-19-contact-tracer/">Hackaday writeup</a>
+
 ## Project Goals
 The goal of this work is to develop an open-source, anonymous, self-driven contract tracing hardware token that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
