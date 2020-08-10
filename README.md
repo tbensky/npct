@@ -8,6 +8,8 @@
 
 # The *No Phone* Contact Tracer (NPCT) Project
 
+## Aug 2020: [Paper on arXive](https://arxiv.org/abs/2008.02851).
+
 ## Project Goals
 The goal of this work is to develop an open-source, anonymous, self-driven contract tracing hardware token that *doesn't use a mobile phone at all.*  Say hello to the "NPCT" (**n**o **p**hone **c**ontact **t**racer) Project:
 
