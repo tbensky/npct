@@ -27,7 +27,7 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Project Resources
 
-* <a href=https://arxiv.org/abs/2008.02851>arXiv article</a>a>
+* <a href=https://arxiv.org/abs/2008.02851>arXiv article</a>
 
 * <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
 
