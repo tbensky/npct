@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>No Phone Contact Tracer (NPCT)</title>
+  <title>Covid Behavior Project</title>
 
   <script>
     {% include "./md5.js" %}
@@ -41,104 +41,117 @@
   <div class="row">
 
 
-    <h3>The No-phone/no app contact tracer - Configuration App</h3>
+    <h2>The Covid Behavior Project - Configuration App</h2>
+    <hr/>
+    <h3>Going out in Covid times?</h3>
+    <h4>Can you let others you may encounter know what you've been doing recently?</h4>
      
       <ul>
-        <li> This contact tracer is completely anonymous and doesn't involve your phone at all.
-        <li> If you wish, please turn off your Wifi now, or unplug your computer's Internet cable. 
-        <li> Please power on your hardware tracer.
-        <li> This app runs only on the computer you are using. It does not contact an external server.
+        <li> This is anonymous, so please be honest with your answers.
+        <li> You are never asked for your name, email address, phone number, or any health-related information.
+        <li> Your phone is not needed at all. No Apps are used.
+        <li> This is private. Information only flows between your Covid-behavior device and this computer.
+        <li> The Internet is not used at all (turn off WiFi/unplug cable now if you wish). 
       </ul>
+
+      <hr/>
 
        <div id="content"></div>
 
 
-       <div id="update_area" style="display: none">
-            <h3>Update your device with any symptoms you have<small> (<a href="https://www.who.int/publications/i/item/contact-tracing-in-the-context-of-covid-19">Ref.</a>)</small></h3>
+       <div id="update_area" style="display: none"></div>
+           
       
             <div class="form-group">
-                <hr/>
-                <div class="row">
-                  <div class="col-xs-4">
-                    <input  class="form-check-input" type="checkbox" value="1" checked> I am feeling fine
+              
+                  <h3>Update your device</h3>
+                  <h4>Check all that apply about your past 2-3 days</h4>
+                  
+
+                  <div class="row">
+
+                    <div class="col-sm-6">
+                      <h4>Going out</h4>
+                      <div>
+                        <input  class="form-check-input" type="checkbox" checked onClick="update_code(0)" value="0"> I have not been out
+                        <br/>
+                        <input  class="form-check-input" type="checkbox" onClick="update_code(1)" value="1"> I have been out
+                      </div>
+
+                      <h4>Mask wearing</h4>
+                      <div>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(2)" value="2"> I was wearing a mask
+                        <br/>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(3)" value="3"> I was not wearing a mask
+                      </div>
+                    
+
+                      <h4>How about others you were around?</h4>
+                      <div>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(4)" value="4"> They were wearing masks
+                        <br/>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(5)" value="5"> They were not wearing masks
+                        <br/>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(6)" value="6"> They are in my Covid-safe "bubble"
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <h4>Social Distancing</h4>
+                      <div>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(7)" value="7"> I did social distance (did not spend more that 15 minutes within 6 feet of anyone)
+                        <br/>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(8)" value="8"> I did not social distance (spent 15 minutes within 6 feet of others)
+                      </div>
+
+                      <h4>Were you inside or outside?</h4>
+                      <div>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(9)" value="9"> Inside
+                        <br/>
+                        <input class="form-check-input" type="checkbox" onClick="update_code(10)" value="10"> Outside
+                      </div> 
+                    </div>
+                  
                   </div>
 
-                  <div class="col-xs-4">
-                    <input  class="form-check-input" type="checkbox" value="2"> Sore throat
-                    <br/>    
-                            
-                    <input  class="form-check-input" type="checkbox" value="4"> Cough
-                    <br/>  
-                 
-                    <input  class="form-check-input" type="checkbox" value="8"> Runny nose or nasal congestion
-                    <br/>
-                  
-                    <input  class="form-check-input" type="checkbox" value="16"> Shortness of breath or difficulty breathing
-                    <br/>
+
+                  <br/>
                 
-                    <input  class="form-check-input" type="checkbox" value="32"> Muscle pain
-                    <br/>
-                 
-                    <input  class="form-check-input" type="checkbox" value="64"> Loss of smell or taste
-                    <br/>
+                  <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
+                  <!--- <button class="btn btn-success" onclick="get_health_code()">Compile health code</button--->
                   
-                    <input  class="form-check-input" type="checkbox" value="128"> Diarrhea
-                    <br/>
-
-                    <input  class="form-check-input" type="checkbox" value="256"> Fever
-                    <br/>
-
-                    <input  class="form-check-input" type="checkbox" value="512"> Headache
-                  </div>
-
-                 <div class="col-xs-4">
-                  <input  class="form-check-input" type="checkbox" value="1024"> I tested negative for Covid-19
-                  <br/>
-
-                  <input  class="form-check-input" type="checkbox" value="2048"> I tested positive for Covid-19
-                  <br/>
-                  <br/>
-
-                  <input  class="form-check-input" type="checkbox" value="4096"> I will not be wearing a mask
-                  <br/>
-
-                  <input  class="form-check-input" type="checkbox" value="8192"> I'll be wearing a mask
-                  <br/>
-                  <br/>
-
-                  <input  class="form-check-input" type="checkbox" value="16384"> My symptoms are getting better
-                  <br/>
-               
-                  <input  class="form-check-input" type="checkbox" value="32768"> My symptoms are getting worse
-                </div>
-
-                <div class="col-xs-12" align="center">
-                  <br/><br/>
-                   <button class="btn btn-success" onclick="bt_update()">Update hardware</button>
-              </div>
             </div>
           </div>
    
 
  
-                <hr/>
-                <h3>Participate in Contact Tracing</h3>
-                <button onclick="read_token()" class="btn btn-success btn-xs">Download Device Log</button>
-                <!---
-                <button class="btn btn-primary btn-xs" onclick="$('#share').modal('show')">Share my encounters</button>
-                <button class="btn btn-primary btn-xs" onclick="$('#id_info').modal('show')">Get my messaging ID</button>
-                <button class="btn btn-primary btn-xs" onclick="update_health_id()">Share my health update</button>
-                --->
-                <a id="device_log_download" class="btn btn-primary btn-xs" download="Download.csv" type="text/csv">Save device log</a>
-                <br/>
-                <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</b> and manually scan for and "Inspect" the device. Then try here again.</small>
-                <br/>
-                <br/>
-                <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
-                <br/>
-                <hr/>
-      </div>
+          <hr/>
 
+          <div id="row">
+            <div id="col">
+              <h3>Retrieve your device log</h3>
+              <button onclick="read_token()" class="btn btn-success btn-xs">Download Device Log</button>
+              <a id="device_log_download" class="btn btn-primary btn-xs" download="Download.csv" type="text/csv">Save device log</a>
+              <br/>
+              <small>Trouble connecting to device?  Go to this URL: <b>chrome://bluetooth-internals/#devices</band manually scan for and "Inspect" the device. Then try here again.</small>
+              <br/>
+              <br/>
+              <textarea id="device_dump"  class="form-control" rows=5 readonly wrap="soft"></textarea>
+              <br/>
+              <hr/>
+
+              <!--
+              <h3>Optional: Share encounters or message those you've encountered</h3>
+              <h4>This is optional. Ignore it if you wish.</h4>
+              <br/>
+              <button class="btn btn-info" data-toggle="modal" data-target="#share">Share encounters</button>
+              <button class="btn btn-info" data-toggle="modal" data-target="#id_info">Message those I've encountered</button>
+              <br/>
+              <br/>
+              -->
+              <hr/>
+            </div>
+          </div>
 
   </div>
 </div>
@@ -152,19 +165,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Share your contact tracing data</h4>
+        <h4 class="modal-title">Share your encounters</h4>
       </div>
       <div class="modal-body">
-        An added power of contact tracing is in sharing your encounters.
+        An added power of who you encountered is in sharing them with others using the device.  If you don't mind sharing your encounters (it's all anonymous), please click "Share" below.
         <br/>
         <br/>
-        If you don't mind sharing your encounters (it's all anonymous), can you please paste the data below into the text-box you'll find at <a href="http://npctshare.org" target="_blank">npctshare.org</a>? (If the box is empty, click the "Read Device Log" button on the main screen first.)
+        This will add your encounters to a growning database at covid222.org.
         <br/>
-        <br/>
-        <textarea id="device_dump_uncoded" class="form-control" rows=10 readonly wrap="soft"></textarea>
-        </p>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success">Share</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -179,44 +190,19 @@
         <h4 class="modal-title">Messaging ID</h4>
       </div>
       <div class="modal-body">
-        If you wish to send a message to those you encounter, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
+       Send a message to those you've encountered.
         <br/>
         <br/>
-        Here is the Messaging ID you'll need:
+        Type your message and click 'Send.'
         <br/>
-        <input type=text class="form-control" id="messaging_id" readonly>
+        <textarea class="form-control" id="message" rows="5"></textarea>
         </p>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="send_message()">Send</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
-
-<div id="health_share" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Share an update to my health</h4>
-      </div>
-      <div class="modal-body">
-        If you wish to share an update to your health, with those you've encountered, you can do so at <a href="http://npctshare.org" target="_blank">npctshare.org</a>.
-        <br/>
-        <br/>
-        Be sure you update your health tick marks doing so.
-        <br/>
-        <br/>
-        <label for="health_update_id"> Here is the Health-update code you'll need:</label>
-        <input type=text class="form-control" id="health_update_id" readonly>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -229,6 +215,7 @@
   var d = new Date();
   var dstr = d.getFullYear() + "-" + d.getMonth().toString().padStart(2,'0') + "-" + d.getDate().toString().padStart(2,'0') + "_encounters.csv";
   var public_id, private_id;
+
 
   $( document ).ready(function() 
   {
@@ -250,7 +237,7 @@
       $('#content').html(`
         <div id="config_front">
           <h3>Initial configuration</h3>
-          Looks like you're setting up the contact tracing hardware for the first time. Click this button to get your anonymous ID:
+          Looks like you're setting up the Covid behavior hardware for the first time. Click this button to get your anonymous ID:
           <br/>
           <br/>
           <center><button onclick="create_ids()" class="btn btn-success btn-lg">Create ID</button></center>
@@ -293,24 +280,19 @@ function create_ids()
 
 function decode_health(num)
 {
-  var codes = {
-      1: "Feeling fine",
-      2: "Sore throat", 
-      4: "Cough", 
-      8: "Runny nose or nasal congestion", 
-      16: "Shortness of breath or difficulty breathing", 
-      32: "Muscle pain" ,
-      64: "Loss of smell or taste",
-      128: "Diarrhea",
-      256: "Fever",
-      512: "Headache",
-      1024: "Tested negative for Covid-19",
-      2048: "Tested positive for Covid-19",
-      4096: "Wearing a mask",
-      8192: "Not wearing a mask",
-      16384: "Symptoms are getting better",
-      32768: "Symptoms are getting worse",
-    };
+   var codes = {
+                                1<<0: "Have not been out",
+                                1<<1: "Have been out",
+                                1<<2: "Wearing a mask", 
+                                1<<3: "Not wearing a mask", 
+                                1<<4: "Around others wearing masks", 
+                                1<<5: "Around others not wearing masks", 
+                                1<<6: "Around others in my Covid-bubble", 
+                                1<<7: "Social distance", 
+                                1<<8: "Did not social distance",
+                                1<<9: "Was inside", 
+                                1<<10: "Was outside", 
+                              };
   var ret = "";
 
   Object.keys(codes).forEach(function(key) 
@@ -353,10 +335,13 @@ function get_health_code()
   var health = 0;
   
   $('input[type=checkbox]').each(function () {
-     if (this.checked) {
-        health += parseInt($(this).val()); 
+     if (this.checked) 
+     {
+        health += Math.pow(2,parseInt($(this).val())); 
      }
   });
+
+  console.log("health code="+health);
 
   return(health);
 }
@@ -471,28 +456,28 @@ function bt_update()
          {services: ['0000feed-0000-1000-8000-00805f9b34fb']},
       ],
       })
-        .then(device => 
+        .then(device =
                     { 
                       bt_device = device;
                       return device.gatt.connect();
                     })
-        .then(server => {
+        .then(server ={
           return server.getPrimaryService('0000feed-0000-1000-8000-00805f9b34fb');
         })
-        .then(service => {
+        .then(service ={
           return service.getCharacteristic('0000c0de-0000-1000-8000-00805f9b34fb');
         })
-        .then(characteristic => {
+        .then(characteristic ={
           for (var i = 0; i < update_id.length; i ++)
             a.push(update_id.charCodeAt(i));
           return characteristic.writeValue(new Uint8Array(a));
         })
-        .then(_ => 
+        .then(_ =
         {
           alert("Device updated. Please remove, then restore power to complete update.")
           bt_device.gatt.disconnect();
         })
-        .catch(error => 
+        .catch(error =
           { 
             console.log(error); 
           });
@@ -508,6 +493,35 @@ function save_device_log()
   var a = document.getElementById("device_log_download");
   a.href = URL.createObjectURL(data);
 }
+
+function update_code(n)
+{
+
+}
+
+function send_message()
+{
+  var msg = $('#message').val();
+  var url = 'http://localhost/~tom/npctshare/index.php/welcome/send_message';
+
+  $.ajax({
+            type: 'POST',
+            url: url,
+            data: {private_id: private_id, public_id: public_id,message: msg},
+            success: function(e) 
+                      { 
+                        alert("Message sent!");
+                        $('#id_info').modal('hide');
+                      
+                      },
+               fail: function(e) 
+                      { 
+                      
+                      },
+        }); // ajax
+}
+
+
 </script>
 
 </body>
