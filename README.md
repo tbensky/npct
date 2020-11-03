@@ -27,6 +27,8 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Project Resources
 
+* <a href=https://www.instructables.com/covid222/>Instructable</a>
+
 * <a href=https://arxiv.org/abs/2008.02851>arXiv article</a>
 
 * <a href="https://github.com/tbensky/npct/blob/master/AssemblyInstructions/instructions.pdf">Short assembly instructions</a>
@@ -44,6 +46,7 @@ Suppose someone gets infected with the disease. They're called "the case." The c
 But this requires a lot of legwork. In the contact tracing protocol, typically carried out by public health, those who test positive (each now a "case") will be contacted (by public health) to tell them of/confirm their test result. They will be asked to isolate. Additionally, public health will inquire about the case's recent contacts. Public health will then contact the contacts, discuss with them about going into quarantine, etc. and on it goes.  (Then there's the hardships of isolating and quarantining.)
 
 Typically contact tracing is all done by phone. It is slow and arduous work, but time is of the essence, as a contact (if they then become sick) will likely themselves become infectious within days, spreading the disease to those *they* contact. Numbers for COVID-19: People are infectious 2-days before showing symptonms, 50% show symptoms within 5 days, infected people should isolate for 10-days, contacts should quarantine for 2-weeks.
+
 
 ### Can technology help? Can we do self-driven contact tracing? 
 
