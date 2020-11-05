@@ -281,17 +281,17 @@ function create_ids()
 function decode_health(num)
 {
    var codes = {
-                                1<<0: "Have not been out",
-                                1<<1: "Have been out",
+                                1<<0: "Has not been out",
+                                1<<1: "Has been out",
                                 1<<2: "Wearing a mask", 
                                 1<<3: "Not wearing a mask", 
                                 1<<4: "Around others wearing masks", 
                                 1<<5: "Around others not wearing masks", 
-                                1<<6: "Around others in my Covid-bubble", 
-                                1<<7: "Social distance", 
+                                1<<6: "Around others in a Covid-bubble", 
+                                1<<7: "Social distanced", 
                                 1<<8: "Did not social distance",
-                                1<<9: "Was inside", 
-                                1<<10: "Was outside", 
+                                1<<9: "Inside", 
+                                1<<10: "Outside", 
                               };
   var ret = "";
 
@@ -497,28 +497,6 @@ function save_device_log()
 function update_code(n)
 {
 
-}
-
-function send_message()
-{
-  var msg = $('#message').val();
-  var url = 'http://localhost/~tom/npctshare/index.php/welcome/send_message';
-
-  $.ajax({
-            type: 'POST',
-            url: url,
-            data: {private_id: private_id, public_id: public_id,message: msg},
-            success: function(e) 
-                      { 
-                        alert("Message sent!");
-                        $('#id_info').modal('hide');
-                      
-                      },
-               fail: function(e) 
-                      { 
-                      
-                      },
-        }); // ajax
 }
 
 
