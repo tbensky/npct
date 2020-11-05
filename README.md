@@ -27,6 +27,8 @@ I wanted to focus some quarantine stress/energy and do something (anything) to h
 
 ## Project Resources
 
+* <a href=http://www.covid222.org>Covid222.org</a>
+
 * <a href=https://www.instructables.com/covid222/>Instructable</a>
 
 * <a href=https://arxiv.org/abs/2008.02851>arXiv article</a>
