@@ -73,42 +73,42 @@
                     <div class="col-sm-6">
                       <h4>Going out</h4>
                       <div>
-                        <input  class="form-check-input" type="checkbox" checked onClick="update_code(0)" value="0"> I have not been out
+                        <input  class="form-check-input" type="checkbox" checked onClick="update_code(0)" value="1"> I have not been out
                         <br/>
-                        <input  class="form-check-input" type="checkbox" onClick="update_code(1)" value="1"> I have been out
+                        <input  class="form-check-input" type="checkbox" onClick="update_code(1)" value="2"> I have been out
                       </div>
 
                       <h4>Mask wearing</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(2)" value="2"> I was wearing a mask
+                        <input class="form-check-input" type="checkbox" onClick="update_code(2)" value="4"> I was wearing a mask
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(3)" value="3"> I was not wearing a mask
+                        <input class="form-check-input" type="checkbox" onClick="update_code(3)" value="8"> I was not wearing a mask
                       </div>
                     
 
                       <h4>How about others you were around?</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(4)" value="4"> They were wearing masks
+                        <input class="form-check-input" type="checkbox" onClick="update_code(4)" value="16"> They were wearing masks
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(5)" value="5"> They were not wearing masks
+                        <input class="form-check-input" type="checkbox" onClick="update_code(5)" value="32"> They were not wearing masks
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(6)" value="6"> They are in my Covid-safe "bubble"
+                        <input class="form-check-input" type="checkbox" onClick="update_code(6)" value="64"> They are in my Covid-safe "bubble"
                       </div>
                     </div>
 
                     <div class="col-sm-6">
                       <h4>Social Distancing</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(7)" value="7"> I did social distance (did not spend more that 15 minutes within 6 feet of anyone)
+                        <input class="form-check-input" type="checkbox" onClick="update_code(7)" value="128"> I did social distance (did not spend more that 15 minutes within 6 feet of anyone)
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(8)" value="8"> I did not social distance (spent 15 minutes within 6 feet of others)
+                        <input class="form-check-input" type="checkbox" onClick="update_code(8)" value="256"> I did not social distance (spent 15 minutes within 6 feet of others)
                       </div>
 
                       <h4>Were you inside or outside?</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(9)" value="9"> Inside
+                        <input class="form-check-input" type="checkbox" onClick="update_code(9)" value="512"> Inside
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(10)" value="10"> Outside
+                        <input class="form-check-input" type="checkbox" onClick="update_code(10)" value="1024"> Outside
                       </div> 
                     </div>
                   
@@ -322,7 +322,7 @@ function decode(str)
   if (str.length != 22)
     return(str);
 
-  id = str.substring(1,17);
+  id = str.substring(0,16);
   health = parseInt(str.substring(16,20),16);
   health_str = decode_health(health);
   count = parseInt(str.substring(20,22),16);
