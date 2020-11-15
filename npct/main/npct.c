@@ -304,7 +304,7 @@ void add_encounter(char *encounter)
     int i;
     char *ptr;
     char *tptr;
-    const char *tag = "#C19";
+    const char *tag = "#C19:";
     const int len0 = strlen(tag);
 
     if (strlen(encounter) != BLE_HEALTH_NAME_LEN)
@@ -313,8 +313,6 @@ void add_encounter(char *encounter)
         return;
     }
 
-    printf("first 3: %c %c %c %c\n",encounter[0],encounter[1],encounter[2],encounter[3]);
-    printf("strncmp=%d\n",strncmp(encounter,tag,len0));
     if (strncmp(encounter,tag,len0))
     {
         printf("Not a health token.\n");

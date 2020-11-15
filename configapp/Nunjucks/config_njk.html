@@ -401,7 +401,7 @@ async function bt_read()
                     line++;
                   }
 
-                  pre = Math.floor(device_log.length / PACKET_SIZE) + " contacts found.\n";
+                  pre = Math.floor(device_log.length / PACKET_SIZE) + " encounters found.\n";
                   $('#device_dump').val(pre + dump);  
                   save_device_log();
                   //$('#device_dump_uncoded').val(public_id + private_id + "\n");
