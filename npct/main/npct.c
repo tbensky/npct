@@ -313,7 +313,9 @@ void add_encounter(char *encounter)
         return;
     }
 
-    if (!strncmp(encounter,tag,len0))
+    printf("first 3: %c %c %c %c\n",encounter[0],encounter[1],encounter[2],encounter[3]);
+    printf("strncmp=%d\n",strncmp(encounter,tag,len0));
+    if (strncmp(encounter,tag,len0))
     {
         printf("Not a health token.\n");
         return;
