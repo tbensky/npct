@@ -322,12 +322,12 @@ function decode(str)
   if (str.length != 22)
     return(str);
 
-  id = str.substring(0,16);
+  id = str.substring(1,17);
   health = parseInt(str.substring(16,20),16);
   health_str = decode_health(health);
   count = parseInt(str.substring(20,22),16);
 
-  return(id + " encountered " + count.toString() + " times, " + health_str);
+  return(id + " encountered " + count.toString() + " times: " + health_str);
 }
 
 function get_health_code()
