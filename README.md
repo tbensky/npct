@@ -332,13 +332,15 @@ Next, make this contact tracer project for someone you know, and tell them to ma
 
 * Name logging algorithm
 
-	* For storing each contact, 22 hex-digits are needed (for simplicity, the 22 hex-digits are literally stored in the ESP32 memory): 16 for the ID + 4 for the health code + 2 for the occurrence count.
+	* For storing each contact, 24 hex-digits are needed (for simplicity, the 24 hex-digits are literally stored in the ESP32 memory): 16 for the ID + 4 for the health code + 2 for the occurrence count + 2 for the system seconds since the encounter (2 bytes=65535 seconds max.)
 
-	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 110,000 bytes on the stock ESP32 partition, and 110,000/20 = 5,000 possible names stored. 
+	* The logging algorithm is a circular buffer that starts kicking out the oldest name at when 5,000 are stored (seems like one can safely `malloc` 110,000 bytes on the stock ESP32 partition, and 110,000/24 = 4,500+ possible names stored. 
 
 	* It maintains a count for repeated incoming names, instead of storing another copy of the same name.  Counts max out at 255 (8-bits, or two hex digits).
 
-	* It won't allow the same name to be logged (or counted) successively.  *Some other* name must come in first.
+	* It won't allow the same encounter to be logged (or counted) successively.  *Some other* name must come in first.
+
+	* It only updates a counter on a repeated enounter if it happens outside of 10 min.
 
 
 * BLE name, server, characteristic.
