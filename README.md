@@ -340,7 +340,7 @@ Next, make this contact tracer project for someone you know, and tell them to ma
 
 	* It won't allow the same encounter to be logged (or counted) successively.  *Some other* name must come in first.
 
-	* It only updates a counter on a repeated enounter if it happens outside of 10 min.
+	* It only updates a counter on a repeated encounter if it happens outside of 10 min.
 
 
 * BLE name, server, characteristic.
