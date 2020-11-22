@@ -622,7 +622,7 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 <script>
 
   var mouseX = 0, mouseY = 0;
-  const PACKET_SIZE = 22;
+  const PACKET_SIZE = 24;
   const hash_salt = "b063f85e5dbc0310dfc860e012965552";
   var d = new Date();
   var dstr = d.getFullYear() + "-" + d.getMonth().toString().padStart(2,'0') + "-" + d.getDate().toString().padStart(2,'0') + "_encounters.csv";
@@ -689,6 +689,48 @@ function create_ids()
   $('#config_front').css("display","none");
 }
 
+function get_health_grade(num)
+{
+    if (num & 1 == num)
+      return("A+");
+
+    if (num & 2+4+16+128+1024 == num)
+      return("A");
+
+    if (num & 2+4+32+64+128+1024 == num)
+      return("A-");
+
+    if (num & 2+4+32+128+1024 == num)
+        return("B+");
+
+    if (num & 2+4+32+256+1024 == num)
+      return("B");
+
+    if (num & 2+4+32+256+512 == num)
+      return("B-");
+
+    if (num & 2+4+32+256+512 == num)
+      return("C+");
+
+    if (num & 2+8+128+1024 == num)
+      return("C-");
+
+    if (num & 2+8+32+256+1024 == num)
+      return("D+");
+
+    if (num & 2+8+32+256+512 == num)
+      return("D");
+
+    if (num & 2+8+32)
+      return("D-");
+
+    if (num & 2+8+32+256+512)
+      return("F");
+
+
+    return("");
+
+}
 
 function decode_health(num)
 {
@@ -705,6 +747,8 @@ function decode_health(num)
                                 512: "Inside", 
                                 1024: "Outside", 
                               };
+  
+
   var ret = "";
 
   Object.keys(codes).forEach(function(key) 
@@ -731,7 +775,7 @@ function decode(str)
   var id, health, count;
   var health_str;
 
-  if (str.length != 22)
+  if (str.length != PACKET_SIZE)
     return(str);
 
   id = str.substring(0,16);
@@ -739,7 +783,7 @@ function decode(str)
   health_str = decode_health(health);
   count = parseInt(str.substring(20,22),16);
 
-  return(id + " encountered " + count.toString() + " times: " + health_str);
+  return(id + "[" + get_health_grade(health) + "] encountered " + count.toString() + " times: " + health_str);
 }
 
 function get_health_code()

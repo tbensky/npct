@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -163,15 +164,17 @@ static prepare_type_env_t a_prepare_write_env;
 
 ///////////// for discovery
 
-#define ID_SIZE 16              //1/2 of an md5
-#define HID_SIZE 20             // +4 for 4 digit hex health code
-#define PACKET_SIZE 22          //20(=id+health) + 2(=encounter count)
+#define ID_SIZE 16              // 1/2 of an md5
+#define HID_SIZE 20             // ID_SIZE +4 for 4 digit hex health code
+#define ENCOUNTER_COUNT 2       // 2 bytes encounter count
+#define PACKET_SIZE 24          // 20(=id at 16 + health at 4) + 2(=encounter count) + 2(=sec since encounter)
 #define BLE_HEALTH_NAME_LEN 25  // 5(#C19:) + 16 + 4 = 25
 #define MAX_MEMORY_ALLOWED 110000
 #define MAX_PACKETS_ALLOWED (MAX_MEMORY_ALLOWED / PACKET_SIZE)
 //#define MAX_BLE_WRITE_LEN ESP_GATT_MAX_ATTR_LEN
 #define MAX_BLE_WRITE_LEN 20
 
+#define IGNORE_TIME 600 // ignore any repeated encounters for 10 min
 
 //https://android.googlesource.com/platform/external/bluetooth/bluedroid/+/5738f83aeb59361a0a2eda2460113f6dc9194271/stack/btm/btm_ble_int.h#102
 //What maximum BLE name do we expect?
@@ -264,6 +267,11 @@ int seen_before(char *hid)
 {
     int i, count;
     char hex[3];
+    union
+    {
+        long t;
+        unsigned char bytes[4];
+    } tt;
     
     for(i=0;i<Encounter_count * PACKET_SIZE;i += PACKET_SIZE)
     {
@@ -283,8 +291,41 @@ int seen_before(char *hid)
 
             *(Encounters + i + HID_SIZE + 0) = hex[0];
             *(Encounters + i + HID_SIZE + 1) = hex[1];
+
+            printf("Encounter count updated to %d\n",count);
+
+            //update time seen too
+            time(&tt.t);
+            *(Encounters + i + HID_SIZE + ENCOUNTER_COUNT + 0) = tt.bytes[1];
+            *(Encounters + i + HID_SIZE + ENCOUNTER_COUNT + 1) = tt.bytes[0];
+            printf("Time updated to %d\n",tt.bytes[1] * 256 + tt.bytes[0]);
+
             return(1);
 
+        }
+    }
+    return(0);
+}
+
+int seen_before_within_dt(char *hid)
+{
+    int i;
+    unsigned char last_time_seen[2];
+    short t;
+    long cur;
+    
+    for(i=0;i<Encounter_count * PACKET_SIZE;i += PACKET_SIZE)
+    {
+        if (strncmp(Encounters + i,hid,HID_SIZE) == 0)
+        {
+            last_time_seen[1] = *(Encounters + i + HID_SIZE + ENCOUNTER_COUNT + 0);
+            last_time_seen[0] = *(Encounters + i + HID_SIZE + ENCOUNTER_COUNT + 1);
+            t = (last_time_seen[1] <<8) + last_time_seen[0];
+            time(&cur);
+            cur = cur & 0x00ff;
+            printf("Current time=%ld, Seen before at t=%d\n",cur,t);
+            if (cur - t < IGNORE_TIME)
+                return(1);
         }
     }
     return(0);
@@ -306,6 +347,16 @@ void add_encounter(char *encounter)
     char *tptr;
     const char *tag = "#C19:";
     const int len0 = strlen(tag);
+    union
+    {
+        long t;
+        unsigned char bytes[4];
+    } tt;
+    short t;
+
+    time(&tt.t);
+    t = (tt.bytes[1] << 8) + tt.bytes[0];
+    printf("long=%ld, short=%d\n",tt.t,t);
 
     if (strlen(encounter) != BLE_HEALTH_NAME_LEN)
     {
@@ -319,15 +370,23 @@ void add_encounter(char *encounter)
         return;
     }
 
+    if (seen_before_within_dt(encounter + len0))
+    {
+        printf("Seen before, within %d second time limit.\n",IGNORE_TIME);
+        return;
+    }
+
+    /*
     if (strncmp(encounter + len0,LastEncounter,ID_SIZE) == 0)
     {
         printf("Last encounter repeat. Ignored from log.\n");
         return;
     }
+    */
 
     if (seen_before(encounter + len0))
     {
-        printf("Seen before, but not last time. Updating counter.\n");
+        printf("Seen before, but not last time. Updated counter and encounter time.\n");
         make_last(encounter + len0);
         return;
     }
@@ -367,6 +426,10 @@ void add_encounter(char *encounter)
     }
     *ptr = '0';
     *(ptr + 1) = '1';
+    *(ptr + 2) = tt.bytes[1];
+    *(ptr + 3) = tt.bytes[0];
+
+    printf("timestamp=%d\n",(*(ptr+2)<<8) + *(ptr+3));
     printf("Encounter_count=%d\n",Encounter_count);
     if (Encounter_count == 1)
     {
@@ -383,7 +446,7 @@ void dump()
     for(i=0;i<Encounter_count * PACKET_SIZE;i += PACKET_SIZE)
     {
         for(j=i;j<i+PACKET_SIZE;j++)
-            printf("%c",Encounters[j]);
+            printf("%x ",Encounters[j]);
         printf("\n");
     }
 
@@ -745,32 +808,8 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
         break;
     case ESP_GATTS_ADD_INCL_SRVC_EVT:
         break;
-    case ESP_GATTS_ADD_CHAR_EVT: 
-        {
-        // uint16_t length = 0;
-        // const uint8_t *prf_char;
-
-        // ESP_LOGI(GATTS_TAG, "ADD_CHAR_EVT, status %d,  attr_handle %d, service_handle %d\n",
-        //         param->add_char.status, param->add_char.attr_handle, param->add_char.service_handle);
-        // gl_profile_tab[PROFILE_A_APP_ID].char_handle = param->add_char.attr_handle;
-        // gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.len = ESP_UUID_LEN_16;
-        // gl_profile_tab[PROFILE_A_APP_ID].descr_uuid.uuid.uuid16 = ESP_GATT_UUID_CHAR_CLIENT_CONFIG;
-        // esp_err_t get_attr_ret = esp_ble_gatts_get_attr_value(param->add_char.attr_handle,  &length, &prf_char);
-        // if (get_attr_ret == ESP_FAIL){
-        //     ESP_LOGE(GATTS_TAG, "ILLEGAL HANDLE");
-        // }
-
-        // ESP_LOGI(GATTS_TAG, "the gatts demo char length = %x\n", length);
-        // for(int i = 0; i < length; i++){
-        //     ESP_LOGI(GATTS_TAG, "prf_char[%x] =%x\n",i,prf_char[i]);
-        // }
-        // esp_err_t add_descr_ret = esp_ble_gatts_add_char_descr(gl_profile_tab[PROFILE_A_APP_ID].service_handle, &gl_profile_tab[PROFILE_A_APP_ID].descr_uuid,
-        //                                                         ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE, NULL, NULL);
-        // if (add_descr_ret){
-        //     ESP_LOGE(GATTS_TAG, "add char descr failed, error code =%x", add_descr_ret);
-        // }
+    case ESP_GATTS_ADD_CHAR_EVT:  
         break;
-    }
     case ESP_GATTS_ADD_CHAR_DESCR_EVT:
         gl_profile_tab[PROFILE_A_APP_ID].descr_handle = param->add_char_descr.attr_handle;
         ESP_LOGI(GATTS_TAG, "ADD_DESCR_EVT, status %d, attr_handle %d, service_handle %d\n",
@@ -898,6 +937,8 @@ void fill_fake_encounters()
 void app_main(void)
 {
     esp_err_t ret;
+
+    printf("long=%d, int=%d, char=%d, short=%d, time_t=%d\n",sizeof(long),sizeof(int),sizeof(char),sizeof(short),sizeof(time_t));
     
     ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) 
