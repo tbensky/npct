@@ -64,7 +64,7 @@
       
             <div class="form-group">
               
-                  <h3>Update your device</h3>
+                  <h3>Update your token</h3>
                   <h4>Check all that apply about your past 2-3 days</h4>
                   
 
@@ -73,43 +73,46 @@
                     <div class="col-sm-6">
                       <h4>Going out</h4>
                       <div>
-                        <input  class="form-check-input" type="checkbox" checked onClick="update_code(0)" value="1"> I have not been out
+                        <input  class="form-check-input" type="checkbox" checked onClick="update_code(1)" value="1"> I have not been out
                         <br/>
-                        <input  class="form-check-input" type="checkbox" onClick="update_code(1)" value="2"> I have been out
+                        <input  class="form-check-input" type="checkbox" onClick="update_code(2)" value="2"> I have been out
                       </div>
 
                       <h4>Mask wearing</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(2)" value="4"> I was wearing a mask
+                        <input class="form-check-input" type="checkbox" onClick="update_code(4)" value="4"> I was wearing a mask
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(3)" value="8"> I was not wearing a mask
+                        <input class="form-check-input" type="checkbox" onClick="update_code(1024)" value="1024"> I was not wearing a mask
                       </div>
                     
 
                       <h4>How about others you were around?</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(4)" value="16"> They were wearing masks
+                        <input class="form-check-input" type="checkbox" onClick="update_code(16)" value="16"> They were wearing masks
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(5)" value="32"> They were not wearing masks
+                        <input class="form-check-input" type="checkbox" onClick="update_code(512)" value="512"> They were not wearing masks
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(6)" value="64"> They are in my Covid-safe "bubble"
+                        <input class="form-check-input" type="checkbox" onClick="update_code(64)" value="64"> They are in my Covid-safe "bubble"
                       </div>
                     </div>
 
                     <div class="col-sm-6">
                       <h4>Social Distancing</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(7)" value="128"> I did social distance (did not spend more that 15 minutes within 6 feet of anyone)
+                        <input class="form-check-input" type="checkbox" onClick="update_code(8)" value="8"> I did social distance (did not spend more that 15 minutes within 6 feet of anyone)
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(8)" value="256"> I did not social distance (spent 15 minutes within 6 feet of others)
+                        <input class="form-check-input" type="checkbox" onClick="update_code(128)" value="128"> I did not social distance (spent 15 minutes within 6 feet of others)
                       </div>
 
                       <h4>Were you inside or outside?</h4>
                       <div>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(9)" value="512"> Inside
+                        <input class="form-check-input" type="checkbox" onClick="update_code(256)" value="256"> Inside
                         <br/>
-                        <input class="form-check-input" type="checkbox" onClick="update_code(10)" value="1024"> Outside
+                        <input class="form-check-input" type="checkbox" onClick="update_code(32)" value="32"> Outside
                       </div> 
+
+                      <h4>Your Covid Grade</h4>
+                      <div id="covid_grade"></div>
                     </div>
                   
                   </div>
@@ -261,6 +264,9 @@
        $('#update_area').css("display","inline");
     }
 
+    update_code(1);
+    setInterval(update_grade,1000);
+
 });
 
 function create_ids()
@@ -277,63 +283,24 @@ function create_ids()
   $('#config_front').css("display","none");
 }
 
-function get_health_grade(num)
-{
-    if (num & 1 == num)
-      return("A+");
-
-    if (num & 2+4+16+128+1024 == num)
-      return("A");
-
-    if (num & 2+4+32+64+128+1024 == num)
-      return("A-");
-
-    if (num & 2+4+32+128+1024 == num)
-        return("B+");
-
-    if (num & 2+4+32+256+1024 == num)
-      return("B");
-
-    if (num & 2+4+32+256+512 == num)
-      return("B-");
-
-    if (num & 2+4+32+256+512 == num)
-      return("C+");
-
-    if (num & 2+8+128+1024 == num)
-      return("C-");
-
-    if (num & 2+8+32+256+1024 == num)
-      return("D+");
-
-    if (num & 2+8+32+256+512 == num)
-      return("D");
-
-    if (num & 2+8+32)
-      return("D-");
-
-    if (num & 2+8+32+256+512)
-      return("F");
 
 
-    return("");
-
-}
 
 function decode_health(num)
 {
    var codes = {
                                 1: "Has not been out",
                                 2: "Has been out",
-                                4 : "Wearing a mask", 
-                                8: "Not wearing a mask", 
+                                4: "Wearing a mask", 
+                                8: "Social distanced", 
                                 16: "Around others wearing masks", 
-                                32: "Around others not wearing masks", 
-                                64: "Around others in a Covid-bubble", 
-                                128: "Social distanced", 
-                                256: "Did not social distance",
-                                512: "Inside", 
-                                1024: "Outside", 
+                                32: "Outside",
+                                64: "Around others in a strict Covid-bubble", 
+                                
+                                128: "Did not social distance",
+                                256: "Inside", 
+                                512: "Around others not wearing masks",
+                                1024: "Not wearing a mask", 
                               };
   
 
@@ -538,11 +505,44 @@ function save_device_log()
   a.href = URL.createObjectURL(data);
 }
 
-function update_code(n)
+function get_health_grade(num)
 {
+    if ((num & 1) == 0 && (num & 2) == 0)
+        return("?");
+ 
+    if (num <= 3)
+    {
+      if ((num & 1) == 1 && (num & 2) == 0) return("A+");
+      return("A");
+    }
+ 
+    if (num <= 14) return("A");
+    if (num <= 62) return("A-");
+    if (num <= 126) return("B+");
+    if (num <= 126) return("B+");
+    if (num <= 254) return("B-");
+    if (num <= 510) return("C+");
+    if (num <= 1022) return("C");
+    return("D");
 
 }
 
+function update_code(n)
+{
+  var g;
+  g = get_health_grade(n);
+  $('#covid_grade').html("<h1>"+g+"</h1>");
+
+}
+
+function update_grade()
+{
+  var val = 0;
+$('input:checkbox.form-check-input').each(function () {
+       val += (this.checked ? parseInt($(this).val()) : 0);
+  });
+update_code(val);
+}
 
 </script>
 
